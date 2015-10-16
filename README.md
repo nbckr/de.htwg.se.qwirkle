@@ -1,2 +1,2 @@
 # qwirkle
-Qwirkle
+Qwirkle ist ein schönes Spiel.
