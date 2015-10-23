@@ -1,6 +1,6 @@
 package de.htwg.general;
 
-import de.htwg.game.Player;
+import de.htwg.game.data.Player;
 
 public class Main {
 
@@ -10,9 +10,5 @@ public class Main {
         n = "Frank";
 
         System.out.print(pl.getName());
-
-        System.out.println("Hello World!");
-
-
     }
 }
