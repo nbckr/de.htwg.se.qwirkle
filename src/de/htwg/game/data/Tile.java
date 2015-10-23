@@ -8,6 +8,7 @@ public class Tile {
     protected enum Color {
         ORANGE, YELLOW, RED, BLUE, GREEN, PURPLE
     }
+
     protected enum Shape {
         CIRCLE, SQUARE, CLOVER, DIAMOND, STAR, CROSS
     }

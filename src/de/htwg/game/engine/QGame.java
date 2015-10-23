@@ -7,14 +7,14 @@ import de.htwg.game.data.Tile;
  */
 public class QGame {
 
-    private static final Tile[][] BOARD = new Tile[101][101];
+    //private static final Tile[][] BOARD = new Tile[101][101];
 
     public static void main(String[] args) {
         System.out.println("test");
     }
 
     private void init() {
-
+        return;
     }
 
 }
