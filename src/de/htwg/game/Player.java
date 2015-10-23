@@ -1,4 +1,4 @@
-package game;
+package de.htwg.game;
 
 import java.util.ArrayList;
 
