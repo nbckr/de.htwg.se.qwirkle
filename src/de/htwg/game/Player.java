@@ -25,7 +25,9 @@ public class Player {
      * @param t Tile to add
      */
     public void addTileToHand(Tile t) {
-
+        if(this.hand.size() < 6) {
+            this.hand.add(t);
+        }
     }
 
     /**
