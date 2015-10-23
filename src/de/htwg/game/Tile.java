@@ -5,8 +5,8 @@ package de.htwg.game;
  */
 public class Tile {
 
-    final private String color;
-    final private String shape;
+    private final String color;
+    private final String shape;
 
     public Tile(String color, String shape) {
         this.color = color;
