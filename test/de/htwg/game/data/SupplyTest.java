@@ -18,4 +18,24 @@ public class SupplyTest extends TestCase {
     public void testGetSize() throws Exception {
 
     }
+
+    public void testGetTile1() throws Exception {
+
+    }
+
+    public void testInsertTile1() throws Exception {
+
+    }
+
+    public void testGetSize1() throws Exception {
+
+    }
+
+    public void testIsEmpty() throws Exception {
+
+    }
+
+    public void testToString() throws Exception {
+
+    }
 }
