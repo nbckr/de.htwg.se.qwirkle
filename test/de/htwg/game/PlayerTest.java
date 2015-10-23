@@ -7,11 +7,25 @@ import junit.framework.TestCase;
  */
 public class PlayerTest extends TestCase {
 
+    Player p;
+
+    public void setUp() {
+        p = new Player("Agate");
+    }
+
+    public void testAddTileToHand() throws Exception {
+
+    }
+
+    public void testAddScore() throws Exception {
+
+    }
+
     public void testGetName() throws Exception {
 
     }
 
-    public void testGetScorte() throws Exception {
+    public void testGetScore() throws Exception {
 
     }
 
