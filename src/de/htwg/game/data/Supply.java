@@ -17,9 +17,13 @@ public class Supply {
 
     public Supply() {
         // create 108 Tiles and put them in Supply in random order
+        tiles = new ArrayList<>();
+
         for (Shape s : Shape.values()) {
             for (Color c : Color.values()) {
-               // for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 3; i++) {
+                    tiles.add(new Tile(c, s));
+                }
             }
         }
     }

@@ -3,10 +3,12 @@ package de.htwg.game.data;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
+import de.htwg.game.data.Tile.*;
 
 /**
  * Created by luluschi on 23.10.2015.
  */
+
 public class PlayerTest extends TestCase {
 
     Player p;
@@ -16,10 +18,9 @@ public class PlayerTest extends TestCase {
         p = new Player("Agate");
 
         tiles = new ArrayList<Tile>();
-        tiles.add(new Tile("Grün", "Kreuz"));
-        tiles.add(new Tile("Blau", "Kreis"));
-        tiles.add(new Tile("Gelb", "Quadrat"));
-        tiles.add(new Tile("Rot", "Stern"));
+        tiles.add(new Tile(Color.BLUE, Shape.CIRCLE));
+        tiles.add(new Tile(Color.GREEN, Shape.DIAMOND));
+
     }
 
     public void testGetName() throws Exception {
