@@ -5,19 +5,26 @@ package de.htwg.game.data;
  */
 public class Tile {
 
-    private final String color;
-    private final String shape;
-
-    public Tile(String color, String shape) {
-        this.color = color;
-        this.shape = shape;
+    protected enum Color {
+        ORANGE, YELLOW, RED, BLUE, GREEN, PURPLE
+    }
+    protected enum Shape {
+        CIRCLE, SQUARE, CLOVER, DIAMOND, STAR, CROSS
     }
 
-    public String getColor() {
+    private final Color color;
+    private final Shape shape;
+
+    public Tile(Color c, Shape s) {
+        this.color = c;
+        this.shape = s;
+    }
+
+    public Color getColor() {
         return color;
     }
 
-    public String getShape() {
+    public Shape getShape() {
         return shape;
     }
 
