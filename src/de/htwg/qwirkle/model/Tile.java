@@ -82,7 +82,7 @@ public class Tile {
                 myShape = "CR";
                 break;
             default:
-                myShape = "  ";
+                myShape = "??";
         }
 
         return (myColor + myShape + TilePrintUtil.ANSI_RESET);

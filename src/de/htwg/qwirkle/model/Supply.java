@@ -16,10 +16,10 @@ public class Supply {
     private static Random random;
 
     /**
-     * Creates 108 Tiles - three of each color/shape combination - and put them in Supply in random order.
+     * Creates 108 Tiles - three of each color/shape combination - and puts them in Supply in random order.
      */
     public Supply() {
-        tiles = new ArrayList<>();
+        tiles = new ArrayList<>(108);
 
         for (Shape s : Shape.values()) {
             for (Color c : Color.values()) {
@@ -28,11 +28,11 @@ public class Supply {
                 }
             }
         }
-        Collections.shuffle(tiles); // not really neccesary as getTile() is random
+        // Collections.shuffle(tiles) not really neccesary as getTile() is random
     }
 
     /**
-     * Draws a Tile from Supply.
+     * Draws a Tile from Supply randomly.
      * @return a Tile randomly chosen from Supply or null if Supply is empty
      */
     public Tile getTile() {
@@ -51,8 +51,9 @@ public class Supply {
      * @param t the Tile to insert
      */
     public void insertTile(Tile t) {
+        assert(tiles.size() < 108);
         tiles.add(t);
-        Collections.shuffle(tiles);
+        // Collections.shuffle(tiles) not really neccesary as getTile() is random
     }
 
     public int getSize() {
