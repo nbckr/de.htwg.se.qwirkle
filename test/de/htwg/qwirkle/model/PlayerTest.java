@@ -1,9 +1,9 @@
-package de.htwg.game.data;
+package de.htwg.qwirkle.model;
 
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
-import de.htwg.game.data.Tile.*;
+import de.htwg.qwirkle.model.Tile.*;
 
 /**
  * Created by luluschi on 23.10.2015.
