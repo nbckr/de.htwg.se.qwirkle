@@ -1,4 +1,4 @@
-package de.htwg.game.data;
+package de.htwg.qwirkle.model;
 
 import java.util.ArrayList;
 

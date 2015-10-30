@@ -1,4 +1,4 @@
-package de.htwg.game.data;
+package de.htwg.qwirkle.model;
 
 /**
  * Created by niels on 23.10.2015.

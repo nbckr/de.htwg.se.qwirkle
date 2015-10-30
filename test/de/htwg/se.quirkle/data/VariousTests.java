@@ -1,4 +1,4 @@
-package de.htwg.general;
+// TODO package
 
 import de.htwg.game.data.Player;
 

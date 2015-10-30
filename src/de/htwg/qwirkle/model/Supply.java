@@ -1,11 +1,11 @@
-package de.htwg.game.data;
+package de.htwg.qwirkle.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Collections.*;
 
-import de.htwg.game.data.Tile.*;
+import de.htwg.qwirkle.model.Tile.*;
 
 /**
  * Created by niels on 23.10.2015.
