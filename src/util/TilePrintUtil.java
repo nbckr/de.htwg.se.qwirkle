@@ -1,6 +1,7 @@
 package util;
 
 /**
+ * Contains constant color values used in Tile.toString()
  * Created by niboecke on 30.10.2015.
  */
 public abstract class TilePrintUtil {
@@ -17,12 +18,12 @@ public abstract class TilePrintUtil {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    public static final String ANSI_BLACK_BG = "\u001B[40m";         // instead of orange
+    public static final String ANSI_BLACK_BG = "\u001B[40m";
     public static final String ANSI_YELLOW_BG = "\u001B[43m";
     public static final String ANSI_RED_BG = "\u001B[41m";
     public static final String ANSI_BLUE_BG = "\u001B[44m";
     public static final String ANSI_GREEN_BG = "\u001B[42m";
-    public static final String ANSI_PURPLE_BG = "\u001B[45m";       // not sure
+    public static final String ANSI_PURPLE_BG = "\u001B[45m";
     public static final String ANSI_CYAN_BG = "\u001B[46m";
 
 }
