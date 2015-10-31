@@ -1,6 +1,5 @@
 /*
 Source: https://moodle.htwg-konstanz.de/moodle/course/view.php?id=713
-Slightly edited for own needs
  */
 
 package util.observer;
