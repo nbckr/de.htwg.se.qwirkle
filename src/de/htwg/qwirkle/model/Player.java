@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Player {
 
-    private static int playerCount = 0;
+    // private static int playerCount = 0;
     private String name;
     private int score;
     private ArrayList<Tile> hand;
@@ -16,7 +16,7 @@ public class Player {
      * Standard constructor calls constructor with standard name: Player1, Player2, ...
      */
     public Player() {
-        this(("Player" + ++playerCount));
+        this(("Player"));
     }
 
     /**

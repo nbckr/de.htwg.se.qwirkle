@@ -29,10 +29,13 @@ public class QController extends Observable {
         this.statusMessage = MessageUtil.WELCOME;
         this.rounds = 0;
 
-        this.players = new ArrayList<>(numPlayers);
-        for (int i = 1; i <= numPlayers, i+
-
+        this.players = new ArrayList<>();
+        for (int i = 1; i <= numPlayers; i++) {
+            String name = "Player " + i;
+            players.add(new Player(name));
+        }
     }
+
 
     /**
      * @param t Tile to add
