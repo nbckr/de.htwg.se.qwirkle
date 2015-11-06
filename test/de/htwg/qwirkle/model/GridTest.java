@@ -21,7 +21,8 @@ public class GridTest extends TestCase {
 
     @Before
     public void setUp() {
-        // System.out.println("HALLO");
+        grid = new Grid(20,20);
+
         Tile tile1 = new Tile(Color.BLUE, Shape.CIRCLE);
         Tile tile2 = new Tile(Color.RED, Shape.CROSS);
         Tile tile3 = new Tile(Color.CYAN, Shape.STAR);
@@ -34,16 +35,19 @@ public class GridTest extends TestCase {
 
     @Test
     public void testSetTile() throws Exception {
+        assertEquals(true, grid.setTile(tile1, 3,3));
+        assertEquals(false, grid.setTile(tile2, 3,3));
     }
 
     @Test
     public void testGetTile() throws Exception {
-
+        assertEquals(tile1, grid.getTile(3,3));
+        assertEquals(null, grid.getTile(1,1));
     }
 
     @Test
     public void testToString() throws Exception {
-        grid = new Grid(20,20);
+
 
         /*grid.setTile(tile1,0,0);
         grid.setTile(tile2,2,4);
@@ -56,6 +60,6 @@ public class GridTest extends TestCase {
             grid.setTile(supply.getTile(), 16, i);
         }
 
-        System.out.println(grid);
+        //System.out.println(grid);
     }
 }
