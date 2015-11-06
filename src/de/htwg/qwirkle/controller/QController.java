@@ -12,34 +12,56 @@ import java.util.TreeMap;
 
 public class QController extends Observable {
 
-    private ArrayList<Player> players;
+    private ArrayList<Player> players;      // TODO: cyclic list?
+    private Player currentPlayer;
     private Supply supply;
     private Grid grid;
     private String statusMessage;
+    private int rounds;
 
-    public QController(Grid grid) {
+    /**
+     * @param grid the grid for this game instance
+     * @param numPlayers the nuber of player
+     */
+    public QController(Grid grid, int numPlayers) {
         this.grid = grid;
         this.supply = new Supply();
-        this.players = null;        // TODO: init players
         this.statusMessage = MessageUtil.WELCOME;
+        this.rounds = 0;
+
+        this.players = new ArrayList<>(numPlayers);
+        for (int i = 1; i <= numPlayers, i+
+
     }
 
     /**
      * @param t Tile to add
      * @param i position to specify row
      * @param j position to specify column
-     * @return the points to add to player's score
+     * @return the points to add to player's score, or -1 if adding was impossible
      */
     public int addTileToGrid(Tile t, int i, int j) {
-        return 0;
+        int points = 0;
+        // TODO: validate if playing here is even possible, return -1 if no
+
+        grid.setTile(t, i, j);
+        // TODO: how many points does the player get?
+
+        notifyObservers();
+        return points;
     }
 
     /**
-     * @param t old Tile to trade in
+     * @param t_old old Tile to trade in
      * @return new Tile to replace the old one
      */
-    public Tile tradeTile(Tile t) {
-        return null;
+    public Tile tradeTile(Tile t_old) {
+        assert(!supply.isEmpty());
+        Tile t_new = supply.getTile();
+        supply.insertTile(t_old);
+
+        notifyObservers();
+        return t_new;
     }
 
     public String getGridString() {

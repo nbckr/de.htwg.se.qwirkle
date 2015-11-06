@@ -7,6 +7,8 @@ package de.htwg.qwirkle;
 
 import de.htwg.qwirkle.aview.tui.TextUI;
 import de.htwg.qwirkle.controller.QController;
+import de.htwg.qwirkle.model.Grid;
+
 import java.util.Scanner;
 
 public final class Qwirkle {
@@ -18,13 +20,13 @@ public final class Qwirkle {
     public static void main(String[] args) {
 
         // Build up the application
-        controller =  new QController(9);
+        controller =  new QController(new Grid(20,20), 2);
 
         tui = new TextUI(controller);
         tui.printTUI();
 
         // Create an initial game
-        controller.create();
+        // controller.create();
 
         // continue to read user input on the tui until the user decides to quit
         boolean loop = true;

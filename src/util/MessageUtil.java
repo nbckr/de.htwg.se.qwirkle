@@ -15,7 +15,4 @@ public abstract class MessageUtil {
 
     public static final String WELCOME = "Welcome to QWIRKLE!";
 
-    protected static final String ILLEGAL_ARGUMENT = "";
-    protected static final String SET_TILE_SUCCESS = "";
-    protected static final String SET_TILE_FAIL = "";
 }
