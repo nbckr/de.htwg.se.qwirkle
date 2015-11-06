@@ -7,6 +7,12 @@ import junit.framework.TestCase;
  */
 public class SupplyTest extends TestCase {
 
+    Supply s;
+
+    public void setUp() {
+        s = new Supply();
+    }
+
     public void testGetTile() throws Exception {
 
     }
