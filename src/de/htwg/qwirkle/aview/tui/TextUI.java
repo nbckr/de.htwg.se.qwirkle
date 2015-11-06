@@ -19,9 +19,10 @@ public class TextUI implements IObserver {
     }
 
     public void printTUI() {
+        // print name of player, content of player's hand, number of round
         System.out.println(controller.getGridString());
-        System.out.println(controller.getStatus());
-        System.out.println("Please enter a command: blabla");
+        System.out.println(controller.getStatusMessage());
+        System.out.println("Please enter a command (press h for help)");
     }
 
     /**
@@ -29,6 +30,7 @@ public class TextUI implements IObserver {
      *             a - add tile(s) to grid
      *             t - trade in tile(s)
      *             n - new game
+     *             h - show help
      *             q - quit
      * @return true in all cases except 'q' pressed
      */
@@ -44,6 +46,10 @@ public class TextUI implements IObserver {
 
         if (line.equalsIgnoreCase("n")) {
 
+        }
+
+        if (line.equalsIgnoreCase("h")) {
+            System.out.println(util.MessageUtil.INSTRUCTIONS);
         }
 
         if (line.equalsIgnoreCase("q"))

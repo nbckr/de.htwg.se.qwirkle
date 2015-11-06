@@ -71,4 +71,20 @@ public class Player {
     public ArrayList<Tile> getHand() {
         return new ArrayList<Tile>(this.hand);
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "score=" + score +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public String printHand() {
+        StringBuilder sb = new StringBuilder();
+        for (Tile t : hand) {
+            sb.append(t.toString() + " ");
+        }
+        return sb.toString();
+    }
 }

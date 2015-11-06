@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Collections.*;
+import java.lang.Math;
 
 import de.htwg.qwirkle.model.Tile.*;
 
@@ -20,6 +21,7 @@ public class Supply {
      */
     public Supply() {
         tiles = new ArrayList<>(108);
+        random = new Random(43);            // TODO: random always gives the same numbers...
 
         for (Shape s : Shape.values()) {
             for (Color c : Color.values()) {
@@ -40,7 +42,7 @@ public class Supply {
             return null;
         }
 
-        int i = random.nextInt() % tiles.size();
+        int i = Math.abs(random.nextInt() % tiles.size());
         Tile t = tiles.get(i);
         tiles.remove(i);
         return t;
