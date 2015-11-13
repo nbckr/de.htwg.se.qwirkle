@@ -161,6 +161,9 @@ public class Player {
     }
 
     public String printHand() {
+        if (hand.size() == 0) {
+            return "(empty)";
+        }
         StringBuilder sb = new StringBuilder();
         for (Tile t : hand) {
             sb.append(t.toString() + " ");

@@ -15,12 +15,13 @@ public class Supply {
 
     private ArrayList<Tile> tiles;
     private static Random random;
+    private static final int MAX_SIZE = 108;
 
     /**
      * Creates 108 Tiles - three of each color/shape combination - and puts them in Supply in random order.
      */
     public Supply() {
-        tiles = new ArrayList<>(108);
+        tiles = new ArrayList<>(MAX_SIZE);
         random = new Random(43);            // TODO: random always gives the same numbers...
 
         for (Shape s : Shape.values()) {
@@ -30,7 +31,7 @@ public class Supply {
                 }
             }
         }
-        // Collections.shuffle(tiles) not really neccesary as getTile() is random
+        Collections.shuffle(tiles);
     }
 
     /**
@@ -53,9 +54,9 @@ public class Supply {
      * @param t the Tile to insert
      */
     public void insertTile(Tile t) {
-        assert(tiles.size() < 108);
+        assert(tiles.size() < MAX_SIZE);
         tiles.add(t);
-        // Collections.shuffle(tiles) not really neccesary as getTile() is random
+        Collections.shuffle(tiles);
     }
 
     public int getSize() {
