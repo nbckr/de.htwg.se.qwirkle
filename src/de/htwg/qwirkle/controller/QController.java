@@ -5,12 +5,14 @@ import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Supply;
 import de.htwg.qwirkle.model.Tile;
 import util.MessageUtil;
+import util.observer.QEvent;
 import util.observer.Observable;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 public class QController extends Observable {
+
+    private State state;
 
     private ArrayList<Player> players;      // TODO: cyclic list?
     private Player currentPlayer;
@@ -21,19 +23,55 @@ public class QController extends Observable {
 
     /**
      * @param grid the grid for this game instance
-     * @param numPlayers the nuber of player
      */
-    public QController(Grid grid, int numPlayers) {
+    public QController(Grid grid) {
         this.grid = grid;
         this.supply = new Supply();
-        this.statusMessage = MessageUtil.WELCOME;
         this.rounds = 0;
 
-        this.players = new ArrayList<>();
-        for (int i = 1; i <= numPlayers; i++) {
-            String name = "Player " + i;
-            players.add(new Player(name));
+
+
+        this.state = State.initialized;
+    }
+
+    public void init(ArrayList<Player> players) {
+        assert((players.size() > 0)&&(players.size() < 5));
+
+        //print welcome
+        this.statusMessage = MessageUtil.WELCOME;
+        notifyObservers(new QEvent(QEvent.Events.message));
+
+        this.players = players;
+        initPlayers();
+    }
+
+    private void initPlayers() {
+        // deal tiles
+        for (int i = 0; i < 6; i++) {
+            for (Player p : this.players) {
+                p.addTileToHand(this.supply.getTile());
+            }
         }
+
+        // choose first player
+        /*int vOld = -1, vNew;
+
+        for (Player p : this.players) {
+            vNew = p.evalPlayer();
+
+            if(vNew > vOld) {
+                vOld = vNew;
+                this.currentPlayer = p;
+            }
+        }
+        */
+
+        this.currentPlayer = this.players.get(0);
+
+        this.statusMessage = "Player " + this.currentPlayer.getName() + " starts.";
+        notifyObservers(new QEvent(QEvent.Events.message));
+
+        this.state = State.next;
     }
 
 
@@ -73,5 +111,10 @@ public class QController extends Observable {
 
     public String getStatusMessage() {
         return statusMessage;
+    }
+
+    private enum State {
+        next,
+        initialized
     }
 }

@@ -33,7 +33,7 @@ public abstract class Observable implements IObservable {
     }
 
     @Override
-    public void notifyObservers(Event e) {
+    public void notifyObservers(QEvent e) {
         for (IObserver observer: subscribers) {
             observer.update(e);
         }

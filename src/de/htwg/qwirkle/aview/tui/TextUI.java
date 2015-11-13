@@ -2,7 +2,11 @@ package de.htwg.qwirkle.aview.tui;
 
 import de.htwg.qwirkle.controller.QController;
 import de.htwg.qwirkle.model.Grid;
-import util.observer.Event;
+import de.htwg.qwirkle.model.Player;
+import util.observer.QEvent;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 import util.observer.IObserver;
 
 /**
@@ -10,10 +14,12 @@ import util.observer.IObserver;
  */
 public class TextUI implements IObserver {
 
+    private Scanner scanner;
     private QController controller;
     private Grid grid;
 
     public TextUI(QController controller) {
+        this.scanner = new Scanner(System.in);
         this.controller = controller;
         controller.addObserver(this);
     }
@@ -23,6 +29,34 @@ public class TextUI implements IObserver {
         System.out.println(controller.getGridString());
         System.out.println(controller.getStatusMessage());
         System.out.println("Please enter a command (press h for help)");
+    }
+
+    public void initializePlayer() {
+        int noP = 1;
+        String name;
+        ArrayList<Player> players;
+
+        players = new ArrayList<>();
+
+        while(noP <= 4) {
+            if (noP >= 3) {
+                System.out.println("Enter another Player? (y/n)");
+                if (this.scanner.next() == "n") {
+                    break;
+                }
+            }
+
+            System.out.printf("Enter name of Player%i:", noP);
+            name = this.scanner.next();
+            players.add(new Player(name));
+            noP++;
+        }
+
+        this.controller.init(players);
+    }
+
+    public void printMessage() {
+        System.out.println(this.controller.getStatusMessage());
     }
 
     /**
@@ -59,7 +93,17 @@ public class TextUI implements IObserver {
     }
 
     @Override
-    public void update(Event e) {
-        printTUI();
+    public void update(QEvent e) {
+        switch(e.getEvent()) {
+            case getPlayer:
+                initializePlayer();
+                break;
+            case message:
+                printMessage();
+                break;
+            default:
+                printTUI();
+                break;
+        }
     }
 }

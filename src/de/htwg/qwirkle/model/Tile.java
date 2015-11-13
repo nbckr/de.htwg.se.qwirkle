@@ -34,6 +34,14 @@ public class Tile {
         return shape;
     }
 
+    public boolean equals(Tile t) {
+        if((this.color == t.color) && (this.shape == t.shape)) {
+            return true;
+        }
+
+        return false;
+    }
+
     @Override
     public String toString() {
         String myShape;

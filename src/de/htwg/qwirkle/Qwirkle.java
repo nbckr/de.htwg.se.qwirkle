@@ -20,10 +20,11 @@ public final class Qwirkle {
     public static void main(String[] args) {
 
         // Build up the application
-        controller =  new QController(new Grid(20,20), 2);
-
+        controller =  new QController(new Grid(20,20));
         tui = new TextUI(controller);
-        tui.printTUI();
+
+
+        //tui.printTUI();
 
         // Create an initial game
         // controller.create();
