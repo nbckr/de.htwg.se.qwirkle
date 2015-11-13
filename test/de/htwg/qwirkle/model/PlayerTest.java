@@ -4,6 +4,8 @@ import junit.framework.TestCase;
 
 import java.util.ArrayList;
 import de.htwg.qwirkle.model.Tile.*;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Created by luluschi on 23.10.2015.
@@ -11,11 +13,12 @@ import de.htwg.qwirkle.model.Tile.*;
 
 public class PlayerTest extends TestCase {
 
-    Player p;
+    Player player;
     ArrayList<Tile> tiles;
 
+    @Before
     public void setUp() {
-        p = new Player("Agate");
+        player = new Player("Agate");
 
         tiles = new ArrayList<Tile>();
         tiles.add(new Tile(Color.BLUE, Shape.CIRCLE));
@@ -23,24 +26,52 @@ public class PlayerTest extends TestCase {
 
     }
 
+    @Test
     public void testGetName() throws Exception {
-        assertEquals("Agate", p.getName());
+        assertEquals("Agate", player.getName());
     }
 
-    public void testGetScore() throws Exception {
-        assertEquals(0, p.getScore());
-        p.addScore(123);
-        assertEquals(123, p.getScore());
-        p.addScore(-234);
-        assertEquals(123, p.getScore());
-    }
-
+    @Test
     public void testGetHand() throws Exception {
-        assertEquals(0, p.getHand().size());
+        assertEquals(0, player.getHand().size());
 
         for (Tile t : tiles) {
-            p.addTileToHand(t);
+            player.addTileToHand(t);
         }
-        assertEquals(true, tiles.equals(p.getHand()));
+        assertEquals(true, tiles.equals(player.getHand()));
+    }
+
+    @Test
+    public void testAddTileToHand() throws Exception {
+        testGetHand();
+    }
+
+    @Test
+    public void testGetScore() throws Exception {
+        assertEquals(0, player.getScore());
+        player.addScore(123);
+        assertEquals(123, player.getScore());
+        // player.addScore(-234);
+        // assertEquals(123, player.getScore());
+        System.out.println(player);
+    }
+
+    @Test
+    public void testAddScore() throws Exception {
+        testGetScore();
+    }
+
+    @Test
+    public void testPrintHand() throws Exception {
+        System.out.println(player.printHand());
+        for (Tile t : tiles) {
+            player.addTileToHand(t);
+        }
+        System.out.println(player.printHand());
+    }
+
+    @Test
+    public void testToString() throws Exception {
+        System.out.println(player);
     }
 }
