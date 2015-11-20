@@ -34,6 +34,9 @@ public class QController extends Observable {
         this.state = State.initialized;
     }
 
+    /**
+     * @param players List with all players for the game
+     */
     public void init(ArrayList<Player> players) {
         assert((players.size() > 0)&&(players.size() < 5));
 
@@ -45,6 +48,9 @@ public class QController extends Observable {
         initPlayers();
     }
 
+    /**
+     * Initializes the players. Adds tile and chooses the start player
+     */
     private void initPlayers() {
         // deal tiles
         for (int i = 0; i < 6; i++) {
@@ -104,26 +110,44 @@ public class QController extends Observable {
         return t_new;
     }
 
+    /**
+     * Returns the player next in line.
+     * @return the player next in line
+     */
     public Player getCurrentPlayer() {
         return this.currentPlayer;
     }
 
+    /**
+     * Reset the current player with the player next in line.
+     */
     public void nextPlayer(){
         int index = (this.players.indexOf(this.currentPlayer) + 1) % this.players.size();
         this.currentPlayer = this.players.get(index);
         this.statusMessage = "Player " + this.currentPlayer.getName() + " is next in line.";
     }
 
+    /**
+     * Refills the current players hand with tiles from supply
+     */
     public void refillPlayer() {
         for (int i = this.currentPlayer.getHand().size(); i <= 6; i++) {
             this.currentPlayer.addTileToHand(this.supply.getTile());
         }
     }
 
+    /**
+     * Returns the grid as text for tui
+     * @return grid as string
+     */
     public String getGridString() {
         return grid.toString();
     }
 
+    /**
+     * Returns the current status message
+     * @return status message
+     */
     public String getStatusMessage() {
         return statusMessage;
     }

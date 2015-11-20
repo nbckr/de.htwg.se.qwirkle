@@ -20,6 +20,9 @@ public class TextUI implements IObserver {
     private QController controller;
     private Grid grid;
 
+    /**
+     * @param controller Qwirkle game controller
+     */
     public TextUI(QController controller) {
         this.scanner = new Scanner(System.in);
         this.controller = controller;
@@ -28,6 +31,9 @@ public class TextUI implements IObserver {
         initializePlayer();
     }
 
+    /**
+     * Prints the minor information of the grind and current player
+     */
     public void printTUI() {
         // print name of player, content of player's hand, number of round
         System.out.println(controller.getGridString());
@@ -37,6 +43,9 @@ public class TextUI implements IObserver {
         System.out.println("Please enter a command (press h for help)");
     }
 
+    /**
+     * Reads number of players from console and starts the initialisation
+     */
     public void initializePlayer() {
         int noP = 1;
         String name, tmp;
@@ -62,6 +71,9 @@ public class TextUI implements IObserver {
         this.controller.init(players);
     }
 
+    /**
+     * Prints the controllers status message
+     */
     public void printMessage() {
         System.out.println(this.controller.getStatusMessage());
     }
@@ -70,7 +82,6 @@ public class TextUI implements IObserver {
      * @param line the user input to process. Possible inputs are:
      *             a - add tile(s) to grid
      *             t - trade in tile(s)
-     *             n - new game
      *             h - show help
      *             q - quit
      * @return true in all cases except 'q' pressed
@@ -114,10 +125,6 @@ public class TextUI implements IObserver {
             System.out.println();
         }
 
-        if (line.equalsIgnoreCase("n")) {
-            System.out.println();
-        }
-
         if (line.equalsIgnoreCase("h")) {
             System.out.println(MessageUtil.INSTRUCTIONS);
         }
@@ -131,6 +138,10 @@ public class TextUI implements IObserver {
         return true;    // continue loop in all cases but 'q'
     }
 
+    /**
+     * Reacts on a given event.
+     * @param e Event for update
+     */
     @Override
     public void update(QEvent e) {
         switch(e.getEvent()) {
