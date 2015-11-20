@@ -30,6 +30,8 @@ public final class Qwirkle {
         // controller.create();
 
         // continue to read user input on the tui until the user decides to quit
+        tui.printTUI();
+
         boolean loop = true;
         scanner = new Scanner(System.in);
         while (loop) {

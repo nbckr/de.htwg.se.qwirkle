@@ -22,18 +22,21 @@ public class TextUI implements IObserver {
         this.scanner = new Scanner(System.in);
         this.controller = controller;
         controller.addObserver(this);
+
+        initializePlayer();
     }
 
     public void printTUI() {
         // print name of player, content of player's hand, number of round
         System.out.println(controller.getGridString());
         System.out.println(controller.getStatusMessage());
+        System.out.println(controller.getCurrentPlayer().printHand());
         System.out.println("Please enter a command (press h for help)");
     }
 
     public void initializePlayer() {
         int noP = 1;
-        String name;
+        String name, tmp;
         ArrayList<Player> players;
 
         players = new ArrayList<>();
@@ -41,12 +44,13 @@ public class TextUI implements IObserver {
         while(noP <= 4) {
             if (noP >= 3) {
                 System.out.println("Enter another Player? (y/n)");
-                if (this.scanner.next() == "n") {
+                tmp = this.scanner.next();
+                if (tmp.equals("n")) {
                     break;
                 }
             }
 
-            System.out.printf("Enter name of Player%i:", noP);
+            System.out.printf("Enter name of Player%d:", noP);
             name = this.scanner.next();
             players.add(new Player(name));
             noP++;

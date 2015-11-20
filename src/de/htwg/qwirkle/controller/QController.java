@@ -69,8 +69,6 @@ public class QController extends Observable {
         this.currentPlayer = this.players.get(0);
 
         this.statusMessage = "Player " + this.currentPlayer.getName() + " starts.";
-        notifyObservers(new QEvent(QEvent.Events.message));
-
         this.state = State.next;
     }
 
@@ -103,6 +101,10 @@ public class QController extends Observable {
 
         notifyObservers();
         return t_new;
+    }
+
+    public Player getCurrentPlayer() {
+        return this.currentPlayer;
     }
 
     public String getGridString() {
