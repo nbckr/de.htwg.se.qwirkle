@@ -86,6 +86,7 @@ public class QController extends Observable {
         grid.setTile(t, i, j);
         // TODO: how many points does the player get?
 
+        this.statusMessage = "Player " + this.currentPlayer.getName();
         notifyObservers();
         return points;
     }
@@ -108,9 +109,15 @@ public class QController extends Observable {
     }
 
     public void nextPlayer(){
-        int index = this.players.indexOf(this.currentPlayer) + 1;
+        int index = (this.players.indexOf(this.currentPlayer) + 1) % this.players.size();
         this.currentPlayer = this.players.get(index);
         this.statusMessage = "Player " + this.currentPlayer.getName() + " is next in line.";
+    }
+
+    public void refillPlayer() {
+        for (int i = this.currentPlayer.getHand().size(); i <= 6; i++) {
+            this.currentPlayer.addTileToHand(this.supply.getTile());
+        }
     }
 
     public String getGridString() {

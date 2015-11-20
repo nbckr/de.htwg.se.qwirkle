@@ -47,11 +47,11 @@ public class Player {
     public Tile getTileFromHand(int index) {
         Tile retval;
 
-        if((index < 1) || (index > 6)) {
+        if((index < 1) || (index > this.getHand().size())) {
             return null;
         }
-        retval = this.hand.get(index);
-        this.hand.remove(index);
+        retval = this.hand.get(index - 1);
+        this.hand.remove(index - 1);
         return retval;
     }
 

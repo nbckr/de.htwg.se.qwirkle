@@ -81,7 +81,8 @@ public class TextUI implements IObserver {
             boolean tileSet = false;
 
             while(true) {
-                System.out.println("Select tile to add to grid(1-5, 0 to quit):");
+                int size = this.controller.getCurrentPlayer().getHand().size();
+                System.out.println("Select tile to add to grid(1-" + size + ", 0 to quit):");
                 int iTile = scanner.nextInt();
                 if(iTile == 0){
                     break;
@@ -102,6 +103,7 @@ public class TextUI implements IObserver {
             }
 
             if(tileSet) {
+                controller.refillPlayer();
                 controller.nextPlayer();
                 printTUI();
             }
