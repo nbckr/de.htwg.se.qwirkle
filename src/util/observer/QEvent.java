@@ -19,6 +19,7 @@ public class QEvent {
     public enum Events {
         getPlayer, // specifies number of players and initialize them
         message, // print the controller message
+        def, // default value
     }
 
 }

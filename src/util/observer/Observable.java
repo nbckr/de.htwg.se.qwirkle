@@ -29,7 +29,7 @@ public abstract class Observable implements IObservable {
 
     @Override
     public void notifyObservers() {
-        notifyObservers(null);
+        notifyObservers(new QEvent(QEvent.Events.def));
     }
 
     @Override

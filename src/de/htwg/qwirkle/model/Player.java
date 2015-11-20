@@ -44,6 +44,17 @@ public class Player {
         return true;
     }
 
+    public Tile getTileFromHand(int index) {
+        Tile retval;
+
+        if((index < 1) || (index > 6)) {
+            return null;
+        }
+        retval = this.hand.get(index);
+        this.hand.remove(index);
+        return retval;
+    }
+
     /**
      * Adds a given number of points to the player's score
      * @param i Value to add to score. Has to be greater than 0

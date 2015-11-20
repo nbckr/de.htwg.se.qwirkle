@@ -14,5 +14,7 @@ public abstract class MessageUtil {
                                               "\tq - quit";
 
     public static final String WELCOME = "Welcome to QWIRKLE!";
+    public static final String SEEYOU = "\nSee you later!";
+    public static final String INVALID = "invalid entry";
 
 }

@@ -107,6 +107,12 @@ public class QController extends Observable {
         return this.currentPlayer;
     }
 
+    public void nextPlayer(){
+        int index = this.players.indexOf(this.currentPlayer) + 1;
+        this.currentPlayer = this.players.get(index);
+        this.statusMessage = "Player " + this.currentPlayer.getName() + " is next in line.";
+    }
+
     public String getGridString() {
         return grid.toString();
     }

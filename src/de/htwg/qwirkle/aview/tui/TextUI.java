@@ -3,6 +3,8 @@ package de.htwg.qwirkle.aview.tui;
 import de.htwg.qwirkle.controller.QController;
 import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
+import de.htwg.qwirkle.model.Tile;
+import util.MessageUtil;
 import util.observer.QEvent;
 
 import java.util.ArrayList;
@@ -30,7 +32,8 @@ public class TextUI implements IObserver {
         // print name of player, content of player's hand, number of round
         System.out.println(controller.getGridString());
         System.out.println(controller.getStatusMessage());
-        System.out.println(controller.getCurrentPlayer().printHand());
+        System.out.println("Hand: " + controller.getCurrentPlayer().printHand());
+        System.out.println("Score: " + controller.getCurrentPlayer().getScore());
         System.out.println("Please enter a command (press h for help)");
     }
 
@@ -75,23 +78,53 @@ public class TextUI implements IObserver {
     public boolean processInputLine(String line) {
 
         if (line.equalsIgnoreCase("a")) {
+            boolean tileSet = false;
+
+            while(true) {
+                System.out.println("Select tile to add to grid(1-5, 0 to quit):");
+                int iTile = scanner.nextInt();
+                if(iTile == 0){
+                    break;
+                }
+
+                Tile selectedTile = controller.getCurrentPlayer().getTileFromHand(iTile);
+                if (selectedTile == null) {
+                    System.out.println(MessageUtil.INVALID);
+                    continue;
+                }
+
+                System.out.print("Select position on grid(row column):");
+                int row = scanner.nextInt();
+                int col = scanner.nextInt();
+
+                controller.addTileToGrid(selectedTile, row, col);
+                tileSet = true;
+            }
+
+            if(tileSet) {
+                controller.nextPlayer();
+                printTUI();
+            }
 
         }
 
         if (line.equalsIgnoreCase("t")) {
-
+            System.out.println();
         }
 
         if (line.equalsIgnoreCase("n")) {
-
+            System.out.println();
         }
 
         if (line.equalsIgnoreCase("h")) {
-            System.out.println(util.MessageUtil.INSTRUCTIONS);
+            System.out.println(MessageUtil.INSTRUCTIONS);
         }
 
-        if (line.equalsIgnoreCase("q"))
+        if (line.equalsIgnoreCase("q")) {
+            // ToDo: evaluate player's score
+            System.out.println(MessageUtil.SEEYOU);
             return false;   // quit loop
+        }
 
         return true;    // continue loop in all cases but 'q'
     }
