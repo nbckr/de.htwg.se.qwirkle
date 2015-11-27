@@ -32,12 +32,12 @@ public class PlayerTest extends TestCase {
     }
 
     @Test
-    public void testGetName() throws Exception {
+    public void testGetName() {
         assertEquals("Agate", player.getName());
     }
 
     @Test
-    public void testGetHand() throws Exception {
+    public void testGetHand() {
         assertEquals(0, player.getHand().size());
 
         for (Tile t : tiles) {
@@ -47,7 +47,7 @@ public class PlayerTest extends TestCase {
     }
 
     @Test
-    public void testAddTileToHand() throws Exception {
+    public void testAddTileToHand() {
         boolean retval;
 
         for (int i = 0; i <= 7; i++)
@@ -61,7 +61,7 @@ public class PlayerTest extends TestCase {
         }
     }
 
-    public void testgetTileFromHand() throws Exception {
+    public void testgetTileFromHand() {
         Tile retval;
 
         for (Tile t : tiles) {
@@ -76,7 +76,7 @@ public class PlayerTest extends TestCase {
     }
 
     @Test
-    public void testGetScore() throws Exception {
+    public void testGetScore() {
         assertEquals(0, player.getScore());
         player.addScore(123);
         assertEquals(123, player.getScore());
@@ -86,12 +86,12 @@ public class PlayerTest extends TestCase {
     }
 
     @Test
-    public void testAddScore() throws Exception {
+    public void testAddScore() {
         testGetScore();
     }
 
     @Test
-    public void testPrintHand() throws Exception {
+    public void testPrintHand() {
         System.out.println(player.printHand());
         for (Tile t : tiles) {
             player.addTileToHand(t);
@@ -100,7 +100,7 @@ public class PlayerTest extends TestCase {
     }
 
     @Test
-    public void testToString() throws Exception {
+    public void testToString() {
         System.out.println(player);
     }
 }

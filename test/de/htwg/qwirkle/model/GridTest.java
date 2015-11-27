@@ -33,25 +33,25 @@ public class GridTest extends TestCase {
     }
 
     @Test(expected=IllegalArgumentException.class)
-    public void testGrid() throws Exception {
+    public void testGrid() {
         grid_fail = new Grid(9,9);
     }
 
     @Test
-    public void testSetTile() throws Exception {
+    public void testSetTile() {
         assertEquals(true, grid.setTile(tile1, 3,3));
         assertEquals(false, grid.setTile(tile2, 3,3));
     }
 
     @Test
-    public void testGetTile() throws Exception {
+    public void testGetTile() {
         assertEquals(true, grid.setTile(tile1, 3,3));
         assertEquals(tile1, grid.getTile(3,3));
         assertEquals(null, grid.getTile(1,1));
     }
 
     @Test
-    public void testToString() throws Exception {
+    public void testToString() {
 
         grid.setTile(tile1,0,0);
         grid.setTile(tile2,2,4);

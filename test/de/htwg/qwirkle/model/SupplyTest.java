@@ -19,8 +19,9 @@ public class SupplyTest extends TestCase {
     }
 
     @Test
-    public void testGetTile() throws Exception {
+    public void testGetTile() {
         int initsize = supply.getSize();
+
         for (int i = 0; i < initsize; i++) {
             assert(supply.getTile() != null);
         }
@@ -28,14 +29,16 @@ public class SupplyTest extends TestCase {
         assertEquals(null, supply.getTile());
     }
 
-    @Test
-    public void testInsertTile() throws Exception {
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testInsertTile() {
         Tile out = supply.getTile();
+        supply.insertTile(tile);
+
         supply.insertTile(tile);
     }
 
     @Test
-    public void testGetSize() throws Exception {
+    public void testGetSize() {
         assertEquals(108, supply.getSize());
         Tile out = supply.getTile();
         out = supply.getTile();
@@ -43,7 +46,7 @@ public class SupplyTest extends TestCase {
     }
 
     @Test
-    public void testIsEmpty() throws Exception {
+    public void testIsEmpty() {
         int initsize = supply.getSize();
         for (int i = 0; i < initsize; i++) {
             assertEquals(false, supply.isEmpty());
@@ -53,7 +56,7 @@ public class SupplyTest extends TestCase {
     }
 
     @Test
-    public void testToString() throws Exception {
+    public void testToString() {
         System.out.println(supply);
     }
 }
