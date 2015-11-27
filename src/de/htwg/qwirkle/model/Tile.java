@@ -11,15 +11,20 @@ public class Tile {
 
 
     protected enum Color {
-        CYAN, YELLOW, RED, BLUE, GREEN, PURPLE
+        CYAN, YELLOW, RED, BLUE, GREEN, PURPLE, UNDEF
     }
 
     protected enum Shape {
-        CIRCLE, SQUARE, CLOVER, DIAMOND, STAR, CROSS
+        CIRCLE, SQUARE, CLOVER, DIAMOND, STAR, CROSS, UNDEF
     }
 
     private final Color color;
     private final Shape shape;
+
+    public Tile() {
+        this.color = Color.UNDEF;
+        this.shape = Shape.UNDEF;
+    }
 
     public Tile(Color c, Shape s) {
         this.color = c;
