@@ -31,7 +31,7 @@ public class QController extends Observable {
 
 
 
-        this.state = State.initialized;
+        this.state = State.INITIALIZED;
     }
 
     /**
@@ -75,7 +75,7 @@ public class QController extends Observable {
         this.currentPlayer = this.players.get(0);
 
         this.statusMessage = "Player " + this.currentPlayer.getName() + " starts.";
-        this.state = State.next;
+        this.state = State.NEXT;
     }
 
 
@@ -153,7 +153,7 @@ public class QController extends Observable {
     }
 
     private enum State {
-        next,
-        initialized
+        NEXT,
+        INITIALIZED
     }
 }

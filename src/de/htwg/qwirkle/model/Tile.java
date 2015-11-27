@@ -8,8 +8,6 @@ import util.TilePrintUtil;
 
 public class Tile {
 
-
-
     protected enum Color {
         CYAN, YELLOW, RED, BLUE, GREEN, PURPLE
     }

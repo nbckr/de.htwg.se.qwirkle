@@ -17,12 +17,13 @@ public final class Qwirkle {
     private static TextUI tui;
     private static QController controller;
 
+    private Qwirkle() {}
+
     public static void main(String[] args) {
 
         // Build up the application
         controller =  new QController(new Grid(20,20));
         tui = new TextUI(controller);
-
 
         //tui.printTUI();
 

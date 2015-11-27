@@ -18,7 +18,6 @@ public class TextUI implements IObserver {
 
     private Scanner scanner;
     private QController controller;
-    private Grid grid;
 
     /**
      * @param controller Qwirkle game controller
