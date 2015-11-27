@@ -11,7 +11,6 @@ public class Player {
     private String name;
     private int score;
     private ArrayList<Tile> hand;
-    private ArrayList<Integer> buffer;
 
     /**
      * Standard constructor calls constructor with standard name: Player1, Player2, ...
@@ -28,7 +27,6 @@ public class Player {
         this.name = name;
         this.score = 0;
         this.hand = new ArrayList<Tile>(6);
-        this.buffer = new ArrayList<Integer>(6);
     }
 
     /**
@@ -83,84 +81,6 @@ public class Player {
      */
     public ArrayList<Tile> getHand() {
         return new ArrayList<Tile>(this.hand);
-    }
-
-    public int evalPlayer() {
-        ArrayList<Integer> buffer = new ArrayList<>(6);
-        int greatValC, greatValS, greatValAll = -1;
-
-        assert(this.hand.size() > 0);
-
-        for (Tile t : this.hand) {
-            // get eval number for current tile's color
-            greatValC = evalPlayerC(t);
-            //save intern buffer
-            buffer = this.buffer;
-
-            // get eval number for current tile's shape
-            greatValS = evalPlayerS(t);
-
-            // jump to next tile if greatValAll is greatest
-            if((greatValC < greatValAll) && (greatValS < greatValAll)) {
-                continue;
-            }
-
-            // switch to greatest val, current tile and if shape or color
-            if(greatValC >= greatValS) {
-                greatValAll = greatValC;
-            } else {
-                greatValAll = greatValS;
-                //save buffer of ValS
-                buffer = this.buffer;
-            }
-        }
-
-        // write back buffer for end of eval
-        this.buffer = buffer;
-
-        return greatValAll;
-    }
-
-    private int evalPlayerC(Tile t) {
-        int greatVal= 0;
-        this.buffer = new ArrayList<>(6);
-
-        for (Tile e : this.hand) {
-            if(!(t.equals(e))) {
-                if(t.getColor() == e.getColor()) {
-                    greatVal++;
-                    buffer.add(this.hand.indexOf(e));
-                }
-            }
-        }
-
-        return greatVal;
-    }
-
-    private int evalPlayerS(Tile t) {
-        int greatVal= 0;
-        this.buffer = new ArrayList<>(6);
-
-        for (Tile e : this.hand) {
-            if(!(t.equals(e))) {
-                if(t.getShape() == e.getShape()) {
-                    greatVal++;
-                    buffer.add(this.hand.indexOf(e));
-                }
-            }
-        }
-
-        return greatVal;
-    }
-
-    public void addTileToBuffer(Tile t) {
-        int index;
-
-        if((index = this.hand.indexOf(t)) >= 0) {
-            if(!(buffer.contains(index))) {
-                this.buffer.add(index);
-            }
-        }
     }
 
     @Override
