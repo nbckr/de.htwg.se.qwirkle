@@ -59,19 +59,6 @@ public class QController extends Observable {
             }
         }
 
-        // choose first player
-        /*int vOld = -1, vNew;
-
-        for (Player p : this.players) {
-            vNew = p.evalPlayer();
-
-            if(vNew > vOld) {
-                vOld = vNew;
-                this.currentPlayer = p;
-            }
-        }
-        */
-
         this.currentPlayer = this.players.get(0);
 
         this.statusMessage = "Player " + this.currentPlayer.getName() + " starts.";
