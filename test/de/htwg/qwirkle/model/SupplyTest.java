@@ -24,6 +24,7 @@ public class SupplyTest extends TestCase {
         for (int i = 0; i < initsize; i++) {
             assert(supply.getTile() != null);
         }
+
         assertEquals(null, supply.getTile());
     }
 
