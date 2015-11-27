@@ -25,7 +25,16 @@ public class Supply {
         random = new Random(43);            // TODO: random always gives the same numbers...
 
         for (Shape s : Shape.values()) {
+
+            //ignore undefined values
+            if(s == Shape.UNDEF)
+                continue;
+
             for (Color c : Color.values()) {
+
+                //ignore undefined values
+                if(c == Color.UNDEF)
+                    continue;
                 for (int i = 0; i < 3; i++) {
                     tiles.add(new Tile(c, s));
                 }
@@ -54,7 +63,11 @@ public class Supply {
      * @param t the Tile to insert
      */
     public void insertTile(Tile t) {
-        assert(tiles.size() < MAX_SIZE);
+        if(tiles.size() >= MAX_SIZE)
+        {
+            throw new IndexOutOfBoundsException("number of max tiles in supply is already reached.");
+        }
+
         tiles.add(t);
         Collections.shuffle(tiles);
     }
