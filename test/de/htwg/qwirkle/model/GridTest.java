@@ -5,9 +5,6 @@ import de.htwg.qwirkle.model.Tile.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
-
 /**
  * Created by niboecke on 30.10.2015.
  */
@@ -32,9 +29,15 @@ public class GridTest extends TestCase {
         supply = new Supply();
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test
     public void testGrid() {
-        grid_fail = new Grid(9,9);
+
+        //throws exception
+        try {
+            grid_fail = new Grid(9, 9);
+        } catch (IllegalArgumentException e) {
+            System.out.println("IllegalArgumentException expected: " + e.getMessage());
+        }
     }
 
     @Test

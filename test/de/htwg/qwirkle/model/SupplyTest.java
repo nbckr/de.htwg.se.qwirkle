@@ -29,12 +29,17 @@ public class SupplyTest extends TestCase {
         assertEquals(null, supply.getTile());
     }
 
-    @Test(expected=IndexOutOfBoundsException.class)
+    @Test
     public void testInsertTile() {
         Tile out = supply.getTile();
         supply.insertTile(tile);
 
-        supply.insertTile(tile);
+        //throws exception
+        try {
+            supply.insertTile(tile);
+        } catch(IndexOutOfBoundsException e) {
+            System.out.println("IndexOutOfBoundsException expected: " + e.getMessage());
+        }
     }
 
     @Test
