@@ -55,12 +55,12 @@ public class Grid {
 
     /**
      * getTile returns the tile of a cell on the grid
-     * @param i position to specify row
-     * @param j position to specify column
+     * @param row position to specify row
+     * @param col position to specify column
      * @return Tile on the specified position or null if cell is empty
      */
-    public Tile getTile(int i, int j) {
-        return grid[i][j];     // if empty, null is returned automatically
+    public Tile getTile(int row, int col) {
+        return grid[row][col];     // if empty, null is returned automatically
     }
 
     @Override

@@ -125,6 +125,13 @@ public class QController extends Observable {
     }
 
     /**
+     * Returns the Tile on this position of the grid; the Tile remains on the grid though
+     */
+    public Tile getTileReference(int row, int col) {
+        return this.grid.getTile(row, col);
+    }
+
+    /**
      * Returns the grid as text for tui
      * @return grid as string
      */
