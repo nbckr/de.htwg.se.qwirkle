@@ -14,7 +14,7 @@ public class QController extends Observable {
 
     private State state;
 
-    private ArrayList<Player> players;      // TODO: cyclic list?
+    private ArrayList<Player> players;
     private Player currentPlayer;
     private Supply supply;
     private Grid grid;
@@ -84,17 +84,18 @@ public class QController extends Observable {
         return points;
     }
 
+
     /**
-     * @param t_old old Tile to trade in
+     * @param oldTile old Tile to trade in
      * @return new Tile to replace the old one
      */
-    public Tile tradeTile(Tile t_old) {
+    public Tile tradeTile(Tile oldTile) {
         assert(!supply.isEmpty());
-        Tile t_new = supply.getTile();
-        supply.insertTile(t_old);
+        Tile newTile = supply.getTile();
+        supply.insertTile(oldTile);
 
         notifyObservers();
-        return t_new;
+        return newTile;
     }
 
     /**

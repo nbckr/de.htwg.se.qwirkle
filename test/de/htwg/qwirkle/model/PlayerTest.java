@@ -61,6 +61,7 @@ public class PlayerTest extends TestCase {
         }
     }
 
+    @Test
     public void testgetTileFromHand() {
         Tile retval;
 
@@ -70,6 +71,9 @@ public class PlayerTest extends TestCase {
 
         retval = player.getTileFromHand(2);
         assertEquals(tiles.get(1), retval);
+
+        retval = player.getTileFromHand();
+        assertNotNull(retval);
 
         retval = player.getTileFromHand(10);
         assertNull(retval);

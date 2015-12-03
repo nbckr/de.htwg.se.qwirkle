@@ -8,7 +8,10 @@ import util.MessageUtil;
 import util.observer.QEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.regex.PatternSyntaxException;
+
 import util.observer.IObserver;
 
 /**
@@ -31,7 +34,7 @@ public class TextUI implements IObserver {
     }
 
     /**
-     * Prints the minor information of the grind and current player
+     * Prints the minor information of the grid and current player
      */
     public void printTUI() {
         // print name of player, content of player's hand, number of round
@@ -88,40 +91,11 @@ public class TextUI implements IObserver {
     public boolean processInputLine(String line) {
 
         if (line.equalsIgnoreCase("a")) {
-            boolean tileSet = false;
-
-            while(true) {
-                int size = this.controller.getCurrentPlayer().getHand().size();
-                System.out.println("Select tile to add to grid(1-" + size + ", 0 to quit):");
-                int iTile = scanner.nextInt();
-                if(iTile == 0){
-                    break;
-                }
-
-                Tile selectedTile = controller.getCurrentPlayer().getTileFromHand(iTile);
-                if (selectedTile == null) {
-                    System.out.println(MessageUtil.INVALID);
-                    continue;
-                }
-
-                System.out.print("Select position on grid(row column):");
-                int row = scanner.nextInt();
-                int col = scanner.nextInt();
-
-                controller.addTileToGrid(selectedTile, row, col);
-                tileSet = true;
-            }
-
-            if(tileSet) {
-                controller.refillPlayer();
-                controller.nextPlayer();
-                printTUI();
-            }
-
+            addTileRoutine();
         }
 
         if (line.equalsIgnoreCase("t")) {
-            System.out.println();
+            tradeTileRoutine();
         }
 
         if (line.equalsIgnoreCase("h")) {
@@ -135,6 +109,67 @@ public class TextUI implements IObserver {
         }
 
         return true;    // continue loop in all cases but 'q'
+    }
+
+    private void tradeTileRoutine() {
+        int size = this.controller.getCurrentPlayer().getHand().size();
+        System.out.println("Which tiles do you want to trade? (1-" + size +", separated by space:");
+        String trading = scanner.next();
+        List<Integer> integerList;
+
+        try {
+            String[] stringArray = trading.split("\\s+");
+            integerList = new ArrayList<>();
+            for(String string : stringArray) {
+                int i = Integer.parseInt(string);
+                assert(i <= this.controller.getCurrentPlayer().getHand().size());
+                integerList.add(i);
+            }
+        } catch (PatternSyntaxException ex) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        for(int i : integerList) {
+            Tile oldTile = controller.getCurrentPlayer().getTileFromHand(i);
+            Tile newTile = controller.tradeTile(oldTile);
+            controller.getCurrentPlayer().addTileToHand(newTile);
+        }
+
+        controller.nextPlayer();
+        printTUI();
+    }
+
+    private void addTileRoutine() {
+        boolean tileSet = false;
+
+        while(true) {
+            int size = this.controller.getCurrentPlayer().getHand().size();
+            System.out.println("Select tile to add to grid(1-" + size + ", 0 to quit):");
+            int iTile = scanner.nextInt();
+            if(iTile == 0){
+                break;
+            }
+
+            Tile selectedTile = controller.getCurrentPlayer().getTileFromHand(iTile);
+            if (selectedTile == null) {
+                System.out.println(MessageUtil.INVALID);
+                continue;
+            }
+
+            System.out.print("Select position on grid(row column):");
+            int row = scanner.nextInt();
+            int col = scanner.nextInt();
+
+            controller.addTileToGrid(selectedTile, row, col);
+            tileSet = true;
+        }
+
+        if(tileSet) {
+            controller.refillPlayer();
+            controller.nextPlayer();
+            printTUI();
+        }
     }
 
     /**

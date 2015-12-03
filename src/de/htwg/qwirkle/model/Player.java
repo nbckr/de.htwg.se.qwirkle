@@ -42,6 +42,10 @@ public class Player {
         return true;
     }
 
+    public Tile getTileFromHand() {
+        return getTileFromHand(1);
+    }
+
     public Tile getTileFromHand(int index) {
         Tile retval;
 
