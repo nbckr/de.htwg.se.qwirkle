@@ -36,11 +36,6 @@ dependencies {
     testCompile "junit:junit:4.11"
 }
 
-sourceSets {
-    main.java.srcDir "src"
-    test.java.srcDir "test"
-}
-
 jar {
     manifest.attributes "Main-Class":"de.htwg.qwirkle.Qwirkle"
 }
