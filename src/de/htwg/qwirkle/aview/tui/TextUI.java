@@ -13,6 +13,7 @@ import java.util.Scanner;
 import java.util.regex.PatternSyntaxException;
 
 import util.observer.IObserver;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created by niboecke on 30.10.2015.
@@ -21,6 +22,7 @@ public class TextUI implements IObserver {
 
     private Scanner scanner;
     private QController controller;
+    final static Logger logger = Logger.getLogger(TextUI.class);
 
     /**
      * @param controller Qwirkle game controller
