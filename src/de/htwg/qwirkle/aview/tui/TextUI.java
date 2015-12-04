@@ -29,7 +29,6 @@ public class TextUI implements IObserver {
      * @param controller Qwirkle game controller
      */
     public TextUI(QController controller) {
-        logger.error("TextUI");
         this.scanner = new Scanner(System.in);
         this.controller = controller;
         controller.addObserver(this);
