@@ -4,6 +4,7 @@ import de.htwg.qwirkle.controller.QController;
 import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
+import org.apache.logging.log4j.LogManager;
 import util.MessageUtil;
 import util.observer.QEvent;
 
@@ -22,12 +23,13 @@ public class TextUI implements IObserver {
 
     private Scanner scanner;
     private QController controller;
-    final static Logger logger = Logger.getLogger(TextUI.class);
+    private static final Logger logger = LogManager.getLogger(TextUI.class);
 
     /**
      * @param controller Qwirkle game controller
      */
     public TextUI(QController controller) {
+        logger.error("TextUI");
         this.scanner = new Scanner(System.in);
         this.controller = controller;
         controller.addObserver(this);
