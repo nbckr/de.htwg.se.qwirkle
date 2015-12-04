@@ -13,6 +13,7 @@ apply plugin: "org.sonarqube"
 apply plugin: "eclipse"
 apply plugin: "maven"
 apply plugin: "jacoco"
+apply plugin: "application"
 
 idea {
     project {
@@ -21,6 +22,8 @@ idea {
         languageLevel = '1.8'
     }
 }
+
+mainClassName = 'de.htwg.qwirkle.Qwirkle'
 
 dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api',  version: '2.4.1'
