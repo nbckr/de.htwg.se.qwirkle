@@ -6,14 +6,14 @@ package util.observer;
 
 public class QEvent {
 
-    private Events _e;
+    private Events events;
 
     public QEvent(Events e) {
-        this._e = e;
+        this.events = e;
     }
 
     public Events getEvent() {
-        return this._e;
+        return this.events;
     }
 
     public enum Events {

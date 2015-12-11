@@ -23,7 +23,7 @@ public class TextUI implements IObserver {
 
     private Scanner scanner;
     private QController controller;
-    private static Logger LOG = LogManager.getLogger(TextUI.class);
+    private static final Logger LOG = LogManager.getLogger(TextUI.class);
 
     /**
      * @param controller Qwirkle game controller
@@ -54,7 +54,7 @@ public class TextUI implements IObserver {
     public void initializePlayer() {
         int noP = 1;
         String name, tmp;
-        ArrayList<Player> players;
+        List<Player> players;
 
         players = new ArrayList<>();
 
@@ -94,19 +94,19 @@ public class TextUI implements IObserver {
      */
     public boolean processInputLine(String line) {
 
-        if (line.equalsIgnoreCase("a")) {
+        if ("a".equalsIgnoreCase(line)) {
             addTileRoutine();
         }
 
-        if (line.equalsIgnoreCase("t")) {
+        if ("t".equalsIgnoreCase(line)) {
             tradeTileRoutine();
         }
 
-        if (line.equalsIgnoreCase("h")) {
+        if ("h".equalsIgnoreCase(line)) {
             LOG.info(MessageUtil.INSTRUCTIONS);
         }
 
-        if (line.equalsIgnoreCase("q")) {
+        if ("q".equalsIgnoreCase(line)) {
             // ToDo: evaluate player's score
             LOG.info(MessageUtil.SEEYOU);
             return false;   // quit loop
@@ -126,7 +126,7 @@ public class TextUI implements IObserver {
             integerList = new ArrayList<>();
             for(String string : stringArray) {
                 int i = Integer.parseInt(string);
-                assert(i <= this.controller.getCurrentPlayer().getHand().size());
+                assert i <= this.controller.getCurrentPlayer().getHand().size();
                 integerList.add(i);
             }
         } catch (PatternSyntaxException ex) {
@@ -161,7 +161,7 @@ public class TextUI implements IObserver {
                 continue;
             }
 
-            System.out.print("Select position on grid(row column):");
+            LOG.info("Select position on grid(row column):");
             int row = scanner.nextInt();
             int col = scanner.nextInt();
 

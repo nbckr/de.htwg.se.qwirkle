@@ -1,7 +1,5 @@
 package de.htwg.qwirkle.model;
 
-import java.util.Arrays;
-
 /**
  * Created by niboecke on 30.10.2015.
  */
@@ -27,7 +25,7 @@ public class Grid {
      * @param i number of rows
      * @param j number of columns
      */
-    public Grid(int i, int j) throws IllegalArgumentException {
+    public Grid(int i, int j) {
 
         if ((i < 10) || (j < 10) || (i > MAX_COLS) || (j > MAX_ROWS))
             throw new IllegalArgumentException("Number of rows / columns must be between 10 and " + MAX_COLS);

@@ -4,7 +4,6 @@ Source: https://moodle.htwg-konstanz.de/moodle/course/view.php?id=713
 
 package util.observer;
 
-import java.lang.Override;
 import java.util.ArrayList;
 import java.util.List;
 

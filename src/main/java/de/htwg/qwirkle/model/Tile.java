@@ -37,11 +37,15 @@ public class Tile {
         return shape;
     }
 
-    public boolean equals(Tile t) {
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Tile)) {
+            return false;
+        }
+        Tile t = (Tile) o;
         if((this.color == t.color) && (this.shape == t.shape)) {
             return true;
         }
-
         return false;
     }
 

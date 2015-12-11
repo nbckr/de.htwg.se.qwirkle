@@ -1,4 +1,4 @@
-package de.htwg.qwirkle.controller;
+package de.htwg.qwirkle.controller.impl;
 
 import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
@@ -9,8 +9,9 @@ import util.observer.QEvent;
 import util.observer.Observable;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class QController extends Observable {
+public class QController extends Observable implements de.htwg.qwirkle.controller.IQController {
 
     private State state;
 
@@ -34,17 +35,15 @@ public class QController extends Observable {
         this.state = State.INITIALIZED;
     }
 
-    /**
-     * @param players List with all players for the game
-     */
-    public void init(ArrayList<Player> players) {
+    @Override
+    public void init(List<Player> players) {
         assert((players.size() > 0)&&(players.size() < 5));
 
         //print welcome
         this.statusMessage = MessageUtil.WELCOME;
         notifyObservers(new QEvent(QEvent.Events.message));
 
-        this.players = players;
+        this.players = (ArrayList) players;
         initPlayers();
     }
 
@@ -66,12 +65,7 @@ public class QController extends Observable {
     }
 
 
-    /**
-     * @param t Tile to add
-     * @param i position to specify row
-     * @param j position to specify column
-     * @return the points to add to player's score, or -1 if adding was impossible
-     */
+    @Override
     public int addTileToGrid(Tile t, int i, int j) {
         int points = 0;
         // TODO: validate if playing here is even possible, return -1 if no
@@ -85,10 +79,7 @@ public class QController extends Observable {
     }
 
 
-    /**
-     * @param oldTile old Tile to trade in
-     * @return new Tile to replace the old one
-     */
+    @Override
     public Tile tradeTile(Tile oldTile) {
         assert(!supply.isEmpty());
         Tile newTile = supply.getTile();
@@ -98,57 +89,38 @@ public class QController extends Observable {
         return newTile;
     }
 
-    /**
-     * Returns the player next in line.
-     * @return the player next in line
-     */
+    @Override
     public Player getCurrentPlayer() {
         return this.currentPlayer;
     }
 
-    /**
-     * Reset the current player with the player next in line.
-     */
+    @Override
     public void nextPlayer(){
         int index = (this.players.indexOf(this.currentPlayer) + 1) % this.players.size();
         this.currentPlayer = this.players.get(index);
         this.statusMessage = "Player " + this.currentPlayer.getName() + " is next in line.";
     }
 
-    /**
-     * Refills the current players hand with tiles from supply
-     */
+    @Override
     public void refillPlayer() {
         for (int i = this.currentPlayer.getHand().size(); i <= 6; i++) {
             this.currentPlayer.addTileToHand(this.supply.getTile());
         }
     }
 
-    /**
-     * Returns the Tile on this position of the grid; the Tile remains on the grid though
-     */
+    @Override
     public Tile getTileReference(int row, int col) {
         return this.grid.getTile(row, col);
     }
 
-    /**
-     * Returns the grid as text for tui
-     * @return grid as string
-     */
+    @Override
     public String getGridString() {
         return grid.toString();
     }
 
-    /**
-     * Returns the current status message
-     * @return status message
-     */
+    @Override
     public String getStatusMessage() {
         return statusMessage;
     }
 
-    private enum State {
-        NEXT,
-        INITIALIZED
-    }
 }

@@ -1,5 +1,6 @@
 package de.htwg.qwirkle.controller;
 
+import de.htwg.qwirkle.controller.impl.QController;
 import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
@@ -8,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by niels on 03.12.2015.
