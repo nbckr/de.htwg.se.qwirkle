@@ -1,6 +1,6 @@
 package de.htwg.qwirkle.aview.tui;
 
-import de.htwg.qwirkle.controller.QController;
+import de.htwg.qwirkle.controller.impl.QController;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
 
@@ -61,19 +61,6 @@ public class TextUI implements IObserver {
         while(noP <= 4) {
             if (noP >= 3) {
 
-
-
-                if(LOG.isDebugEnabled()) {
-                    System.out.println("debugja");
-                } else {
-                    System.out.println("debugnein");
-                }
-
-                if(LOG.isInfoEnabled()) {
-                    System.out.println("infoja");
-                } else {
-                    System.out.println("infonein");
-                }
                 LOG.info("Enter another Player? (y/n)");
                 tmp = this.scanner.next();
                 if (tmp.equals("n")) {
@@ -81,7 +68,7 @@ public class TextUI implements IObserver {
                 }
             }
 
-            LOG.error("Enter name of Player" + noP + ": ");
+            LOG.info("Enter name of Player" + noP + ": ");
             name = this.scanner.next();
             players.add(new Player(name));
             noP++;
