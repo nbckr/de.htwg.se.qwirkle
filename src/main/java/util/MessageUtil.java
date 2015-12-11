@@ -7,10 +7,6 @@ package util;
 
 public abstract class MessageUtil {
 
-    private MessageUtil() {
-        // prevent class from being instantiated
-    }
-
     public static final String INSTRUCTIONS = "List of commands:\n" +
                                               "\ta - add tile(s) to grid\n\t" +
                                               "t - trade in tile(s)\n" +
@@ -21,4 +17,7 @@ public abstract class MessageUtil {
     public static final String SEEYOU = "\nSee you later!";
     public static final String INVALID = "invalid entry";
 
+    private MessageUtil() {
+        // prevent class from being instantiated
+    }
 }
