@@ -1,10 +1,9 @@
 package de.htwg.qwirkle.aview.tui;
 
 import de.htwg.qwirkle.controller.QController;
-import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
-import org.apache.logging.log4j.LogManager;
+
 import util.MessageUtil;
 import util.observer.QEvent;
 
@@ -15,6 +14,7 @@ import java.util.regex.PatternSyntaxException;
 
 import util.observer.IObserver;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * Created by niboecke on 30.10.2015.
@@ -23,7 +23,7 @@ public class TextUI implements IObserver {
 
     private Scanner scanner;
     private QController controller;
-    private static final Logger logger = LogManager.getLogger(TextUI.class);
+    private static Logger LOG = LogManager.getLogger(TextUI.class);
 
     /**
      * @param controller Qwirkle game controller
@@ -41,11 +41,11 @@ public class TextUI implements IObserver {
      */
     public void printTUI() {
         // print name of player, content of player's hand, number of round
-        System.out.println(controller.getGridString());
-        System.out.println(controller.getStatusMessage());
-        System.out.println("Hand: " + controller.getCurrentPlayer().printHand());
-        System.out.println("Score: " + controller.getCurrentPlayer().getScore());
-        System.out.println("Please enter a command (press h for help)");
+        LOG.info(controller.getGridString());
+        LOG.info(controller.getStatusMessage());
+        LOG.info("Hand: " + controller.getCurrentPlayer().printHand());
+        LOG.info("Score: " + controller.getCurrentPlayer().getScore());
+        LOG.info("Please enter a command (press h for help)");
     }
 
     /**
@@ -60,14 +60,28 @@ public class TextUI implements IObserver {
 
         while(noP <= 4) {
             if (noP >= 3) {
-                System.out.println("Enter another Player? (y/n)");
+
+
+
+                if(LOG.isDebugEnabled()) {
+                    System.out.println("debugja");
+                } else {
+                    System.out.println("debugnein");
+                }
+
+                if(LOG.isInfoEnabled()) {
+                    System.out.println("infoja");
+                } else {
+                    System.out.println("infonein");
+                }
+                LOG.info("Enter another Player? (y/n)");
                 tmp = this.scanner.next();
                 if (tmp.equals("n")) {
                     break;
                 }
             }
 
-            System.out.printf("Enter name of Player%d:", noP);
+            LOG.error("Enter name of Player" + noP + ": ");
             name = this.scanner.next();
             players.add(new Player(name));
             noP++;
@@ -80,7 +94,7 @@ public class TextUI implements IObserver {
      * Prints the controllers status message
      */
     public void printMessage() {
-        System.out.println(this.controller.getStatusMessage());
+        LOG.info(this.controller.getStatusMessage());
     }
 
     /**
@@ -102,12 +116,12 @@ public class TextUI implements IObserver {
         }
 
         if (line.equalsIgnoreCase("h")) {
-            System.out.println(MessageUtil.INSTRUCTIONS);
+            LOG.info(MessageUtil.INSTRUCTIONS);
         }
 
         if (line.equalsIgnoreCase("q")) {
             // ToDo: evaluate player's score
-            System.out.println(MessageUtil.SEEYOU);
+            LOG.info(MessageUtil.SEEYOU);
             return false;   // quit loop
         }
 
@@ -116,7 +130,7 @@ public class TextUI implements IObserver {
 
     private void tradeTileRoutine() {
         int size = this.controller.getCurrentPlayer().getHand().size();
-        System.out.println("Which tiles do you want to trade? (1-" + size +", separated by space:");
+        LOG.info("Which tiles do you want to trade? (1-" + size + ", separated by space:");
         String trading = scanner.next();
         List<Integer> integerList;
 
@@ -129,7 +143,7 @@ public class TextUI implements IObserver {
                 integerList.add(i);
             }
         } catch (PatternSyntaxException ex) {
-            System.out.println("Invalid input");
+            LOG.info("Invalid input");
             return;
         }
 
@@ -148,7 +162,7 @@ public class TextUI implements IObserver {
 
         while(true) {
             int size = this.controller.getCurrentPlayer().getHand().size();
-            System.out.println("Select tile to add to grid(1-" + size + ", 0 to quit):");
+            LOG.info("Select tile to add to grid(1-" + size + ", 0 to quit):");
             int iTile = scanner.nextInt();
             if(iTile == 0){
                 break;
@@ -156,7 +170,7 @@ public class TextUI implements IObserver {
 
             Tile selectedTile = controller.getCurrentPlayer().getTileFromHand(iTile);
             if (selectedTile == null) {
-                System.out.println(MessageUtil.INVALID);
+                LOG.info(MessageUtil.INVALID);
                 continue;
             }
 
