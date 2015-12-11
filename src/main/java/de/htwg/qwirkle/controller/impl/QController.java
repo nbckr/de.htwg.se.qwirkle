@@ -15,12 +15,11 @@ public class QController extends Observable implements de.htwg.qwirkle.controlle
 
     private State state;
 
-    private ArrayList<Player> players;
+    private List<Player> players;
     private Player currentPlayer;
     private Supply supply;
     private Grid grid;
     private String statusMessage;
-    private int rounds;
 
     /**
      * @param grid the grid for this game instance
@@ -28,20 +27,16 @@ public class QController extends Observable implements de.htwg.qwirkle.controlle
     public QController(Grid grid) {
         this.grid = grid;
         this.supply = new Supply();
-        this.rounds = 0;
-
-
-
         this.state = State.INITIALIZED;
     }
 
     @Override
     public void init(List<Player> players) {
-        assert((players.size() > 0)&&(players.size() < 5));
+        assert (!players.isEmpty())&&(players.size() < 5);
 
         //print welcome
         this.statusMessage = MessageUtil.WELCOME;
-        notifyObservers(new QEvent(QEvent.Events.message));
+        notifyObservers(new QEvent(QEvent.Events.MESSAGE));
 
         this.players = (ArrayList) players;
         initPlayers();
@@ -81,7 +76,7 @@ public class QController extends Observable implements de.htwg.qwirkle.controlle
 
     @Override
     public Tile tradeTile(Tile oldTile) {
-        assert(!supply.isEmpty());
+        assert !supply.isEmpty();
         Tile newTile = supply.getTile();
         supply.insertTile(oldTile);
 

@@ -1,22 +1,23 @@
 package de.htwg.qwirkle.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by luluschi on 23.10.2015.
  */
 public class Player {
 
-    // private static int playerCount = 0;
     private String name;
     private int score;
-    private ArrayList<Tile> hand;
+    private List<Tile> hand;
+    // private static int playerCount = 0;
 
     /**
      * Standard constructor calls constructor with standard name: Player1, Player2, ...
      */
     public Player() {
-        this(("Player"));
+        this("Player");
     }
 
     /**
@@ -62,7 +63,7 @@ public class Player {
      * @param i Value to add to score. Has to be greater than 0
      */
     public void addScore(int i) {
-        assert(i > 0);
+        assert i > 0;
         this.score += i;
     }
 
@@ -96,7 +97,7 @@ public class Player {
     }
 
     public String printHand() {
-        if (hand.size() == 0) {
+        if (hand.isEmpty()) {
             return "(empty)";
         }
         StringBuilder sb = new StringBuilder();

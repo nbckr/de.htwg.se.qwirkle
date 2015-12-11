@@ -6,6 +6,10 @@ package util;
  */
 public abstract class TilePrintUtil {
 
+    private TilePrintUtil() {
+        // prevent class from being instantiated
+    }
+
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BOLD = "\u001B[1m";
     public static final String ANSI_BLACK = "\u001B[30m";

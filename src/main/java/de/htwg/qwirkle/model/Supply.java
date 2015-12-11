@@ -47,7 +47,7 @@ public class Supply {
      * @return a Tile randomly chosen from Supply or null if Supply is empty
      */
     public Tile getTile() {
-        if (tiles.size() == 0) {
+        if (tiles.isEmpty()) {
             return null;
         }
 
@@ -76,7 +76,7 @@ public class Supply {
     }
 
     public boolean isEmpty() {
-        return tiles.size() == 0;
+        return tiles.isEmpty();
     }
 
     @Override

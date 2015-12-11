@@ -63,7 +63,7 @@ public class TextUI implements IObserver {
 
                 LOG.info("Enter another Player? (y/n)");
                 tmp = this.scanner.next();
-                if (tmp.equals("n")) {
+                if ("n".equals(tmp)) {
                     break;
                 }
             }
@@ -183,10 +183,10 @@ public class TextUI implements IObserver {
     @Override
     public void update(QEvent e) {
         switch(e.getEvent()) {
-            case getPlayer:
+            case GET_PLAYER:
                 initializePlayer();
                 break;
-            case message:
+            case MESSAGE:
                 printMessage();
                 break;
             default:

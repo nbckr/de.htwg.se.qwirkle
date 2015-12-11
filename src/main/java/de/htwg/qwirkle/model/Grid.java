@@ -9,7 +9,7 @@ public class Grid {
     public static final int MAX_ROWS = 99;
     public static final int MAX_COLS = MAX_ROWS;
 
-    private Tile[][] grid;
+    private Tile[][] tiles;
     private int numRows;
     private int numCols;
 
@@ -30,35 +30,35 @@ public class Grid {
         if ((i < 10) || (j < 10) || (i > MAX_COLS) || (j > MAX_ROWS))
             throw new IllegalArgumentException("Number of rows / columns must be between 10 and " + MAX_COLS);
 
-        grid = new Tile[i][j];
+        tiles = new Tile[i][j];
         numRows = i;
         numCols = j;
     }
 
     /**
-     * setTile adds a tile to an empty cell of the grid
-     * @param t Tile to put on the grid
+     * setTile adds a tile to an empty cell of the tiles
+     * @param t Tile to put on the tiles
      * @param i position to specify row
      * @param j position to specify column
      * @return true if successful, false otherwise
      */
     public boolean setTile(Tile t, int i, int j) {
 
-        if (grid[i][j] != null)
+        if (tiles[i][j] != null)
             return false;
 
-        grid[i][j] = t;
+        tiles[i][j] = t;
         return true;
     }
 
     /**
-     * getTile returns the tile of a cell on the grid
+     * getTile returns the tile of a cell on the tiles
      * @param row position to specify row
      * @param col position to specify column
      * @return Tile on the specified position or null if cell is empty
      */
     public Tile getTile(int row, int col) {
-        return grid[row][col];     // if empty, null is returned automatically
+        return tiles[row][col];     // if empty, null is returned automatically
     }
 
     @Override
@@ -75,8 +75,8 @@ public class Grid {
         for(int i = 0; i < numRows; i++) {
             sb.append(String.format("%02d ", i));
             for (int j = 0; j < numCols; j++) {
-                if(grid[i][j] != null) {
-                    sb.append(grid[i][j] + " ");
+                if(tiles[i][j] != null) {
+                    sb.append(tiles[i][j] + " ");
                 } else {
                     sb.append("|| ");
                 }

@@ -100,7 +100,7 @@ public class Tile {
                 myShape = "??";
         }
 
-        return (myColor + myShape + TilePrintUtil.ANSI_RESET);
+        return myColor + myShape + TilePrintUtil.ANSI_RESET;
     }
 
 

@@ -3,7 +3,6 @@ package de.htwg.qwirkle.controller;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
