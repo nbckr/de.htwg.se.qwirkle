@@ -20,8 +20,7 @@ public class Tile {
     private final Shape shape;
 
     public Tile() {
-        this.color = Color.UNDEF;
-        this.shape = Shape.UNDEF;
+        this(Color.UNDEF, Shape.UNDEF);
     }
 
     public Tile(Color c, Shape s) {
@@ -54,6 +53,10 @@ public class Tile {
         String myShape;
         String myColor;
 
+        if(this.color == Color.UNDEF ||this.shape == Shape.UNDEF) {
+            return "undefined";
+        }
+
         switch(color) {
             case CYAN:
                 myColor = TilePrintUtil.ANSI_CYAN_BG;
@@ -77,28 +80,7 @@ public class Tile {
                 myColor = TilePrintUtil.ANSI_BLACK_BG;
         }
 
-        switch(shape) {
-            case CIRCLE:
-                myShape = "CI";
-                break;
-            case SQUARE:
-                myShape = "SQ";
-                break;
-            case CLOVER:
-                myShape = "CL";
-                break;
-            case DIAMOND:
-                myShape = "DI";
-                break;
-            case STAR:
-                myShape = "ST";
-                break;
-            case CROSS:
-                myShape = "CR";
-                break;
-            default:
-                myShape = "??";
-        }
+        myShape = shape.toString().substring(0, 2);
 
         return myColor + myShape + TilePrintUtil.ANSI_RESET;
     }

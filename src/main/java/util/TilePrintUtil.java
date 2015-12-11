@@ -29,4 +29,8 @@ public abstract class TilePrintUtil {
     private TilePrintUtil() {
         // prevent class from being instantiated
     }
+
+    public class ColorClassTest {
+        public static final String BLACK = ANSI_BLACK;
+    }
 }
