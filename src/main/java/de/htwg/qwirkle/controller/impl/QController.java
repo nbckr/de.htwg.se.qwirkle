@@ -1,5 +1,7 @@
 package de.htwg.qwirkle.controller.impl;
 
+import de.htwg.qwirkle.controller.IQController;
+import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Supply;
@@ -11,7 +13,7 @@ import util.observer.Observable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QController extends Observable implements de.htwg.qwirkle.controller.IQController {
+public class QController extends Observable implements IQController, IQControllerGui {
 
     private State state;
 
@@ -27,7 +29,6 @@ public class QController extends Observable implements de.htwg.qwirkle.controlle
     public QController(Grid grid) {
         this.grid = grid;
         this.supply = new Supply();
-        this.state = State.INITIALIZED;
     }
 
     @Override
@@ -118,4 +119,15 @@ public class QController extends Observable implements de.htwg.qwirkle.controlle
         return statusMessage;
     }
 
+    @Override
+    public void create() {
+        //grid.create()
+        this.state = State.INITIALIZED;
+        notifyObservers();
+    }
+
+    @Override
+    public void exit() {
+        System.exit(0);
+    }
 }

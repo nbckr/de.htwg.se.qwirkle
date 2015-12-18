@@ -2,13 +2,14 @@ package de.htwg.qwirkle.controller;
 
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
+import util.observer.IObservable;
 
 import java.util.List;
 
 /**
  * Created by niels on 11.12.2015.
  */
-public interface IQController {
+public interface IQController extends IObservable {
     /**
      * @param players List with all players for the game
      */
@@ -60,6 +61,8 @@ public interface IQController {
      * @return status message
      */
     String getStatusMessage();
+
+    void create();
 
     public enum State {
         NEXT,
