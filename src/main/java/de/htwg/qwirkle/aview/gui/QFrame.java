@@ -13,8 +13,7 @@ import java.awt.*;
  */
 public class QFrame extends JFrame implements IObserver {
 
-    private static final int DEFAULT_X = 800;
-    private static final int DEFAULT_Y = 1200;
+    private static final Dimension DEFAULT_WINDOWSIZE = new Dimension(800, 1200);
     private JPanel mainPanel;
     private GridPanel gridPanel;
     private HandPanel handPanel;
@@ -53,7 +52,7 @@ public class QFrame extends JFrame implements IObserver {
         setContentPane(mainPanel);
         setTitle("HTWG QWiRKLE");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(DEFAULT_X, DEFAULT_Y);
+        setSize(DEFAULT_WINDOWSIZE);
         pack();
         setVisible(true);
 
