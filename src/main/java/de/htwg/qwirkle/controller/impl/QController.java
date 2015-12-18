@@ -127,6 +127,16 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
+    public int getNumRows() {
+        return grid.getNumRows();
+    }
+
+    @Override
+    public int getNumCols() {
+        return grid.getNumCols();
+    }
+
+    @Override
     public void exit() {
         System.exit(0);
     }

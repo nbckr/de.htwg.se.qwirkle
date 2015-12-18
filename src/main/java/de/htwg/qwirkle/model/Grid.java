@@ -85,4 +85,11 @@ public class Grid {
         }
         return sb.toString();
     }
+
+    public int getNumRows() {
+        return numRows;
+    }
+    public int getNumCols() {
+        return numCols;
+    }
 }

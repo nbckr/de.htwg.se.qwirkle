@@ -85,5 +85,26 @@ public class Tile {
         return myColor + myShape + TilePrintUtil.ANSI_RESET;
     }
 
+    /**
+     * Special toString implementation to generate image file names
+     * @return tile name in the form "TILE_COLOR_SHAPE", e.g. "TILE_BLUE_CIRCLE"
+     */
+    public String toString2() {
+        StringBuilder sb = new StringBuilder("TILE_");
+        sb.append(color.toString() + "_");
+        sb.append(shape.toString());
+        return sb.toString();
+    }
+
+    /**
+     * @return relative path to corresponding image that has to exist in src/resources/img
+     *         e.g. "\\main\\resources\\img\\TILE_BLUE_CIRCLE.jpg"
+     */
+    public String getImageFilepath() {
+        StringBuilder sb = new StringBuilder("\\main\\resources\\img\\");
+        sb.append(toString2() + ".jpg");
+        return sb.toString();
+    }
+
 
 }

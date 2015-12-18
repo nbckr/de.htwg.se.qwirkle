@@ -64,6 +64,10 @@ public interface IQController extends IObservable {
 
     void create();
 
+    int getNumRows();
+
+    int getNumCols();
+
     public enum State {
         NEXT,
         INITIALIZED
