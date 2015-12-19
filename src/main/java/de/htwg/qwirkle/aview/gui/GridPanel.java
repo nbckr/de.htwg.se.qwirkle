@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class GridPanel extends JPanel {
 
-    private static final int GAP_PX = 1;
+    private static final int GAP_PX = 2;
 
     public GridPanel(IQControllerGui controller) {
 
@@ -18,7 +18,8 @@ public class GridPanel extends JPanel {
         int cols = controller.getNumCols();
         int cells = rows * cols;
 
-        setLayout(new GridLayout(rows, cols, GAP_PX, GAP_PX));
+        setLayout(new GridLayout(rows, cols));
+        //setLayout(new GridLayout(rows, cols, GAP_PX, GAP_PX));
         setBorder(BorderFactory.createLoweredBevelBorder());
 
         // Add cells for all tiles

@@ -19,10 +19,18 @@ public class Tile {
     private final Color color;
     private final Shape shape;
 
+    /**
+     * Create undef Tile
+     */
     public Tile() {
         this(Color.UNDEF, Shape.UNDEF);
     }
 
+    /**
+     * create a new Tile
+     * @param c color
+     * @param s shape
+     */
     public Tile(Color c, Shape s) {
         this.color = c;
         this.shape = s;
@@ -90,6 +98,11 @@ public class Tile {
      * @return tile name in the form "TILE_COLOR_SHAPE", e.g. "TILE_BLUE_CIRCLE"
      */
     public String toString2() {
+        
+        if (this.color == Color.UNDEF ||this.shape == Shape.UNDEF) {
+            return "BACK_SIMPLE";
+        }
+        
         StringBuilder sb = new StringBuilder("TILE_");
         sb.append(color.toString() + "_");
         sb.append(shape.toString());
@@ -101,7 +114,7 @@ public class Tile {
      *         e.g. "\\main\\resources\\img\\TILE_BLUE_CIRCLE.jpg"
      */
     public String getImageFilepath() {
-        StringBuilder sb = new StringBuilder("\\main\\resources\\img\\");
+        StringBuilder sb = new StringBuilder("/main/resources/img/");
         sb.append(toString2() + ".jpg");
         return sb.toString();
     }

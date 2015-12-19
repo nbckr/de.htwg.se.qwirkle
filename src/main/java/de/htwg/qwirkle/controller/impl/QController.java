@@ -41,6 +41,7 @@ public class QController extends Observable implements IQController, IQControlle
 
         this.players = (ArrayList) players;
         initPlayers();
+        notifyObservers();
     }
 
     /**
@@ -58,6 +59,7 @@ public class QController extends Observable implements IQController, IQControlle
 
         this.statusMessage = "Player " + this.currentPlayer.getName() + " starts.";
         this.state = State.NEXT;
+        notifyObservers();
     }
 
 
@@ -95,6 +97,7 @@ public class QController extends Observable implements IQController, IQControlle
         int index = (this.players.indexOf(this.currentPlayer) + 1) % this.players.size();
         this.currentPlayer = this.players.get(index);
         this.statusMessage = "Player " + this.currentPlayer.getName() + " is next in line.";
+        notifyObservers();
     }
 
     @Override
@@ -102,6 +105,7 @@ public class QController extends Observable implements IQController, IQControlle
         for (int i = this.currentPlayer.getHand().size(); i <= 6; i++) {
             this.currentPlayer.addTileToHand(this.supply.getTile());
         }
+        notifyObservers();
     }
 
     @Override

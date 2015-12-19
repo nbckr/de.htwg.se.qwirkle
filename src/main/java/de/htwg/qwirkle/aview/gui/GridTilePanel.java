@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class GridTilePanel extends JPanel implements ITilePanel {
 
-    private static final Dimension DEFAULT_TILESIZE = new Dimension(25, 25);
+    private static final Dimension DEFAULT_TILESIZE = new Dimension(40, 40);
     private int row;
     private int col;
     private Tile tile;
@@ -24,6 +24,7 @@ public class GridTilePanel extends JPanel implements ITilePanel {
         this.controller = controller;
         this.tile = controller.getTileReference(row, col);
 
+        setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         setSize(DEFAULT_TILESIZE);
     }
 
@@ -33,9 +34,11 @@ public class GridTilePanel extends JPanel implements ITilePanel {
         JLabel label = new JLabel("", image, JLabel.CENTER);
         JPanel panel = new JPanel(new BorderLayout());
         panel.add( label, BorderLayout.CENTER );*/
-
-        Image img = new ImageIcon("\\main\\resources\\img\\TILE_BLUE_CIRCLE.jpg").getImage();
+        Image img = new ImageIcon("/main/resources/img/TILE_BLUE_CIRCLE.jpg").getImage();
         g.drawImage(img, 0, 0, DEFAULT_TILESIZE.width, DEFAULT_TILESIZE.height, null);
+
+        String haha = tile.getImageFilepath();
+        System.out.println(haha);
 
     }
 

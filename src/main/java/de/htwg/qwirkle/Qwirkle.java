@@ -16,16 +16,14 @@ public final class Qwirkle {
 
     private static Scanner scanner;
 
-    private Qwirkle() {
-        // prevent Qwirkle from being instantiated
-    }
+    private Qwirkle() {};
 
     public static void main(String[] args) {
 
         // Build up the application, start TUI and GUI
-        QController controller =  new QController(new Grid(20,20));
-        TextUI tui = new TextUI(controller);
+        QController controller =  new QController(new Grid(35,35));
         new QFrame(controller);
+        TextUI tui = new TextUI(controller);
 
         // continue to read user input on the tui until the user decides to quit
         tui.printTUI();
