@@ -22,7 +22,7 @@ public class GridTilePanel extends JPanel implements ITilePanel {
         this.row = row;
         this.col = col;
         this.controller = controller;
-        this.tile = controller.getTileReference(row, col);
+        this.tile = controller.getTileReference(row, col); // null if empty cell
 
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         setSize(DEFAULT_TILESIZE);

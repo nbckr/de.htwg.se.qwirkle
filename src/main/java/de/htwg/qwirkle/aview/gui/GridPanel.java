@@ -18,8 +18,7 @@ public class GridPanel extends JPanel {
         int cols = controller.getNumCols();
         int cells = rows * cols;
 
-        setLayout(new GridLayout(rows, cols));
-        //setLayout(new GridLayout(rows, cols, GAP_PX, GAP_PX));
+        setLayout(new GridLayout(rows, cols, GAP_PX, GAP_PX));
         setBorder(BorderFactory.createLoweredBevelBorder());
 
         // Add cells for all tiles

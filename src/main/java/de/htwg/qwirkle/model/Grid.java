@@ -6,7 +6,7 @@ package de.htwg.qwirkle.model;
 
 public class Grid {
 
-    public static final int MAX_ROWS = 60;
+    public static final int MAX_ROWS = 99;
     public static final int MAX_COLS = MAX_ROWS;
 
     private Tile[][] tiles;
@@ -22,49 +22,32 @@ public class Grid {
 
     /**
      * Creates new Grid, all cells automatically initialized with null
-     * @param rows number of rows
-     * @param cols number of columns
+     * @param i number of rows
+     * @param j number of columns
      */
-    public Grid(int rows, int cols) {
+    public Grid(int i, int j) {
 
-        if ((rows < 10) || (cols < 10) || (rows > MAX_COLS) || (cols > MAX_ROWS))
+        if ((i < 10) || (j < 10) || (i > MAX_COLS) || (j > MAX_ROWS))
             throw new IllegalArgumentException("Number of rows / columns must be between 10 and " + MAX_COLS);
 
-        tiles = new Tile[rows][cols];
-        numRows = rows;
-        numCols = cols;
-        initEmptyCells();
-    }
-
-    /**
-     * Put "empty" Tile objects on each cell
-     */
-    private void initEmptyCells() {
-
-        for (int row = 0; row < numRows; row++) {
-            for (int col = 0; col < numCols; col++) {
-                setTile(new Tile(), row, col);
-            }
-
-        }
+        tiles = new Tile[i][j];
+        numRows = i;
+        numCols = j;
     }
 
     /**
      * setTile adds a tile to an empty cell of the tiles
      * @param t Tile to put on the tiles
-     * @param row position to specify row
-     * @param col position to specify column
+     * @param i position to specify row
+     * @param j position to specify column
      * @return true if successful, false otherwise
      */
-    public boolean setTile(Tile t, int row, int col) {
+    public boolean setTile(Tile t, int i, int j) {
 
-        // adding tile fails if there is already a tile on the position and it' not
-        // the "undefined" tile
-        if (tiles[row][col] != null && !"undefined".equals(tiles[row][col].toString())) {
+        if (tiles[i][j] != null)
             return false;
-        }
 
-        tiles[row][col] = t;
+        tiles[i][j] = t;
         return true;
     }
 
@@ -75,10 +58,7 @@ public class Grid {
      * @return Tile on the specified position or null if cell is empty
      */
     public Tile getTile(int row, int col) {
-        if ("undefined".equals(tiles[row][col].toString())) {
-            return null;
-        }
-        return tiles[row][col];
+        return tiles[row][col];     // if empty, null is returned automatically
     }
 
     @Override
