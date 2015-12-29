@@ -21,7 +21,7 @@ public final class Qwirkle {
     public static void main(String[] args) {
 
         // Build up the application, start TUI and GUI
-        QController controller =  new QController(new Grid(35,35));
+        QController controller =  new QController(new Grid(30,30));
         new QFrame(controller);
         TextUI tui = new TextUI(controller);
 

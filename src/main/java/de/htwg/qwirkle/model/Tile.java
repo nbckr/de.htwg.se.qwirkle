@@ -101,7 +101,7 @@ public class Tile {
      *         e.g. "\\main\\resources\\img\\TILE_BLUE_CIRCLE.jpg"
      */
     public String getImageFilepath() {
-        StringBuilder sb = new StringBuilder("\\main\\resources\\img\\");
+        StringBuilder sb = new StringBuilder("src/main/resources/img/");
         sb.append(toString2() + ".jpg");
         return sb.toString();
     }

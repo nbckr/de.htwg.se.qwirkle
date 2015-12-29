@@ -30,7 +30,7 @@ public class QFrame extends JFrame implements IObserver {
         // Main Panel
         mainPanel = new JPanel();
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        mainPanel.setLayout(new FlowLayout());
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
         gridPanel = new GridPanel(controller);
         mainPanel.add(gridPanel);
@@ -43,9 +43,6 @@ public class QFrame extends JFrame implements IObserver {
 
         statusPanel = new StatusPanel(controller);
         mainPanel.add(statusPanel);
-
-
-
 
 
         // JFrame Settings
