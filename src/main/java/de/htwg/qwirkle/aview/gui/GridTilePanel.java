@@ -7,6 +7,8 @@ import util.StretchIcon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 /**
  * Created by niels on 18.12.2015.
@@ -27,27 +29,49 @@ public class GridTilePanel extends JLabel implements ITilePanel {
         this.col = col;
         this.controller = controller;
         this.tile = controller.getTileReference(row, col);
-        //tile = new Supply().getTile();
+        tile = new Supply().getTile();
 
         if (tile == null) {
-            tile = new Tile(); // null if empty cell; create undef Tile
+            tile = new Tile();                    // null if empty cell; create undef Tile
         }
 
         String filepath = tile.getImageFilepath();
-        System.out.println(filepath);
-
-        this.icon = new StretchIcon(filepath);
+        this.icon = new StretchIcon(filepath, false);
         this.setIcon(icon);
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         this.setPreferredSize(DEFAULT_SIZE);
+
+        // make the Tiles always keep a 1:1 aspect ratio
+        this.addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                Rectangle b = e.getComponent().getBounds();
+                int d = Math.max(b.height, b.width);
+                e.getComponent().setBounds(b.x, b.y, d, d);
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {}
+
+            @Override
+            public void componentShown(ComponentEvent e) {}
+
+            @Override
+            public void componentHidden(ComponentEvent e) {}
+        });
     }
+
+
+
+
+    /*@Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+    }
+
 
     public void paintComponent(Graphics g) {
-
-    }
-
-    /*public void paintComponent(Graphics g) {
 
         ImageIcon image = new ImageIcon("\\main\\resources\\img\\TILE_BLUE_CIRCLE.jpg");
         JLabel label = new JLabel("", image, JLabel.CENTER);
