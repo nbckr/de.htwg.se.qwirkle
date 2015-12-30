@@ -42,7 +42,7 @@ public class GridTilePanel extends JLabel implements ITilePanel {
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         this.setPreferredSize(DEFAULT_SIZE);
 
-        // make the Tiles always keep a 1:1 aspect ratio
+        // always keep a 1:1 aspect ratio
         this.addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {
