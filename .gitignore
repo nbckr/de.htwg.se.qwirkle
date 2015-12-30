@@ -1,9 +1,10 @@
 *.iml
 
-/out/
+/build/
 
 .idea/
 
-*.txt
+.gradle/
 
 *.log
+
