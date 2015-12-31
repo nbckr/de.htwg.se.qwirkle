@@ -24,7 +24,7 @@ public class QControllerTest extends TestCase {
     public void setUp() {
         controller =  new QController(new Grid(10, 10));
         tile = new Tile();
-        singlePlayerList = new ArrayList<>();
+        singlePlayerList = new ArrayList<Player>();
         horst = new Player("Horst");
         singlePlayerList.add(horst);
         controller.init(singlePlayerList);

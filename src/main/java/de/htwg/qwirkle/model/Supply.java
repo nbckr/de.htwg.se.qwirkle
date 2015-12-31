@@ -20,7 +20,7 @@ public class Supply {
      * Creates 108 Tiles - three of each color/shape combination - and puts them in Supply in random order.
      */
     public Supply() {
-        tiles = new ArrayList<>(MAX_SIZE);
+        tiles = new ArrayList<Tile>(MAX_SIZE);
         random = new Random(43);            // TODO: random always gives the same numbers...
 
         for (Shape s : Shape.values()) {
