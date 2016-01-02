@@ -1,5 +1,6 @@
 package de.htwg.qwirkle.aview.gui;
 
+import com.sun.javafx.geom.Quat4f;
 import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
 
@@ -56,11 +57,27 @@ public class MenuBar extends JMenuBar implements ActionListener {
         this.add(helpMenu);
     }
 
+    public void showNewGameDialog(IQControllerGui controller) {
+
+        NewGamePanel ngp = new NewGamePanel();
+        int result = JOptionPane.showConfirmDialog(null, ngp, "Start a new game",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            controller.create(); // TODO: create a new game for real
+            for (String playerName : ngp.getPlayerNames()) {
+                // TODO: controller.addPlayer("String")
+                System.out.println("NEW PLAYER YEAH!" + playerName);
+            }
+        }
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == newMenuItem) {
-            controller.create();
+            this.showNewGameDialog(controller);
         }
 
         if (e.getSource() == quitMenuItem) {

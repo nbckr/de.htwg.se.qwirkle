@@ -26,7 +26,8 @@ public class QFrame extends JFrame implements IObserver {
         this.controller = controller;
         controller.addObserver(this);
 
-        setJMenuBar(new MenuBar(controller));
+        MenuBar menuBar = new MenuBar(controller);
+        setJMenuBar(menuBar);
 
         // Main Panel
         mainPanel = new JPanel();
@@ -54,7 +55,11 @@ public class QFrame extends JFrame implements IObserver {
         setResizable(true);
         setVisible(true);
 
+        // open the New Game dialog
+        menuBar.showNewGameDialog(controller);
     }
+
+
 
     @Override
     public void update(QEvent e) {
