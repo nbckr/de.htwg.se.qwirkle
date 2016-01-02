@@ -59,18 +59,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
     public void showNewGameDialog(IQControllerGui controller) {
 
-        NewGamePanel ngp = new NewGamePanel();
-        int result = JOptionPane.showConfirmDialog(null, ngp, "Start a new game",
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-        if (result == JOptionPane.OK_OPTION) {
-            controller.create(); // TODO: create a new game for real
-            for (String playerName : ngp.getPlayerNames()) {
-                // TODO: controller.addPlayer("String")
-                System.out.println("NEW PLAYER YEAH!" + playerName);
-            }
-        }
-
+        NewGameDialog newGameDialog = new NewGameDialog(controller);
     }
 
     @Override
