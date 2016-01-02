@@ -32,7 +32,7 @@ public class GridPanel extends JPanel {
             }
         }
 
-        // make the Tiles always keep a 1:1 aspect ratio
+        /*// make the Tiles always keep a 1:1 aspect ratio
         this.addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -49,6 +49,6 @@ public class GridPanel extends JPanel {
 
             @Override
             public void componentHidden(ComponentEvent e) {}
-        });
+        });*/
     }
 }

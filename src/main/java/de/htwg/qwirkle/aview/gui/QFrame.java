@@ -22,6 +22,7 @@ public class QFrame extends JFrame implements IObserver {
     private IQControllerGui controller;
 
     public QFrame (final IQControllerGui controller) {
+        super("HTWG QWIRKLE 2016");
         this.controller = controller;
         controller.addObserver(this);
 
@@ -47,7 +48,7 @@ public class QFrame extends JFrame implements IObserver {
 
         // JFrame Settings
         setContentPane(mainPanel);
-        setTitle("HTWG QWiRKLE");
+        //setTitle("HTWG QWiRKLE");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(DEFAULT_WINDOWSIZE);
         setResizable(true);
