@@ -5,6 +5,7 @@ import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -58,7 +59,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
     }
 
     public void showNewGameDialog(IQControllerGui controller) {
-
         NewGameDialog newGameDialog = new NewGameDialog(controller);
     }
 
@@ -78,7 +78,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
         }
 
         if (e.getSource() == aboutMenuItem) {
-            // TODO
+            JOptionPane.showMessageDialog(null, "(c) by Niels Boecker \n" +
+                    "& Lukas Luschin 2016", "About", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }

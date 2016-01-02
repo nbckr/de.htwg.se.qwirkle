@@ -29,6 +29,7 @@ public class QController extends Observable implements IQController, IQControlle
     public QController(Grid grid) {
         this.grid = grid;
         this.supply = new Supply();
+        this.state = State.EMPTY;
     }
 
     @Override

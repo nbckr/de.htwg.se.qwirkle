@@ -2,6 +2,7 @@ package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
+import util.JTextFieldLimit;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Created by niels on 02.01.2016.
@@ -25,6 +28,7 @@ public class NewGameDialog extends JDialog {
 
     public NewGameDialog(IQControllerGui controller) {
         super();
+        this.setLocationByPlatform(true);
         this.controller = controller;
         this.setTitle("Start new game");
         this.setModal(true);
@@ -54,7 +58,7 @@ public class NewGameDialog extends JDialog {
                             JOptionPane e2 = (JOptionPane) e.getSource();
                             if ((Integer) e2.getValue() == JOptionPane.OK_OPTION) {
                                 // TODO: controller start game
-                                
+
                             } else if ((Integer) e2.getValue() == JOptionPane.CANCEL_OPTION) {
                                 exitOrShowError();
                             }
@@ -65,16 +69,6 @@ public class NewGameDialog extends JDialog {
         this.pack();
         this.setResizable(false);
         this.setVisible(true);
-
-        /*
-        int value = ((Integer) optionPane.getValue()).intValue();
-        if (value == JOptionPane.OK_OPTION) {
-            System.out.println("okay!");
-
-        } else if (value == JOptionPane.CANCEL_OPTION) {
-
-            System.out.println("aborted!");
-        }*/
     }
 
     private class NewGamePanel extends JPanel implements ActionListener {
@@ -84,13 +78,14 @@ public class NewGameDialog extends JDialog {
         private JComboBox numPlayerBox;
         private final String[] NUM_PLAYER_OPTIONS = { "2", "3", "4" };
         private final int FIELDSIZE = 20;
+        private final JTextFieldLimit FIELDLIMIT = new JTextFieldLimit(FIELDSIZE);
         private int numPlayerChoice;
 
         private JTextField player1;
         private JTextField player2;
         private JTextField player3;
         private JTextField player4;
-        private LinkedHashSet<JTextField> allPlayers;
+        private LinkedHashSet<JTextField> allPlayerFields;
 
         public NewGamePanel() {
             this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -111,19 +106,23 @@ public class NewGameDialog extends JDialog {
             namesPanel.setBorder((BorderFactory.createTitledBorder("Enter players' names")));
 
             player1 = new JTextField(FIELDSIZE);
+            player1.setDocument(FIELDLIMIT);
             player1.setBorder(BorderFactory.createTitledBorder("Player 1"));
             namesPanel.add(player1);
 
             player2 = new JTextField(FIELDSIZE);
+            player2.setDocument(FIELDLIMIT);
             player2.setBorder(BorderFactory.createTitledBorder("Player 2"));
             namesPanel.add(player2);
 
             player3 = new JTextField(FIELDSIZE);
+            player3.setDocument(FIELDLIMIT);
             player3.setBorder(BorderFactory.createTitledBorder("Player 3"));
             player3.setEnabled(false);
             namesPanel.add(player3);
 
             player4 = new JTextField(FIELDSIZE);
+            player4.setDocument(FIELDLIMIT);
             player4.setBorder(BorderFactory.createTitledBorder("Player 4"));
             player4.setEnabled(false);
             namesPanel.add(player4);
@@ -131,9 +130,11 @@ public class NewGameDialog extends JDialog {
             this.add(choicePanel);
             this.add(namesPanel);
 
-            allPlayers = new LinkedHashSet<>();
-            allPlayers.add(player1);
-            allPlayers.add(player2);
+            allPlayerFields = new LinkedHashSet<>();
+            allPlayerFields.add(player1);
+            allPlayerFields.add(player2);
+
+            TreeSet test = new TreeSet();
         }
 
         public int getNumPlayerChoice() {
@@ -141,11 +142,17 @@ public class NewGameDialog extends JDialog {
         }
 
         public String[] getPlayerNames() {
-            ArrayList<String> playerNames = new ArrayList<>();
-            for (JTextField tf : allPlayers) {
-                playerNames.add(tf.toString());
+            String[] playerNames = new String[allPlayerFields.size()];
+
+            playerNames[0] = player1.getText().isEmpty() ? "Player 1" : player1.getText();
+            playerNames[1] = player2.getText().isEmpty() ? "Player 2" : player2.getText();
+            if (playerNames.length > 2) {
+                playerNames[2] = player3.getText().isEmpty() ? "Player 3" : player3.getText();
             }
-            return (String[]) playerNames.toArray();
+            if (playerNames.length > 3) {
+                playerNames[3] = player4.getText().isEmpty() ? "Player 4" : player4.getText();
+            }
+            return playerNames;
         }
 
         @Override
@@ -157,19 +164,19 @@ public class NewGameDialog extends JDialog {
 
                 if (numPlayerChoice < 3 ) {
                     player3.setEnabled(false);
-                    allPlayers.remove(player3);
+                    allPlayerFields.remove(player3);
                 } else {
                     player3.setEnabled(true);
-                    allPlayers.add(player3);
+                    allPlayerFields.add(player3);
                 }
 
                 if (numPlayerChoice < 4 ) {
                     player4.setEnabled(false);
-                    allPlayers.remove(player4);
+                    allPlayerFields.remove(player4);
                 }
                 else {
                     player4.setEnabled(true);
-                    allPlayers.add(player4);
+                    allPlayerFields.add(player4);
                 }
 
             }
@@ -177,8 +184,7 @@ public class NewGameDialog extends JDialog {
     }
 
     private void exitOrShowError() {
-        //if (controller.getState() == IQController.State.EMPTY) {
-        if (true) {
+        if (controller.getState() == IQController.State.EMPTY) {
             JOptionPane.showMessageDialog(this, "Please start a new game first", "Error!",
                     JOptionPane.ERROR_MESSAGE);
         } else {
