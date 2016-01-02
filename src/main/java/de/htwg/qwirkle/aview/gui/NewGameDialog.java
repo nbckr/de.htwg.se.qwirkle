@@ -50,7 +50,14 @@ public class NewGameDialog extends JDialog {
                                 && (e.getSource() == optionPane)
                                 && (prop.equals(JOptionPane.VALUE_PROPERTY))) {
                             // TODO check input validity
-                            NewGameDialog.this.setVisible(false);
+
+                            JOptionPane e2 = (JOptionPane) e.getSource();
+                            if ((Integer) e2.getValue() == JOptionPane.OK_OPTION) {
+                                // TODO: controller start game
+                                
+                            } else if ((Integer) e2.getValue() == JOptionPane.CANCEL_OPTION) {
+                                exitOrShowError();
+                            }
                         }
                     }
                 });
@@ -59,14 +66,15 @@ public class NewGameDialog extends JDialog {
         this.setResizable(false);
         this.setVisible(true);
 
+        /*
         int value = ((Integer) optionPane.getValue()).intValue();
         if (value == JOptionPane.OK_OPTION) {
             System.out.println("okay!");
 
         } else if (value == JOptionPane.CANCEL_OPTION) {
-            exitOrShowError();
+
             System.out.println("aborted!");
-        }
+        }*/
     }
 
     private class NewGamePanel extends JPanel implements ActionListener {
