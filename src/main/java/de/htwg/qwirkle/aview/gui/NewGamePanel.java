@@ -11,6 +11,8 @@ import java.util.LinkedHashSet;
 /**
  * Created by niels on 02.01.2016.
  */
+
+
 public class NewGamePanel extends JPanel implements ActionListener {
 
     private static final Dimension SIZE = new Dimension(300, 300);
@@ -44,12 +46,10 @@ public class NewGamePanel extends JPanel implements ActionListener {
         numPlayerChoice = Integer.parseInt(((String) numPlayerBox.getSelectedItem()));
 
         namesPanel = new JPanel();
-        namesPanel.setLayout(new BoxLayout(namesPanel, BoxLayout.LINE_AXIS));
+        namesPanel.setLayout(new BoxLayout(namesPanel, BoxLayout.PAGE_AXIS));
         namesPanel.setBorder((BorderFactory.createTitledBorder("Enter players' names")));
 
         player1 = new JTextField(FIELDSIZE);
-        player1.set
-        player1.setText("Player 1");
         player1.setBorder(BorderFactory.createTitledBorder("Player 1"));
         namesPanel.add(player1);
 
