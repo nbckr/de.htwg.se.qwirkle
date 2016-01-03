@@ -1,5 +1,6 @@
 package de.htwg.qwirkle.aview.tui;
 
+import de.htwg.qwirkle.controller.IQController.*;
 import de.htwg.qwirkle.controller.impl.QController;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
@@ -33,7 +34,15 @@ public class TextUI implements IObserver {
         this.controller = controller;
         controller.addObserver(this);
 
-        initializePlayer();
+        this.readPlayerNames();
+
+        // continue to read user input on the tui until the user quits
+        boolean loop = true;
+        scanner = new Scanner(System.in);
+        while (true) {
+            // TODO check if loop works this way, not loop = ...
+            processInputLine(scanner.next());
+        }
     }
 
     /**
@@ -51,7 +60,7 @@ public class TextUI implements IObserver {
     /**
      * Reads number of players from console and starts the initialisation
      */
-    public void initializePlayer() {
+    public void readPlayerNames() {
         int noP = 1;
         String name, tmp;
         List<Player> players;
@@ -90,15 +99,16 @@ public class TextUI implements IObserver {
      *             t - trade in tile(s)
      *             h - show help
      *             q - quit
-     * @return true in all cases except 'q' pressed
      */
-    public boolean processInputLine(String line) {
+    public void processInputLine(String line) {
 
         if ("a".equalsIgnoreCase(line)) {
+            controller.setState(State.ADDTILES);
             addTileRoutine();
         }
 
         if ("t".equalsIgnoreCase(line)) {
+            controller.setState(State.TRADETILES);
             tradeTileRoutine();
         }
 
@@ -109,18 +119,23 @@ public class TextUI implements IObserver {
         if ("q".equalsIgnoreCase(line)) {
             // ToDo: evaluate player's score
             LOG.info(MessageUtil.SEEYOU);
-            return false;   // quit loop
+            controller.exit();
         }
-
-        return true;    // continue loop in all cases but 'q'
     }
 
     private void tradeTileRoutine() {
         int size = this.controller.getCurrentPlayer().getHand().size();
-        LOG.info("Which tiles do you want to trade? (1-" + size + ", separated by space:");
+        LOG.info("Which tiles do you want to trade? (1-" + size + ", separated by " +
+                "space, 0 to quit:");
         String trading = scanner.next();
-        List<Integer> integerList;
 
+        if ("0".equals(trading)) {
+            // no tiles added, so same player's turn
+            printTUI();
+            return;
+        }
+
+        List<Integer> integerList;
         try {
             String[] stringArray = trading.split("\\s+");
             integerList = new ArrayList<Integer>();
@@ -134,13 +149,15 @@ public class TextUI implements IObserver {
             return;
         }
 
+        ArrayList<Tile> oldTiles = new ArrayList<>();
         for(int i : integerList) {
-            Tile oldTile = controller.getCurrentPlayer().getTileFromHand(i);
-            Tile newTile = controller.tradeTile(oldTile);
-            controller.getCurrentPlayer().addTileToHand(newTile);
+            oldTiles.add(controller.getCurrentPlayer().getTileFromHand(i));
         }
+        List<Tile> newTiles = controller.tradeTiles(oldTiles);
+        controller.getCurrentPlayer().addTilesToHand(newTiles);
 
         controller.nextPlayer();
+        controller.setState(State.NEXT);
         printTUI();
     }
 
@@ -172,6 +189,11 @@ public class TextUI implements IObserver {
         if(tileSet) {
             controller.refillPlayer();
             controller.nextPlayer();
+            controller.setState(State.NEXT);
+            printTUI();
+
+        } else {
+            // no tiles added, so same player's turn
             printTUI();
         }
     }
@@ -184,10 +206,12 @@ public class TextUI implements IObserver {
     public void update(QEvent e) {
         switch(e.getEvent()) {
             case GET_PLAYER:
-                initializePlayer();
+                readPlayerNames();
                 break;
             case MESSAGE:
                 printMessage();
+                break;
+            case IGNORE:
                 break;
             default:
                 printTUI();

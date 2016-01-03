@@ -24,6 +24,12 @@ public interface IQController extends IObservable {
     int addTileToGrid(Tile t, int i, int j);
 
     /**
+     * @param oldTiles old Tiles to trade in
+     * @returns new Tiles to replace the old one
+     */
+    List<Tile> tradeTiles(List<Tile> oldTiles);
+
+    /**
      * @param oldTile old Tile to trade in
      * @return new Tile to replace the old one
      */
@@ -70,9 +76,13 @@ public interface IQController extends IObservable {
 
     State getState();
 
+    void setState(State state);
+
     public enum State {
         EMPTY,
         NEXT,
-        INITIALIZED
+        INITIALIZED,
+        ADDTILES,
+        TRADETILES
     }
 }

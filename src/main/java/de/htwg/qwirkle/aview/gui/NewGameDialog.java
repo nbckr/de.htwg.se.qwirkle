@@ -2,6 +2,7 @@ package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
+import de.htwg.qwirkle.model.Player;
 import util.JTextFieldLimit;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class NewGameDialog extends JDialog {
     IQControllerGui controller;
     NewGamePanel newGamePane;
     JOptionPane optionPane;
+    ArrayList<Player> players;
 
     public NewGameDialog(IQControllerGui controller) {
         super();
@@ -57,7 +59,7 @@ public class NewGameDialog extends JDialog {
 
                             JOptionPane e2 = (JOptionPane) e.getSource();
                             if ((Integer) e2.getValue() == JOptionPane.OK_OPTION) {
-                                // TODO: controller start game
+                                startGame();
 
                             } else if ((Integer) e2.getValue() == JOptionPane.CANCEL_OPTION) {
                                 exitOrShowError();
@@ -78,7 +80,6 @@ public class NewGameDialog extends JDialog {
         private JComboBox numPlayerBox;
         private final String[] NUM_PLAYER_OPTIONS = { "2", "3", "4" };
         private final int FIELDSIZE = 20;
-        private final JTextFieldLimit FIELDLIMIT = new JTextFieldLimit(FIELDSIZE);
         private int numPlayerChoice;
 
         private JTextField player1;
@@ -106,23 +107,23 @@ public class NewGameDialog extends JDialog {
             namesPanel.setBorder((BorderFactory.createTitledBorder("Enter players' names")));
 
             player1 = new JTextField(FIELDSIZE);
-            player1.setDocument(FIELDLIMIT);
+            player1.setDocument(new JTextFieldLimit(FIELDSIZE));
             player1.setBorder(BorderFactory.createTitledBorder("Player 1"));
             namesPanel.add(player1);
 
             player2 = new JTextField(FIELDSIZE);
-            player2.setDocument(FIELDLIMIT);
+            player2.setDocument(new JTextFieldLimit(FIELDSIZE));
             player2.setBorder(BorderFactory.createTitledBorder("Player 2"));
             namesPanel.add(player2);
 
             player3 = new JTextField(FIELDSIZE);
-            player3.setDocument(FIELDLIMIT);
+            player3.setDocument(new JTextFieldLimit(FIELDSIZE));
             player3.setBorder(BorderFactory.createTitledBorder("Player 3"));
             player3.setEnabled(false);
             namesPanel.add(player3);
 
             player4 = new JTextField(FIELDSIZE);
-            player4.setDocument(FIELDLIMIT);
+            player4.setDocument(new JTextFieldLimit(FIELDSIZE));
             player4.setBorder(BorderFactory.createTitledBorder("Player 4"));
             player4.setEnabled(false);
             namesPanel.add(player4);
@@ -185,10 +186,22 @@ public class NewGameDialog extends JDialog {
 
     private void exitOrShowError() {
         if (controller.getState() == IQController.State.EMPTY) {
-            JOptionPane.showMessageDialog(this, "Please start a new game first", "Error!",
-                    JOptionPane.ERROR_MESSAGE);
+            int value = JOptionPane.showConfirmDialog(this, "You haven't started a game " +
+                    "yet. Do you want to quit?", "Error!", JOptionPane.YES_NO_OPTION);
+            if (value == JOptionPane.YES_OPTION) {
+                controller.exit();
+            }
         } else {
             this.setVisible(false);
         }
+    }
+
+    private void startGame() {
+        String[] playerNames = newGamePane.getPlayerNames();
+        players = new ArrayList<Player>(playerNames.length);
+        for (String name : playerNames) {
+            players.add(new Player(name));
+        }
+        controller.init(players);
     }
 }

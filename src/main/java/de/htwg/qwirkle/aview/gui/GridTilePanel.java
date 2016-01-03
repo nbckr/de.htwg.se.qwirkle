@@ -29,7 +29,7 @@ public class GridTilePanel extends JLabel implements ITilePanel {
         this.col = col;
         this.controller = controller;
         this.tile = controller.getTileReference(row, col);
-        tile = new Supply().getTile();
+        // for fun: tile = new Supply().getTile();
 
         if (tile == null) {
             tile = new Tile();                    // null if empty cell; create undef Tile

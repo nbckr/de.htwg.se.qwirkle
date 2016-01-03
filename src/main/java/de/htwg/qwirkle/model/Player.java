@@ -43,6 +43,14 @@ public class Player {
         return true;
     }
 
+    public boolean addTilesToHand(List<Tile> tiles) {
+        if(this.hand.size() + tiles.size() >= 6)
+            return false;
+
+        this.hand.addAll(tiles);
+        return true;
+    }
+
     public Tile getTileFromHand() {
         return getTileFromHand(1);
     }

@@ -20,6 +20,7 @@ public class QEvent {
         GET_PLAYER, // specifies number of players and initialize them
         MESSAGE, // print the controller message
         DEF, // default value
+        IGNORE // do nothing
     }
 
 }

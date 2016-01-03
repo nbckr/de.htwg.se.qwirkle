@@ -34,7 +34,7 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public void init(List<Player> players) {
-        assert (!players.isEmpty())&&(players.size() < 5);
+        assert (!players.isEmpty()) && (players.size() < 5);
 
         //print welcome
         this.statusMessage = MessageUtil.WELCOME;
@@ -46,7 +46,7 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     /**
-     * Initializes the players. Adds tile and chooses the start player
+     * Initializes the players. Adds tile and chooses the first player.
      */
     private void initPlayers() {
         // deal tiles
@@ -56,9 +56,10 @@ public class QController extends Observable implements IQController, IQControlle
             }
         }
 
+        // first player starts; could be replaced by more complex algorithm
         this.currentPlayer = this.players.get(0);
 
-        this.statusMessage = "Player " + this.currentPlayer.getName() + " starts.";
+        this.statusMessage = this.currentPlayer.getName() + " starts.";
         this.state = State.NEXT;
         notifyObservers();
     }
@@ -66,7 +67,7 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public int addTileToGrid(Tile t, int i, int j) {
-        int points = 0;
+        int points = 42;
         // TODO: validate if playing here is even possible, return -1 if no
 
         grid.setTile(t, i, j);
@@ -86,6 +87,15 @@ public class QController extends Observable implements IQController, IQControlle
 
         notifyObservers();
         return newTile;
+    }
+
+    @Override
+    public List<Tile> tradeTiles(List<Tile> oldTiles) {
+        List<Tile> newTiles = new ArrayList<>();
+        for (Tile oldTile : oldTiles) {
+            newTiles.add(tradeTile(oldTile));
+        }
+        return newTiles;
     }
 
     @Override
@@ -150,5 +160,10 @@ public class QController extends Observable implements IQController, IQControlle
     @Override
     public State getState() {
         return state;
+    }
+
+    @Override
+    public void setState(State state) {
+        this.state = state;
     }
 }
