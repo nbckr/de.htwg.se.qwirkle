@@ -1,5 +1,6 @@
 package de.htwg.qwirkle.aview.gui;
 
+import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Tile;
 import util.StretchIcon;
@@ -13,7 +14,7 @@ import java.awt.event.ComponentListener;
  * Created by niels on 18.12.2015.
  * TODO: change name to label
  */
-public class GridTilePanel extends JLabel implements ITilePanel {
+public class GridTilePanel extends JLabel implements ITilePanel, ComponentListener {
 
     private static final Dimension DEFAULT_SIZE = new Dimension(30, 30);
     private int row;
@@ -34,23 +35,19 @@ public class GridTilePanel extends JLabel implements ITilePanel {
         this.setPreferredSize(DEFAULT_SIZE);
 
         // always keep a 1:1 aspect ratio
-        this.addComponentListener(new ComponentListener() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                Rectangle b = e.getComponent().getBounds();
-                int d = Math.max(b.height, b.width);
-                e.getComponent().setBounds(b.x, b.y, d, d);
-            }
+        this.addComponentListener(this);
+    }
 
-            @Override
-            public void componentMoved(ComponentEvent e) {}
+    public GridTilePanel(Tile tile, IQControllerGui controller) {
 
-            @Override
-            public void componentShown(ComponentEvent e) {}
+        this.controller = controller;
 
-            @Override
-            public void componentHidden(ComponentEvent e) {}
-        });
+        refreshTile();
+
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        this.setPreferredSize(DEFAULT_SIZE);
+
+        this.addComponentListener(this);
     }
 
     private void refreshTile() {
@@ -75,19 +72,20 @@ public class GridTilePanel extends JLabel implements ITilePanel {
         refreshTile();
     }
 
-/*
-    public void paintComponent(Graphics g) {
+    @Override
+    public void componentResized(ComponentEvent e) {
+        Rectangle b = e.getComponent().getBounds();
+        int d = Math.max(b.height, b.width);
+        e.getComponent().setBounds(b.x, b.y, d, d);
+    }
 
-        ImageIcon image = new ImageIcon("\\main\\resources\\img\\TILE_BLUE_CIRCLE.jpg");
-        JLabel label = new JLabel("", image, JLabel.CENTER);
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add( label, BorderLayout.CENTER );
-        Image img = new ImageIcon("src/main/resources/img/TILE_BLUE_CIRCLE.jpg").getImage();
-        g.drawImage(img, 0, 0, DEFAULT_SIZE.width, DEFAULT_SIZE.height, null);
+    @Override
+    public void componentMoved(ComponentEvent e) {}
 
-        String haha = tile.getImageFilepath();
-        System.out.println(haha);}*/
+    @Override
+    public void componentShown(ComponentEvent e) {}
 
-
+    @Override
+    public void componentHidden(ComponentEvent e) {}
 
 }

@@ -21,7 +21,6 @@ public class GridPanel extends JPanel {
         int cells = rows * cols;
 
         setLayout(new GridLayout(rows, cols, GAP_PX, GAP_PX));
-
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 
         // Add cells for all tiles

@@ -39,9 +39,8 @@ public class TextUI implements IObserver {
         // continue to read user input on the tui until the user quits
         boolean loop = true;
         scanner = new Scanner(System.in);
-        while (true) {
-            // TODO check if loop works this way, not loop = ...
-            processInputLine(scanner.next());
+        while (loop) {
+            loop = processInputLine(scanner.next());
         }
     }
 
@@ -100,7 +99,7 @@ public class TextUI implements IObserver {
      *             h - show help
      *             q - quit
      */
-    public void processInputLine(String line) {
+    public boolean processInputLine(String line) {
 
         if ("a".equalsIgnoreCase(line)) {
             controller.setState(State.ADDTILES);
@@ -121,6 +120,8 @@ public class TextUI implements IObserver {
             LOG.info(MessageUtil.SEEYOU);
             controller.exit();
         }
+
+        return true; // keep looping
     }
 
     private void tradeTileRoutine() {

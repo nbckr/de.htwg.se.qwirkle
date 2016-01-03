@@ -67,17 +67,18 @@ public class Grid {
 
         // inizialise sb with "  " for left upper corner
         StringBuilder sb = new StringBuilder("   ");
-        // write column numbers: [][j]
-        for (int j = 0; j < numCols; j++) {
-            sb.append(String.format("%02d ", j));
+        // write column numbers: [][col]
+        for (int col = 0; col < numCols; col++) {
+            sb.append(String.format("%02d ", col));
         }
         sb.append("\n");
+
         // write row numbers: [i][] and draw tiles
-        for(int i = 0; i < numRows; i++) {
-            sb.append(String.format("%02d ", i));
-            for (int j = 0; j < numCols; j++) {
-                if(tiles[i][j] != null) {
-                    sb.append(tiles[i][j] + " ");
+        for(int row = 0; row < numRows; row++) {
+            sb.append(String.format("%02d ", row));
+            for (int col = 0; col < numCols; col++) {
+                if(tiles[row][col] != null) {
+                    sb.append(tiles[row][col] + " ");
                 } else {
                     sb.append("|| ");
                 }
