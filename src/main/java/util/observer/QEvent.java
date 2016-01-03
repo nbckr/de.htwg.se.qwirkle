@@ -6,21 +6,25 @@ package util.observer;
 
 public class QEvent {
 
-    private Events events;
+    private Event event;
 
-    public QEvent(Events e) {
-        this.events = e;
+    public QEvent() {
+        this(Event.DEFAULT);
     }
 
-    public Events getEvent() {
-        return this.events;
+    public QEvent(Event e) {
+        this.event = e;
     }
 
-    public enum Events {
+    public Event getEvent() {
+        return this.event;
+    }
+
+    public enum Event {
+        DEFAULT,    // default value
         GET_PLAYER, // specifies number of players and initialize them
-        MESSAGE, // print the controller message
-        DEF, // default value
-        IGNORE // do nothing
+        MESSAGE,    // print the controller message
+        NEXTPLAYER, IGNORE      // do nothing
     }
 
 }

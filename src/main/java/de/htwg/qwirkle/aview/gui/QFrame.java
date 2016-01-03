@@ -15,6 +15,7 @@ public class QFrame extends JFrame implements IObserver {
 
     private static final Dimension DEFAULT_WINDOWSIZE = new Dimension(800, 1000);
     private JPanel mainPanel;
+    private JPanel sidePanel;
     private GridPanel gridPanel;
     private HandPanel handPanel;
     private OpPanel opPanel;
@@ -32,19 +33,23 @@ public class QFrame extends JFrame implements IObserver {
         // Main Panel
         mainPanel = new JPanel();
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.LINE_AXIS));
 
         gridPanel = new GridPanel(controller);
         mainPanel.add(gridPanel);
 
+        sidePanel = new JPanel();
+        sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.PAGE_AXIS));
+        mainPanel.add(sidePanel);
+
         opPanel = new OpPanel(controller);
-        mainPanel.add(opPanel);
+        sidePanel.add(opPanel);
 
         handPanel = new HandPanel(controller);
-        mainPanel.add(handPanel);
+        sidePanel.add(handPanel);
 
         statusPanel = new StatusPanel(controller);
-        mainPanel.add(statusPanel);
+        sidePanel.add(statusPanel);
 
 
         // JFrame Settings
@@ -64,6 +69,6 @@ public class QFrame extends JFrame implements IObserver {
     @Override
     public void update(QEvent e) {
         statusPanel.setText(controller.getStatusMessage());
-        repaint();
+        repaint(50);
     }
 }

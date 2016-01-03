@@ -34,7 +34,12 @@ public class TextUI implements IObserver {
         this.controller = controller;
         controller.addObserver(this);
 
-        this.readPlayerNames();
+        // only read names in TUI if they haven't been read in GUI already
+        if (controller.getState() == State.EMPTY) {
+            this.readPlayerNames();
+        } else {
+            printTUI();
+        }
 
         // continue to read user input on the tui until the user quits
         boolean loop = true;

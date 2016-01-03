@@ -4,8 +4,6 @@ import de.htwg.qwirkle.controller.IQControllerGui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 
 /**
  * Created by niels on 18.12.2015.
@@ -26,7 +24,7 @@ public class GridPanel extends JPanel {
         // Add cells for all tiles
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                GridTilePanel tilePanel = new GridTilePanel(row, col, controller);
+                TilePanel tilePanel = new TilePanel(row, col, controller);
                 this.add(tilePanel);
             }
         }

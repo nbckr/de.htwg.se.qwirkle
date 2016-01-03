@@ -38,10 +38,11 @@ public class QController extends Observable implements IQController, IQControlle
 
         //print welcome
         this.statusMessage = MessageUtil.WELCOME;
-        notifyObservers(new QEvent(QEvent.Events.MESSAGE));
+        notifyObservers(new QEvent(QEvent.Event.MESSAGE));
 
         this.players = (ArrayList) players;
         initPlayers();
+        state = State.INITIALIZED;
         notifyObservers();
     }
 
@@ -108,7 +109,7 @@ public class QController extends Observable implements IQController, IQControlle
         int index = (this.players.indexOf(this.currentPlayer) + 1) % this.players.size();
         this.currentPlayer = this.players.get(index);
         this.statusMessage = "Player " + this.currentPlayer.getName() + " is next in line.";
-        notifyObservers();
+        notifyObservers(new QEvent(QEvent.Event.NEXTPLAYER));
     }
 
     @Override

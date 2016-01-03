@@ -12,12 +12,13 @@ import java.awt.*;
  */
 public class StatusPanel extends JPanel {
 
-    private final JLabel statusLabel = new JLabel("");
+    private final JLabel statusLabel;
 
     public StatusPanel(IQControllerGui controller) {
-        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-        this.add(statusLabel);
+        setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+        statusLabel = new JLabel("");
+        add(statusLabel);
     }
 
     public void setText(String statusMessage) {

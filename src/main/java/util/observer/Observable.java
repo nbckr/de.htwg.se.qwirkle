@@ -28,7 +28,7 @@ public abstract class Observable implements IObservable {
 
     @Override
     public void notifyObservers() {
-        notifyObservers(new QEvent(QEvent.Events.DEF));
+        notifyObservers(new QEvent(QEvent.Event.DEFAULT));
     }
 
     @Override
