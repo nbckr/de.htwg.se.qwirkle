@@ -15,7 +15,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
@@ -79,18 +78,16 @@ public class NewGameDialog extends JDialog {
 
         private JComboBox numPlayerBox;
         private final String[] NUM_PLAYER_OPTIONS = { "2", "3", "4" };
-        private final int FIELDSIZE = 20;
+        private final int FIELDSIZE = 15;
         private int numPlayerChoice;
 
         private JTextField player1;
         private JTextField player2;
         private JTextField player3;
         private JTextField player4;
-        private LinkedHashSet<JTextField> allPlayerFields;
 
         public NewGamePanel() {
             this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-            //this.setSize(SIZE);
 
             choicePanel = new JPanel();
             choicePanel.setLayout(new FlowLayout());
@@ -130,12 +127,6 @@ public class NewGameDialog extends JDialog {
 
             this.add(choicePanel);
             this.add(namesPanel);
-
-            allPlayerFields = new LinkedHashSet<>();
-            allPlayerFields.add(player1);
-            allPlayerFields.add(player2);
-
-            TreeSet test = new TreeSet();
         }
 
         public int getNumPlayerChoice() {
@@ -143,7 +134,7 @@ public class NewGameDialog extends JDialog {
         }
 
         public String[] getPlayerNames() {
-            String[] playerNames = new String[allPlayerFields.size()];
+            String[] playerNames = new String[numPlayerChoice];
 
             playerNames[0] = player1.getText().isEmpty() ? "Player 1" : player1.getText();
             playerNames[1] = player2.getText().isEmpty() ? "Player 2" : player2.getText();
@@ -165,19 +156,15 @@ public class NewGameDialog extends JDialog {
 
                 if (numPlayerChoice < 3 ) {
                     player3.setEnabled(false);
-                    allPlayerFields.remove(player3);
                 } else {
                     player3.setEnabled(true);
-                    allPlayerFields.add(player3);
                 }
 
                 if (numPlayerChoice < 4 ) {
                     player4.setEnabled(false);
-                    allPlayerFields.remove(player4);
                 }
                 else {
                     player4.setEnabled(true);
-                    allPlayerFields.add(player4);
                 }
 
             }
@@ -203,5 +190,6 @@ public class NewGameDialog extends JDialog {
             players.add(new Player(name));
         }
         controller.init(players);
+        this.setVisible(false);
     }
 }

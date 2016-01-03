@@ -28,7 +28,8 @@ public class Grid {
     public Grid(int i, int j) {
 
         if ((i < 10) || (j < 10) || (i > MAX_COLS) || (j > MAX_ROWS))
-            throw new IllegalArgumentException("Number of rows / columns must be between 10 and " + MAX_COLS);
+            throw new IllegalArgumentException("Number of rows / columns must be " +
+                    "between 10 and " + MAX_COLS);
 
         tiles = new Tile[i][j];
         numRows = i;

@@ -1,7 +1,6 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
-import de.htwg.qwirkle.model.Supply;
 import de.htwg.qwirkle.model.Tile;
 import util.StretchIcon;
 
@@ -28,16 +27,8 @@ public class GridTilePanel extends JLabel implements ITilePanel {
         this.row = row;
         this.col = col;
         this.controller = controller;
-        this.tile = controller.getTileReference(row, col);
-        // for fun: tile = new Supply().getTile();
 
-        if (tile == null) {
-            tile = new Tile();                    // null if empty cell; create undef Tile
-        }
-
-        String filepath = tile.getImageFilepath();
-        this.icon = new StretchIcon(filepath, false);
-        this.setIcon(icon);
+        refreshTile();
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         this.setPreferredSize(DEFAULT_SIZE);
@@ -62,15 +53,29 @@ public class GridTilePanel extends JLabel implements ITilePanel {
         });
     }
 
+    private void refreshTile() {
+        this.tile = controller.getTileReference(row, col);
+        // for fun: tile = new Supply().getTile();
+        if (tile == null) {
+            tile = new Tile();                    // null if empty cell; create undef Tile
+        }
+        refreshImage();
+    }
 
-
-
-    /*@Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    private void refreshImage() {
+        String filepath = tile.getImageFilepath();
+        this.icon = new StretchIcon(filepath, false);
+        this.setIcon(icon);
     }
 
 
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        refreshTile();
+    }
+
+/*
     public void paintComponent(Graphics g) {
 
         ImageIcon image = new ImageIcon("\\main\\resources\\img\\TILE_BLUE_CIRCLE.jpg");

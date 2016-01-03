@@ -32,7 +32,7 @@ public class GridPanel extends JPanel {
             }
         }
 
-        setPreferredSize(new Dimension(900, 900));
+        //setSize(new Dimension(900, 900));
 
         /*// make the Tiles always keep a 1:1 aspect ratio
         this.addComponentListener(new ComponentListener() {
