@@ -38,7 +38,7 @@ public class QControllerTest extends TestCase {
     @Test
     public void testAddTileToGrid() throws Exception {
         controller.addTileToGrid(tile, 1, 1);
-        assertEquals(tile, controller.getTileReference(1, 1));
+        assertEquals(tile, controller.peekTileFromGrid(1, 1));
     }
 
     @Test
@@ -78,6 +78,6 @@ public class QControllerTest extends TestCase {
     @Test
     public void testgetTileReference() throws Exception {
         controller.addTileToGrid(tile, 1, 1);
-        assertEquals(tile, controller.getTileReference(1, 1));
+        assertEquals(tile, controller.peekTileFromGrid(1, 1));
     }
 }

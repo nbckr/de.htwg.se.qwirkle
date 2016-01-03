@@ -1,6 +1,5 @@
 package de.htwg.qwirkle.aview.gui;
 
-import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Tile;
 import util.observer.IObserver;
@@ -15,40 +14,38 @@ import java.util.ArrayList;
  */
 public class HandPanel extends JPanel implements IObserver {
 
-
+    private static final Dimension DEFAULT_SIZE = new Dimension(150, 100);
     private IQControllerGui controller;
     ArrayList<Tile> tiles;
-    private ArrayList<TilePanel> tilePanels;
 
     public HandPanel(IQControllerGui controller) {
 
         this.controller = controller;
         controller.addObserver(this);
 
-        setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+        setLayout(new FlowLayout());
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
-        setSize(new Dimension(200, 100));
+        setSize(DEFAULT_SIZE);
 
         for (int i = 0; i < 6; i++) {
-            TilePanel tilePanel = new TilePanel(new Tile(), controller, i);
-            this.add(tilePanel);
+            HandTilePanel handTilePanel = new HandTilePanel(null, controller, i);
+            this.add(handTilePanel);
         }
-        //update(new QEvent());
     }
 
     @Override
     public void update(QEvent e) {
 
-        if (e.getEvent() == QEvent.Event.NEXTPLAYER) {
+        /*if (e.getEvent() == QEvent.Event.NEXTPLAYER) {
             // TODO only update here?
         }
-        /*
+
         System.out.println("ICH WILL!");
         if (controller.getState() != IQController.State.EMPTY) {
             this.removeAll();
             tiles = controller.getCurrentPlayer().getHand();
             for (Tile tile : tiles) {
-                TilePanel tilePanel = new TilePanel(tile, controller);
+                GridTilePanel tilePanel = new GridTilePanel(tile, controller);
                 this.add(tilePanel);
             }
         }*/

@@ -98,7 +98,7 @@ public class Tile {
 
     /**
      * @return relative path to corresponding image that has to exist in src/resources/img
-     *         e.g. "\\main\\resources\\img\\TILE_BLUE_CIRCLE.jpg"
+     *         e.g. "/main/resources/img/TILE_BLUE_CIRCLE.jpg"
      */
     public String getImageFilepath() {
         StringBuilder sb = new StringBuilder("src/main/resources/img/");

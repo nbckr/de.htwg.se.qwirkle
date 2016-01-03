@@ -121,8 +121,13 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
-    public Tile getTileReference(int row, int col) {
+    public Tile peekTileFromGrid(int row, int col) {
         return this.grid.getTile(row, col);
+    }
+
+    @Override
+    public Tile peekTileFromHand(int position) {
+        return getCurrentPlayer().getHand().get(position);
     }
 
     @Override

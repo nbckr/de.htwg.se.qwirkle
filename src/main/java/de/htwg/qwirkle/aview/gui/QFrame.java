@@ -14,6 +14,7 @@ import java.awt.*;
 public class QFrame extends JFrame implements IObserver {
 
     private static final Dimension DEFAULT_WINDOWSIZE = new Dimension(800, 1000);
+    private static final Dimension SPACE_INBETWEEN = new Dimension(10, 0);
     private JPanel mainPanel;
     private JPanel sidePanel;
     private GridPanel gridPanel;
@@ -40,6 +41,7 @@ public class QFrame extends JFrame implements IObserver {
 
         sidePanel = new JPanel();
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.PAGE_AXIS));
+        mainPanel.add(Box.createRigidArea(SPACE_INBETWEEN));
         mainPanel.add(sidePanel);
 
         opPanel = new OpPanel(controller);

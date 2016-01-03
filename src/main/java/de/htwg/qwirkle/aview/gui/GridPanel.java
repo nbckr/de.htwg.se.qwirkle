@@ -24,8 +24,8 @@ public class GridPanel extends JPanel {
         // Add cells for all tiles
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                TilePanel tilePanel = new TilePanel(row, col, controller);
-                this.add(tilePanel);
+                GridTilePanel gridTilePanel = new GridTilePanel(row, col, controller);
+                this.add(gridTilePanel);
             }
         }
 

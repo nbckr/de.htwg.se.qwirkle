@@ -52,9 +52,16 @@ public interface IQController extends IObservable {
     void refillPlayer();
 
     /**
-     * Returns the Tile on this position of the grid; the Tile remains on the grid though
+     * Returns the Tile on this position of the grid; the Tile remains on the grid though.
      */
-    Tile getTileReference(int row, int col);
+    Tile peekTileFromGrid(int row, int col);
+
+
+    /**
+     * Returns the Tile on this position the current player's hand; the Tile remains
+     * there though.
+     */
+    Tile peekTileFromHand(int position);
 
     /**
      * Returns the grid as text for tui
