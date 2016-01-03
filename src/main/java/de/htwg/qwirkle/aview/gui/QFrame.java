@@ -1,11 +1,11 @@
 package de.htwg.qwirkle.aview.gui;
 
-import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
 import util.observer.IObserver;
 import util.observer.QEvent;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -13,12 +13,16 @@ import java.awt.*;
  */
 public class QFrame extends JFrame implements IObserver {
 
-    private static final Dimension DEFAULT_WINDOWSIZE = new Dimension(800, 1000);
-    private static final Dimension SPACE_INBETWEEN = new Dimension(10, 0);
+    private static final Dimension DEFAULT_WINDOWSIZE = new Dimension(1500, 900);
+    private static final Dimension RIGID_AREA = new Dimension(10, 10);
+    protected static final int SIDE_PANEL_WIDTH = 200;
+    protected static final Border INNER_BORDER = BorderFactory.createLineBorder(Color.BLACK, 5);
+
     private JPanel mainPanel;
     private JPanel sidePanel;
     private GridPanel gridPanel;
     private HandPanel handPanel;
+    private PlayerScorePanel playerScorePanel;
     private OpPanel opPanel;
     private StatusPanel statusPanel;
     private IQControllerGui controller;
@@ -41,16 +45,22 @@ public class QFrame extends JFrame implements IObserver {
 
         sidePanel = new JPanel();
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.PAGE_AXIS));
-        mainPanel.add(Box.createRigidArea(SPACE_INBETWEEN));
+        mainPanel.add(Box.createRigidArea(RIGID_AREA));
         mainPanel.add(sidePanel);
 
-        opPanel = new OpPanel(controller);
-        sidePanel.add(opPanel);
+        playerScorePanel = new PlayerScorePanel(controller);
+        sidePanel.add(playerScorePanel);
 
         handPanel = new HandPanel(controller);
+        sidePanel.add(Box.createRigidArea(RIGID_AREA));
         sidePanel.add(handPanel);
 
+        opPanel = new OpPanel(controller);
+        sidePanel.add(Box.createRigidArea(RIGID_AREA));
+        sidePanel.add(opPanel);
+
         statusPanel = new StatusPanel(controller);
+        sidePanel.add(Box.createRigidArea(RIGID_AREA));
         sidePanel.add(statusPanel);
 
 
@@ -70,7 +80,7 @@ public class QFrame extends JFrame implements IObserver {
 
     @Override
     public void update(QEvent e) {
-        statusPanel.setText(controller.getStatusMessage());
-        repaint(50);
+        //statusPanel.setText(controller.getStatusMessage());
+        //repaint(50);
     }
 }

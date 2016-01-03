@@ -1,13 +1,15 @@
 package de.htwg.qwirkle.model;
 
+import java.awt.*;
+
 /**
  * Created by niboecke on 30.10.2015.
  */
 
 public class Grid {
 
-    public static final int MAX_ROWS = 99;
-    public static final int MAX_COLS = MAX_ROWS;
+    public static final int ROWS = 30;
+    public static final int COLS = 30;
 
     private Tile[][] tiles;
     private int numRows;
@@ -17,23 +19,26 @@ public class Grid {
      * Standard constructor calls constructor with standard fieldsize values
      */
     public Grid() {
-        this(MAX_ROWS, MAX_COLS);
+        this(ROWS, COLS);
     }
 
     /**
      * Creates new Grid, all cells automatically initialized with null
-     * @param i number of rows
-     * @param j number of columns
+     * @param row number of rows
+     * @param col number of columns
      */
-    public Grid(int i, int j) {
+    public Grid(int row, int col) {
+        create(row, col);
+    }
 
-        if ((i < 10) || (j < 10) || (i > MAX_COLS) || (j > MAX_ROWS))
+    private void create(int row, int col) {
+        if ((row < 10) || (col < 10) || (row > COLS) || (col > ROWS))
             throw new IllegalArgumentException("Number of rows / columns must be " +
-                    "between 10 and " + MAX_COLS);
+                    "between 10 and " + COLS);
 
-        tiles = new Tile[i][j];
-        numRows = i;
-        numCols = j;
+        tiles = new Tile[row][col];
+        numRows = row;
+        numCols = col;
     }
 
     /**

@@ -14,7 +14,7 @@ import java.awt.*;
 public class HandTilePanel extends ATilePanel {
 
     private final Dimension SIZE_ON_HAND = new Dimension(75, 75);
-    private final int BORDER = 10;
+    private final int BORDER = 5;
     private int position;
 
     public HandTilePanel(Tile tile, IQControllerGui controller, int position) {
@@ -27,7 +27,6 @@ public class HandTilePanel extends ATilePanel {
 
         update(new QEvent());
 
-        setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
         setBorder(BorderFactory.createEmptyBorder(BORDER,BORDER,BORDER,BORDER));
         this.setPreferredSize(SIZE_ON_HAND);
 
@@ -36,13 +35,12 @@ public class HandTilePanel extends ATilePanel {
 
     @Override
     public void update(QEvent e) {
-        if (controller.getState() != IQController.State.EMPTY) {
+        if (controller.getState() != IQController.State.UNINIZIALIZED) {
             tile = controller.peekTileFromHand(position);
         }
         if (tile == null) {
             tile = new Tile();                    // null if empty osition// ; create undef Tile
         }
         refreshImage();
-        System.out.printf("XXX Position %s: %s\n", position, tile.toString());
     }
 }

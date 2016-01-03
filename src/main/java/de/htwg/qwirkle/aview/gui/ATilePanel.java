@@ -7,6 +7,7 @@ import util.observer.IObserver;
 import util.observer.QEvent;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -17,6 +18,7 @@ import java.awt.event.ComponentListener;
 public abstract class ATilePanel extends JLabel implements ComponentListener,
         IObserver {
 
+    protected static final Border TILE_BORDER = BorderFactory.createLineBorder(Color.WHITE, 1);
     protected Tile tile;
     protected IQControllerGui controller;
     protected StretchIcon icon;

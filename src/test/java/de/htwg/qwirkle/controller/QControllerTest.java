@@ -22,7 +22,7 @@ public class QControllerTest extends TestCase {
 
     @Before
     public void setUp() {
-        controller =  new QController(new Grid(10, 10));
+        controller =  new QController();
         tile = new Tile();
         singlePlayerList = new ArrayList<Player>();
         horst = new Player("Horst");

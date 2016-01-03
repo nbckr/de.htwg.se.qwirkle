@@ -86,9 +86,9 @@ public interface IQController extends IObservable {
     void setState(State state);
 
     public enum State {
-        EMPTY,          // no game started
+        UNINIZIALIZED,          // no game started
         INITIALIZED,    // players names were given
-        NEXT,
+        PLAYING,
         ADDTILES,
         TRADETILES
     }

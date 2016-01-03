@@ -25,7 +25,7 @@ public class GridTilePanel extends ATilePanel {
         this.row = row;
         this.col = col;
 
-        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        this.setBorder(ATilePanel.TILE_BORDER);
         this.setPreferredSize(SIZE_ON_GRID);
 
         this.addComponentListener(this);

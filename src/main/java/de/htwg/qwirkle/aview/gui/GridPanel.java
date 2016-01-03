@@ -19,7 +19,7 @@ public class GridPanel extends JPanel {
         int cells = rows * cols;
 
         setLayout(new GridLayout(rows, cols, GAP_PX, GAP_PX));
-        setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+        setBorder(QFrame.INNER_BORDER);
 
         // Add cells for all tiles
         for (int row = 0; row < rows; row++) {
@@ -29,7 +29,8 @@ public class GridPanel extends JPanel {
             }
         }
 
-        //setSize(new Dimension(900, 900));
+        setPreferredSize(new Dimension(800, 800));
+        //
 
         /*// make the Tiles always keep a 1:1 aspect ratio
         this.addComponentListener(new ComponentListener() {

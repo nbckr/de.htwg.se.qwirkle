@@ -14,8 +14,6 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.TreeSet;
 
 /**
  * Created by niels on 02.01.2016.
@@ -172,7 +170,7 @@ public class NewGameDialog extends JDialog {
     }
 
     private void exitOrShowError() {
-        if (controller.getState() == IQController.State.EMPTY) {
+        if (controller.getState() == IQController.State.UNINIZIALIZED) {
             int value = JOptionPane.showConfirmDialog(this, "You haven't started a game " +
                     "yet. Do you want to quit?", "Error!", JOptionPane.YES_NO_OPTION);
             if (value == JOptionPane.YES_OPTION) {
@@ -190,6 +188,7 @@ public class NewGameDialog extends JDialog {
             players.add(new Player(name));
         }
         controller.init(players);
+        controller.create();
         this.setVisible(false);
     }
 }

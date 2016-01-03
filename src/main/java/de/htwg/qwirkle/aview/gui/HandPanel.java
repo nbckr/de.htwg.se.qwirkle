@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class HandPanel extends JPanel implements IObserver {
 
-    private static final Dimension DEFAULT_SIZE = new Dimension(150, 100);
+    private static final Dimension SIZE = new Dimension(QFrame.SIDE_PANEL_WIDTH, 100);
     private IQControllerGui controller;
     ArrayList<Tile> tiles;
 
@@ -24,8 +24,8 @@ public class HandPanel extends JPanel implements IObserver {
         controller.addObserver(this);
 
         setLayout(new FlowLayout());
-        setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
-        setSize(DEFAULT_SIZE);
+        setBorder(QFrame.INNER_BORDER);
+        setPreferredSize(SIZE);
 
         for (int i = 0; i < 6; i++) {
             HandTilePanel handTilePanel = new HandTilePanel(null, controller, i);
@@ -41,7 +41,7 @@ public class HandPanel extends JPanel implements IObserver {
         }
 
         System.out.println("ICH WILL!");
-        if (controller.getState() != IQController.State.EMPTY) {
+        if (controller.getState() != IQController.State.UNINIZIALIZED) {
             this.removeAll();
             tiles = controller.getCurrentPlayer().getHand();
             for (Tile tile : tiles) {

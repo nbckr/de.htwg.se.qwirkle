@@ -16,20 +16,15 @@ import java.util.List;
 public class QController extends Observable implements IQController, IQControllerGui {
 
     private State state;
-
     private List<Player> players;
     private Player currentPlayer;
     private Supply supply;
     private Grid grid;
     private String statusMessage;
 
-    /**
-     * @param grid the grid for this game instance
-     */
-    public QController(Grid grid) {
-        this.grid = grid;
-        this.supply = new Supply();
-        this.state = State.EMPTY;
+    public QController() {
+        this.state = State.UNINIZIALIZED;
+        create();
     }
 
     @Override
@@ -61,7 +56,8 @@ public class QController extends Observable implements IQController, IQControlle
         this.currentPlayer = this.players.get(0);
 
         this.statusMessage = this.currentPlayer.getName() + " starts.";
-        this.state = State.NEXT;
+
+        setState(State.PLAYING);
         notifyObservers();
     }
 
@@ -74,7 +70,7 @@ public class QController extends Observable implements IQController, IQControlle
         grid.setTile(t, i, j);
         // TODO: how many points does the player get?
 
-        this.statusMessage = "Player " + this.currentPlayer.getName();
+        this.statusMessage = "Still " + this.currentPlayer.getName() +"s turn";
         notifyObservers();
         return points;
     }
@@ -108,7 +104,7 @@ public class QController extends Observable implements IQController, IQControlle
     public void nextPlayer(){
         int index = (this.players.indexOf(this.currentPlayer) + 1) % this.players.size();
         this.currentPlayer = this.players.get(index);
-        this.statusMessage = "Player " + this.currentPlayer.getName() + " is next in line.";
+        this.statusMessage = this.currentPlayer.getName() + " is next in line.";
         notifyObservers(new QEvent(QEvent.Event.NEXTPLAYER));
     }
 
@@ -127,6 +123,9 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public Tile peekTileFromHand(int position) {
+        if (position >= getCurrentPlayer().getHand().size()) {
+            return null;
+        }
         return getCurrentPlayer().getHand().get(position);
     }
 
@@ -142,8 +141,8 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public void create() {
-        //grid.create()
-        this.state = State.INITIALIZED;
+        this.grid = new Grid();
+        this.supply = new Supply();
         notifyObservers();
     }
 

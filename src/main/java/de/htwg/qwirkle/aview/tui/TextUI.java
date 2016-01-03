@@ -35,7 +35,7 @@ public class TextUI implements IObserver {
         controller.addObserver(this);
 
         // only read names in TUI if they haven't been read in GUI already
-        if (controller.getState() == State.EMPTY) {
+        if (controller.getState() == State.UNINIZIALIZED) {
             this.readPlayerNames();
         } else {
             printTUI();
@@ -163,7 +163,7 @@ public class TextUI implements IObserver {
         controller.getCurrentPlayer().addTilesToHand(newTiles);
 
         controller.nextPlayer();
-        controller.setState(State.NEXT);
+        controller.setState(State.PLAYING);
         printTUI();
     }
 
@@ -195,7 +195,7 @@ public class TextUI implements IObserver {
         if(tileSet) {
             controller.refillPlayer();
             controller.nextPlayer();
-            controller.setState(State.NEXT);
+            controller.setState(State.PLAYING);
             printTUI();
 
         } else {
