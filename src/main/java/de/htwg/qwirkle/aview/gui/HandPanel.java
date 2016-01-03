@@ -27,9 +27,13 @@ public class HandPanel extends JPanel implements IObserver {
 
         setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
-        setPreferredSize(new Dimension(200, 100));
+        setSize(new Dimension(200, 100));
 
-        update(new QEvent());
+        for (int i = 0; i < 6; i++) {
+            TilePanel tilePanel = new TilePanel(new Tile(), controller, i);
+            this.add(tilePanel);
+        }
+        //update(new QEvent());
     }
 
     @Override
@@ -38,7 +42,8 @@ public class HandPanel extends JPanel implements IObserver {
         if (e.getEvent() == QEvent.Event.NEXTPLAYER) {
             // TODO only update here?
         }
-
+        /*
+        System.out.println("ICH WILL!");
         if (controller.getState() != IQController.State.EMPTY) {
             this.removeAll();
             tiles = controller.getCurrentPlayer().getHand();
@@ -46,6 +51,6 @@ public class HandPanel extends JPanel implements IObserver {
                 TilePanel tilePanel = new TilePanel(tile, controller);
                 this.add(tilePanel);
             }
-        }
+        }*/
     }
 }
