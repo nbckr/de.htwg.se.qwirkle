@@ -58,10 +58,12 @@ public class QControllerTest extends TestCase {
     @Test
     public void testRefillPlayer() throws Exception {
         for(int i = 0; i < 5; i++) {
-            controller.getCurrentPlayer().getTileFromHand();
+            //controller.getTileFromPlayer(1);
+            //controller.getCurrentPlayer().removeTile(1);
+            controller.removeTileFromPlayer(1);
         }
         controller.refillPlayer();
-        assertEquals(6, controller.getCurrentPlayer().getHand().size());
+        assertEquals(6, controller.getCurrentHand().size());
     }
 
     @Test

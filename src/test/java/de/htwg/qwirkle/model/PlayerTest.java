@@ -50,14 +50,10 @@ public class PlayerTest extends TestCase {
     public void testAddTileToHand() {
         boolean retval;
 
-        for (int i = 0; i <= 7; i++)
+        for (int i = 0; i <= 5; i++)
         {
-            retval = player.addTileToHand(new Tile(Color.BLUE, Shape.CLOVER));
-            if(i > 5) {
-                assertEquals(false, retval);
-            } else {
-                assertEquals(true, retval);
-            }
+            player.addTileToHand(new Tile(Color.BLUE, Shape.CLOVER));
+            // assert no Exceptions
         }
     }
 
@@ -69,13 +65,13 @@ public class PlayerTest extends TestCase {
             player.addTileToHand(t);
         }
 
-        retval = player.getTileFromHand(2);
+        retval = player.getTile(2);
         assertEquals(tiles.get(1), retval);
 
-        retval = player.getTileFromHand();
+        retval = player.getTile(1);
         assertNotNull(retval);
 
-        retval = player.getTileFromHand(10);
+        retval = player.getTile(10);
         assertNull(retval);
     }
 

@@ -15,6 +15,8 @@ public interface IQController extends IObservable {
      */
     void init(List<Player> players);
 
+    boolean gridFieldIsEmpty(int row, int col);
+
     /**
      * @param t Tile to add
      * @param row position to specify row
@@ -32,7 +34,7 @@ public interface IQController extends IObservable {
     /**
      * call addTileToGrid when exactly one Tile is selected at Hand and add this one.
      */
-    int addTileToGrid(int row, int col);
+    int addSelectedTileToGrid(int row, int col);
 
     /**
      * @param oldTile old Tile to trade in
@@ -57,6 +59,8 @@ public interface IQController extends IObservable {
      */
     void nextPlayer();
 
+    void refillPlayer(Player player);
+
     /**
      * Refills the current players hand with tiles from supply
      */
@@ -71,7 +75,13 @@ public interface IQController extends IObservable {
      * Returns the Tile on this position the current player's hand; the Tile remains
      * there though.
      */
-    Tile getTileFromHand(int position);
+    Tile getTileFromPlayer(int position);
+
+    void removeTileFromPlayer(int index);
+
+    void removeTilesFromPlayer(List<Tile> tiles);
+
+    void addTileToHand(Tile tile);
 
     /**
      * Returns the grid as text for tui
@@ -95,15 +105,17 @@ public interface IQController extends IObservable {
 
     void setState(State state);
 
-    void select(Tile tile, boolean isSelected);
+    void selectTile(Tile tile, boolean isSelected);
 
-    void selectToggle(Tile tile);
+    void selectTileToggle(Tile tile);
 
     void unselectAll();
 
-    Tile getSelectedTile();
+    Tile getSingleSelectedTile();
 
-    int getNumberOfSelected();
+    List<Tile> getSelectedTiles();
+
+    int getNumberOfSelectedTiles();
 
     void tradeSelectedTiles();
 

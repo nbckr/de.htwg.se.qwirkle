@@ -7,7 +7,6 @@ import util.observer.IObserver;
 import util.observer.QEvent;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -81,7 +80,7 @@ public class OpPanel extends JPanel implements IObserver {
 
             if (e.getSource() == addButton) {
                 controller.setState(IQController.State.ADDTILES);
-                if (controller.getNumberOfSelected() > 1) {
+                if (controller.getNumberOfSelectedTiles() > 1) {
                     controller.unselectAll();
                 }
             }

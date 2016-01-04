@@ -6,7 +6,6 @@ import de.htwg.qwirkle.model.Tile;
 import util.Constants;
 import util.observer.QEvent;
 
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -36,7 +35,7 @@ public class HandTileLabel extends AbstractTileLabel {
     @Override
     public void refreshTile() {
         if (controller.getState() != IQController.State.UNINIZIALIZED) {
-            tile = controller.getTileFromHand(position);
+            tile = controller.getTileFromPlayer(position);
         }
         if (tile == null) {
             tile = new Tile();
@@ -46,7 +45,7 @@ public class HandTileLabel extends AbstractTileLabel {
     class Listener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent e) {
-            controller.selectToggle(tile);
+            controller.selectTileToggle(tile);
         }
     }
 }

@@ -3,7 +3,6 @@ package de.htwg.qwirkle.aview.gui;
 import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Tile;
-import util.Constants;
 import util.observer.QEvent;
 
 import java.awt.*;
@@ -49,13 +48,9 @@ public class GridTileLabel extends AbstractTileLabel {
         public void mousePressed(MouseEvent e) {
 
             if (controller.getState() == IQController.State.ADDTILES
-                    && controller.getNumberOfSelected() == 1) {
-                controller.addTileToGrid(row, col);
+                    && controller.getNumberOfSelectedTiles() == 1) {
+                controller.addSelectedTileToGrid(row, col);
             }
-
-            System.out.println("XXXXXXXXXXXXXXXXXX");
-            System.out.println(row);
-            System.out.println(col);
         }
     }
 }

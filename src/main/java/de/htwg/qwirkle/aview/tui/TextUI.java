@@ -130,6 +130,7 @@ public class TextUI implements IObserver {
     }
 
     private void tradeTileRoutine() {
+        assert(controller.getState() == State.TRADETILES);
         int size = this.controller.getCurrentPlayer().getHand().size();
         LOG.info("Which tiles do you want to trade? (1-" + size + ", separated by " +
                 "space, 0 to quit:");
@@ -150,8 +151,8 @@ public class TextUI implements IObserver {
                 assert i <= this.controller.getCurrentPlayer().getHand().size();
                 integerList.add(i);
 
-                Tile t = controller.getTileFromHand(i);
-                controller.select(t, true);
+                Tile t = controller.getTileFromPlayer(i);
+                controller.selectTile(t, true);
             }
         } catch (PatternSyntaxException ex) {
             LOG.info("Invalid input");
@@ -165,38 +166,36 @@ public class TextUI implements IObserver {
     }
 
     private void addTileRoutine() {
-        boolean tileSet = false;
+        assert(controller.getState() == State.ADDTILES);
 
         while(true) {
             int size = this.controller.getCurrentPlayer().getHand().size();
             LOG.info("Select tile to add to grid(1-" + size + ", 0 to quit):");
-            int iTile = scanner.nextInt();
-            if(iTile == 0){
+            int index = scanner.nextInt();
+            if (index == 0){
                 break;
-            }
-
-            Tile selectedTile = controller.getCurrentPlayer().getTileFromHand(iTile);
-            if (selectedTile == null) {
+            } else if (index > controller.getCurrentHand().size()) {
                 LOG.info(Constants.INVALID);
                 continue;
             }
+
+            controller.selectTile(controller.getTileFromPlayer(index), true);
 
             LOG.info("Select position on grid(row column):");
             int row = scanner.nextInt();
             int col = scanner.nextInt();
 
-            controller.addTileToGrid(selectedTile, row, col);
-            tileSet = true;
+            controller.addSelectedTileToGrid(row, col);
+            controller.setState(State.PLAYING);
         }
 
-        if(tileSet) {
+        if(controller.getState() == State.PLAYING) {
             controller.refillPlayer();
             controller.nextPlayer();
-            controller.setState(State.PLAYING);
             printTUI();
 
-        } else {
-            // no tiles added, so same player's turn
+        } else {    // no tiles added, so same player's turn
+            controller.setState(State.PLAYING);
             printTUI();
         }
     }

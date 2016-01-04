@@ -44,17 +44,21 @@ public class Grid {
     /**
      * setTile adds a tile to an empty cell of the tiles
      * @param t Tile to put on the tiles
-     * @param i position to specify row
-     * @param j position to specify column
+     * @param row position to specify row
+     * @param col position to specify column
      * @return true if successful, false otherwise
      */
-    public boolean setTile(Tile t, int i, int j) {
+    public boolean setTile(Tile t, int row, int col) {
 
-        if (tiles[i][j] != null)
+        if (tiles[row][col] != null)
             return false;
 
-        tiles[i][j] = t;
+        tiles[row][col] = t;
         return true;
+    }
+
+    public boolean fieldIsEmpty(int row, int col) {
+        return tiles[row][col] == null;
     }
 
     /**

@@ -32,40 +32,42 @@ public class Player {
     /**
      * Adds a Tile to the player's hand
      * @param t Tile to add
-     * @return true if successful, false otherwise (usually if Player already had six Tiles)
      */
-    public boolean addTileToHand(Tile t) {
-        if(this.hand.size() >= 6)
-            return false;
+    public void addTileToHand(Tile t) {
+        if (hand.size() > 6) {
+            throw new IllegalArgumentException();
+        }
 
-        this.hand.add(t);
-        return true;
+        hand.add(t);
     }
 
-    public boolean addTilesToHand(List<Tile> tiles) {
-        if(this.hand.size() + tiles.size() >= 6)
-            return false;
-
+    public void addTilesToHand(List<Tile> tiles) {
+        if (this.hand.size() + tiles.size() > 6) {
+            throw new IllegalArgumentException();
+        }
         this.hand.addAll(tiles);
-        return true;
     }
 
-    /**
-     * Get a Tile from hand and remove it there.
-     */
-    public Tile getTileFromHand() {
-        return getTileFromHand(1);
+    public void removeTile(int index) {
+        if (index < 1 || index > getHandHandSize()) {
+            throw new IllegalArgumentException();
+        }
+        hand.remove(index - 1);
     }
 
-    public Tile getTileFromHand(int index) {
-        Tile retval;
+    public void removeTiles(List<Tile> tiles) {
+        if (!hand.containsAll(tiles)) {
+            throw new IllegalArgumentException();
+        }
+        hand.removeAll(tiles);
+    }
 
-        if((index < 1) || (index > this.getHand().size())) {
+    public Tile getTile(int index) {
+        if((index < 1) || (index > getHandHandSize())) {
             return null;
         }
-        retval = this.hand.get(index - 1);
-        this.hand.remove(index - 1);
-        return retval;
+        Tile tile = hand.get(index - 1);
+        return tile;
     }
 
     /**
@@ -96,6 +98,10 @@ public class Player {
      */
     public List<Tile> getHand() {
         return new ArrayList<Tile>(this.hand);
+    }
+
+    public int getHandHandSize() {
+        return hand.size();
     }
 
     @Override
