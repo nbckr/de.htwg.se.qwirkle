@@ -3,9 +3,6 @@ package de.htwg.qwirkle.model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by luluschi on 23.10.2015.
- */
 public class Player {
 
     private String name;
@@ -26,7 +23,7 @@ public class Player {
     public Player(String name) {
         this.name = name;
         this.score = 0;
-        this.hand = new ArrayList<Tile>(6);
+        this.hand = new ArrayList<>(6);
     }
 
     /**
@@ -49,7 +46,7 @@ public class Player {
     }
 
     public void removeTile(int index) {
-        if (index < 1 || index > getHandHandSize()) {
+        if (index < 1 || index > getHandSize()) {
             throw new IllegalArgumentException();
         }
         hand.remove(index - 1);
@@ -63,11 +60,10 @@ public class Player {
     }
 
     public Tile getTile(int index) {
-        if((index < 1) || (index > getHandHandSize())) {
+        if((index < 1) || (index > getHandSize())) {
             return null;
         }
-        Tile tile = hand.get(index - 1);
-        return tile;
+        return hand.get(index - 1);
     }
 
     /**
@@ -97,10 +93,10 @@ public class Player {
      * @return a copy of the player's hand
      */
     public List<Tile> getHand() {
-        return new ArrayList<Tile>(this.hand);
+        return new ArrayList<>(this.hand);
     }
 
-    public int getHandHandSize() {
+    public int getHandSize() {
         return hand.size();
     }
 

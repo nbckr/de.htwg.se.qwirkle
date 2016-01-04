@@ -48,8 +48,16 @@ public class GridTileLabel extends AbstractTileLabel {
         public void mousePressed(MouseEvent e) {
 
             if (controller.getState() == IQController.State.ADDTILES
-                    && controller.getNumberOfSelectedTiles() == 1) {
+                    && controller.getNumberOfSelectedTiles() == 1
+                    && tile.isUndefined()) {
+
                 controller.addSelectedTileToGrid(row, col);
+                controller.removeSelectedTilesFromCurrentPlayer();
+                controller.unselectAllTilesAtHand();
+
+                if (controller.getCurrentHandSize() == 0) {
+                    controller.refillCurrentAndGoToNextPlayer();
+                }
             }
         }
     }

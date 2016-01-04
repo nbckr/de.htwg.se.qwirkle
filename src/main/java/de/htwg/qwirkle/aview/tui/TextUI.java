@@ -17,9 +17,6 @@ import util.observer.IObserver;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-/**
- * Created by niboecke on 30.10.2015.
- */
 public class TextUI implements IObserver {
 
     private Scanner scanner;
@@ -69,7 +66,7 @@ public class TextUI implements IObserver {
         String name, tmp;
         List<Player> players;
 
-        players = new ArrayList<Player>();
+        players = new ArrayList<>();
 
         while(noP <= 4) {
             if (noP >= 3) {
@@ -145,7 +142,7 @@ public class TextUI implements IObserver {
         List<Integer> integerList;
         try {
             String[] stringArray = trading.split("\\s+");
-            integerList = new ArrayList<Integer>();
+            integerList = new ArrayList<>();
             for(String string : stringArray) {
                 int i = Integer.parseInt(string);
                 assert i <= this.controller.getCurrentPlayer().getHand().size();
@@ -160,13 +157,13 @@ public class TextUI implements IObserver {
         }
 
         controller.tradeSelectedTiles();
-        controller.nextPlayer();
-        controller.setState(State.PLAYING);
+        controller.refillCurrentAndGoToNextPlayer();
         printTUI();
     }
 
     private void addTileRoutine() {
         assert(controller.getState() == State.ADDTILES);
+        boolean tileSet = false;
 
         while(true) {
             int size = this.controller.getCurrentPlayer().getHand().size();
@@ -179,6 +176,7 @@ public class TextUI implements IObserver {
                 continue;
             }
 
+            controller.unselectAllTilesAtHand();
             controller.selectTile(controller.getTileFromPlayer(index), true);
 
             LOG.info("Select position on grid(row column):");
@@ -186,16 +184,16 @@ public class TextUI implements IObserver {
             int col = scanner.nextInt();
 
             controller.addSelectedTileToGrid(row, col);
-            controller.setState(State.PLAYING);
+            controller.removeSelectedTilesFromCurrentPlayer();
+            tileSet = true;
         }
 
-        if(controller.getState() == State.PLAYING) {
-            controller.refillPlayer();
-            controller.nextPlayer();
+        if(tileSet) {
+            controller.refillCurrentAndGoToNextPlayer();
             printTUI();
 
-        } else {    // no tiles added, so same player's turn
-            controller.setState(State.PLAYING);
+        } else {         // no tiles added, so same player's turn, can choose add or trade
+            controller.setState(State.CHOOSE_ACTION);
             printTUI();
         }
     }

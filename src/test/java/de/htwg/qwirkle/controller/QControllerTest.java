@@ -9,9 +9,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-/**
- * Created by niels on 03.12.2015.
- */
 public class QControllerTest extends TestCase {
 
     Tile tile;
@@ -23,7 +20,7 @@ public class QControllerTest extends TestCase {
     public void setUp() {
         controller =  new QController();
         tile = new Tile();
-        singlePlayerList = new ArrayList<Player>();
+        singlePlayerList = new ArrayList<>();
         horst = new Player("Horst");
         singlePlayerList.add(horst);
         controller.init(singlePlayerList);
@@ -52,7 +49,7 @@ public class QControllerTest extends TestCase {
 
     @Test
     public void testNextPlayer() throws Exception {
-        controller.nextPlayer();
+        controller.refillCurrentAndGoToNextPlayer();
     }
 
     @Test
@@ -60,10 +57,10 @@ public class QControllerTest extends TestCase {
         for(int i = 0; i < 5; i++) {
             //controller.getTileFromPlayer(1);
             //controller.getCurrentPlayer().removeTile(1);
-            controller.removeTileFromPlayer(1);
+            controller.removeTileFromCurrentPlayer(1);
         }
-        controller.refillPlayer();
-        assertEquals(6, controller.getCurrentHand().size());
+        controller.refillCurrentPlayer();
+        assertEquals(6, controller.getCurrentHandSize());
     }
 
     @Test

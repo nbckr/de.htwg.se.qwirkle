@@ -1,9 +1,5 @@
 package de.htwg.qwirkle.model;
 
-/**
- * Created by niels on 23.10.2015.
- */
-
 import util.Constants;
 
 public class Tile {
@@ -38,6 +34,10 @@ public class Tile {
         return shape;
     }
 
+    public boolean isUndefined() {
+        return shape == Shape.UNDEF;
+    }
+
     public boolean isSelected() {
         return isSelected;
     }
@@ -52,10 +52,7 @@ public class Tile {
             return false;
         }
         Tile t = (Tile) o;
-        if((this.color == t.color) && (this.shape == t.shape)) {
-            return true;
-        }
-        return false;
+        return (this.color == t.color) && (this.shape == t.shape);
     }
 
     @Override
@@ -106,20 +103,15 @@ public class Tile {
      * @return tile name in the form "TILE_COLOR_SHAPE", e.g. "TILE_BLUE_CIRCLE"
      */
     public String toString2() {
-        StringBuilder sb = new StringBuilder("TILE_");
-        sb.append(color.toString() + "_");
-        sb.append(shape.toString());
-        return sb.toString();
+        return "TILE_" + color.toString() + "_" + shape.toString();
     }
 
     /**
      * @return relative path to corresponding image that has to exist in src/resources/img
-     *         e.g. "/main/resources/img/TILE_BLUE_CIRCLE.jpg"
+     *         e.g. "src/main/resources/img/TILE_BLUE_CIRCLE.jpg"
      */
     public String getImageFilepath() {
-        StringBuilder sb = new StringBuilder("src/main/resources/img/");
-        sb.append(toString2() + ".jpg");
-        return sb.toString();
+        return "src/main/resources/img/" + toString2() + ".jpg";
     }
 
 

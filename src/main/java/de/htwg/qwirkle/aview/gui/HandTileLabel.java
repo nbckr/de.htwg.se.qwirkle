@@ -9,20 +9,17 @@ import util.observer.QEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**
- * Created by niels on 18.12.2015.
- */
 public class HandTileLabel extends AbstractTileLabel {
 
-    private int position;
+    private int index;
 
-    public HandTileLabel(Tile tile, IQControllerGui controller, int position) {
+    public HandTileLabel(Tile tile, IQControllerGui controller, int index) {
 
         this.controller = controller;
         controller.addObserver(this);
 
         this.tile = tile;
-        this.position = position;
+        this.index = index;
 
         this.setPreferredSize(Constants.HAND_TILE_SIZE);
 
@@ -35,7 +32,7 @@ public class HandTileLabel extends AbstractTileLabel {
     @Override
     public void refreshTile() {
         if (controller.getState() != IQController.State.UNINIZIALIZED) {
-            tile = controller.getTileFromPlayer(position);
+            tile = controller.getTileFromPlayer(index);
         }
         if (tile == null) {
             tile = new Tile();

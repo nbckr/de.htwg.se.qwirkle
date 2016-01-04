@@ -10,9 +10,6 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**
- * Created by niels on 18.12.2015.
- */
 public class OpPanel extends JPanel implements IObserver {
 
     private IQControllerGui controller;
@@ -80,8 +77,9 @@ public class OpPanel extends JPanel implements IObserver {
 
             if (e.getSource() == addButton) {
                 controller.setState(IQController.State.ADDTILES);
+                confirmButton.setText(":-)");
                 if (controller.getNumberOfSelectedTiles() > 1) {
-                    controller.unselectAll();
+                    controller.unselectAllTilesAtHand();
                 }
             }
 
@@ -92,13 +90,13 @@ public class OpPanel extends JPanel implements IObserver {
             if (e.getSource() == confirmButton
                     && controller.getState() == IQController.State.TRADETILES) {
                 controller.tradeSelectedTiles();
-                controller.nextPlayer();
+                controller.refillCurrentAndGoToNextPlayer();
             }
 
             if (e.getSource() == confirmButton
                     && controller.getState() == IQController.State.ADDTILES) {
                 // TODO
-                controller.nextPlayer();
+                controller.refillCurrentAndGoToNextPlayer();
             }
         }
     }

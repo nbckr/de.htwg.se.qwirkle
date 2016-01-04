@@ -6,9 +6,6 @@ import util.observer.IObservable;
 
 import java.util.List;
 
-/**
- * Created by niels on 11.12.2015.
- */
 public interface IQController extends IObservable {
     /**
      * @param players List with all players for the game
@@ -21,20 +18,19 @@ public interface IQController extends IObservable {
      * @param t Tile to add
      * @param row position to specify row
      * @param col position to specify column
-     * @return the points to add to player's score, or -1 if adding was impossible
      */
-    int addTileToGrid(Tile t, int row, int col);
+    void addTileToGrid(Tile t, int row, int col);
 
     /**
      * @param oldTiles old Tiles to trade in
-     * @returns new Tiles to replace the old one
+     * @return new Tiles to replace the old one
      */
     List<Tile> tradeTiles(List<Tile> oldTiles);
 
     /**
      * call addTileToGrid when exactly one Tile is selected at Hand and add this one.
      */
-    int addSelectedTileToGrid(int row, int col);
+    void addSelectedTileToGrid(int row, int col);
 
     /**
      * @param oldTile old Tile to trade in
@@ -57,14 +53,14 @@ public interface IQController extends IObservable {
     /**
      * Reset the current player with the player next in line.
      */
-    void nextPlayer();
+    void refillCurrentAndGoToNextPlayer();
 
     void refillPlayer(Player player);
 
     /**
      * Refills the current players hand with tiles from supply
      */
-    void refillPlayer();
+    void refillCurrentPlayer();
 
     /**
      * Returns the Tile on this position of the grid; the Tile remains on the grid though.
@@ -77,11 +73,17 @@ public interface IQController extends IObservable {
      */
     Tile getTileFromPlayer(int position);
 
-    void removeTileFromPlayer(int index);
+    void removeTileFromCurrentPlayer(int index);
 
-    void removeTilesFromPlayer(List<Tile> tiles);
+    void removeTilesFromCurrentPlayer(List<Tile> tiles);
 
-    void addTileToHand(Tile tile);
+    void removeSelectedTilesFromCurrentPlayer();
+
+    void addTileToCurrentPlayer(Tile tile);
+
+    void addTilesToCurrentPlayer(List<Tile> tiles);
+
+    void addTileToPlayer(Tile tile, Player player);
 
     /**
      * Returns the grid as text for tui
@@ -94,6 +96,8 @@ public interface IQController extends IObservable {
      * @return status message
      */
     String getStatusMessage();
+
+    void setStatusMessage(String message);
 
     void create();
 
@@ -109,7 +113,7 @@ public interface IQController extends IObservable {
 
     void selectTileToggle(Tile tile);
 
-    void unselectAll();
+    void unselectAllTilesAtHand();
 
     Tile getSingleSelectedTile();
 
@@ -121,12 +125,14 @@ public interface IQController extends IObservable {
 
     List<Player> getPlayers();
 
+    int getCurrentHandSize();
+
     void exit();
 
-    public enum State {
+    enum State {
         UNINIZIALIZED,          // no game started
         INITIALIZED,    // players names were given
-        PLAYING,
+        CHOOSE_ACTION,
         ADDTILES,
         TRADETILES
     }
