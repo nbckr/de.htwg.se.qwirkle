@@ -18,8 +18,10 @@ import java.awt.event.ComponentListener;
 public abstract class ATilePanel extends JLabel implements ComponentListener,
         IObserver {
 
-    protected static final Border TILE_BORDER = BorderFactory.createLineBorder(Color.WHITE, 1);
+    protected static final Border BORDER_PLAIN = BorderFactory.createLineBorder(Color.BLUE, 1);
+    protected static final Border BORDER_SELECTED = BorderFactory.createLineBorder(Color.RED, 4);
     protected Tile tile;
+
     protected IQControllerGui controller;
     protected StretchIcon icon;
 
@@ -28,14 +30,26 @@ public abstract class ATilePanel extends JLabel implements ComponentListener,
 
     protected void refreshImage() {
         String filepath = tile.getImageFilepath();
-        this.icon = new StretchIcon(filepath, false);
-        this.setIcon(icon);
+        icon = new StretchIcon(filepath, false);
+        setIcon(icon);
     }
 
+    protected void refreshBorder() {
+        if (tile.isSelected()) {
+            setBorder(ATilePanel.BORDER_SELECTED);
+        } else {
+            setBorder(ATilePanel.BORDER_PLAIN);
+        }
+    }
+
+    public Tile getTile() {
+        return tile;
+    }
     @Override
     public void update(QEvent e) {
         refreshTile();
         refreshImage();
+        refreshBorder();
     }
 
     @Override

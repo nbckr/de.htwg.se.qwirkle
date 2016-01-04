@@ -1,10 +1,12 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
-import util.ConstantValues;
+import util.Constants;
 import util.observer.IObserver;
 import util.observer.QEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,8 +15,10 @@ import java.awt.*;
  */
 public class HandPanel extends JPanel implements IObserver {
 
-    private static final Dimension SIZE = new Dimension(QFrame.SIDE_PANEL_WIDTH, 100);
+    private static final Dimension SIZE = new Dimension(Constants.SIDE_PANEL_WIDTH, 100);
+    private static final int SPACING = 5;
     private IQControllerGui controller;
+    protected List<JLabel> innerTilePanels;
 
     public HandPanel(IQControllerGui controller) {
 
@@ -22,30 +26,25 @@ public class HandPanel extends JPanel implements IObserver {
         controller.addObserver(this);
 
         setLayout(new FlowLayout());
-        setBorder(ConstantValues.INNER_BORDER);
+        setBorder(Constants.INNER_BORDER);
         setPreferredSize(SIZE);
 
+        innerTilePanels = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
+            JPanel outerPanel = new JPanel();
+            outerPanel.setBorder(BorderFactory.createEmptyBorder(SPACING, SPACING, SPACING, SPACING));
+            outerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
             HandTilePanel handTilePanel = new HandTilePanel(null, controller, i);
-            this.add(handTilePanel);
+            innerTilePanels.add(handTilePanel);
+
+            outerPanel.add(handTilePanel);
+            this.add(outerPanel);
         }
     }
 
     @Override
     public void update(QEvent e) {
-
-        /*if (e.getEvent() == QEvent.Event.NEXTPLAYER) {
-            // TODO only update here?
-        }
-
-        System.out.println("ICH WILL!");
-        if (controller.getState() != IQController.State.UNINIZIALIZED) {
-            this.removeAll();
-            tiles = controller.getCurrentPlayer().getHand();
-            for (Tile tile : tiles) {
-                GridTilePanel tilePanel = new GridTilePanel(tile, controller);
-                this.add(tilePanel);
-            }
-        }*/
+        // neccesary?
     }
 }

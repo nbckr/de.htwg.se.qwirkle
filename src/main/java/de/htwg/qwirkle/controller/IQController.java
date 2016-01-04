@@ -85,6 +85,12 @@ public interface IQController extends IObservable {
 
     void setState(State state);
 
+    void select(Tile tile, boolean isSelected);
+
+    void selectToggle(Tile tile);
+
+    void tradeSelectedTiles();
+
     public enum State {
         UNINIZIALIZED,          // no game started
         INITIALIZED,    // players names were given

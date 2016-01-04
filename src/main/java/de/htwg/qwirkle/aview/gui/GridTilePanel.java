@@ -4,7 +4,6 @@ import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Tile;
 import util.observer.QEvent;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -25,7 +24,6 @@ public class GridTilePanel extends ATilePanel {
         this.row = row;
         this.col = col;
 
-        this.setBorder(ATilePanel.TILE_BORDER);
         this.setPreferredSize(SIZE_ON_GRID);
 
         this.addComponentListener(this);

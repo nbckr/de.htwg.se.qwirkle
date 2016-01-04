@@ -2,7 +2,7 @@ package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
-import util.ConstantValues;
+import util.Constants;
 import util.observer.IObserver;
 import util.observer.QEvent;
 
@@ -14,7 +14,7 @@ import java.awt.*;
  */
 public class StatusPanel extends JPanel implements IObserver {
 
-    private static final Dimension SIZE = new Dimension(QFrame.SIDE_PANEL_WIDTH, 40);
+    private static final Dimension SIZE = new Dimension(Constants.SIDE_PANEL_WIDTH, 40);
     private final JLabel statusLabel;
     private IQController controller;
 
@@ -24,7 +24,7 @@ public class StatusPanel extends JPanel implements IObserver {
         controller.addObserver(this);
 
         setLayout(new FlowLayout(FlowLayout.CENTER));
-        setBorder(ConstantValues.INNER_BORDER);
+        setBorder(Constants.INNER_BORDER);
         setPreferredSize(SIZE);
 
         statusLabel = new JLabel("");

@@ -1,11 +1,14 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
+import de.htwg.qwirkle.model.Tile;
 import util.observer.IObserver;
 import util.observer.QEvent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Created by niels on 18.12.2015.
@@ -14,7 +17,6 @@ public class QFrame extends JFrame implements IObserver {
 
     private static final Dimension DEFAULT_WINDOWSIZE = new Dimension(1500, 900);
     private static final Dimension RIGID_AREA = new Dimension(10, 10);
-    protected static final int SIDE_PANEL_WIDTH = 200;
 
     private JPanel mainPanel;
     private JPanel sidePanel;
@@ -69,7 +71,7 @@ public class QFrame extends JFrame implements IObserver {
         setVisible(true);
 
         // open the New Game dialog
-        menuBar.showNewGameDialog(controller);
+        new NewGameDialog(controller);
     }
 
     @Override

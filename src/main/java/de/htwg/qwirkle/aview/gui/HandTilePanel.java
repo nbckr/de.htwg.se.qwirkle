@@ -5,8 +5,9 @@ import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Tile;
 import util.observer.QEvent;
 
-import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Created by niels on 18.12.2015.
@@ -14,7 +15,6 @@ import java.awt.*;
 public class HandTilePanel extends ATilePanel {
 
     private static final Dimension SIZE_ON_HAND = new Dimension(75, 75);
-    private static final int BORDER = 5;
     private int position;
 
     public HandTilePanel(Tile tile, IQControllerGui controller, int position) {
@@ -25,10 +25,10 @@ public class HandTilePanel extends ATilePanel {
         this.tile = tile;
         this.position = position;
 
-        setBorder(BorderFactory.createEmptyBorder(BORDER,BORDER,BORDER,BORDER));
         this.setPreferredSize(SIZE_ON_HAND);
 
         addComponentListener(this);
+        addMouseListener(new Listener());
 
         update(new QEvent());
     }
@@ -40,6 +40,13 @@ public class HandTilePanel extends ATilePanel {
         }
         if (tile == null) {
             tile = new Tile();
+        }
+    }
+
+    class Listener extends MouseAdapter {
+        @Override
+        public void mousePressed(MouseEvent e) {
+            controller.selectToggle(tile);
         }
     }
 }

@@ -56,15 +56,11 @@ public class MenuBar extends JMenuBar implements ActionListener {
         this.add(helpMenu);
     }
 
-    public void showNewGameDialog(IQControllerGui controller) {
-        new NewGameDialog(controller);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == newMenuItem) {
-            this.showNewGameDialog(controller);
+            new NewGameDialog(controller);
         }
 
         if (e.getSource() == quitMenuItem) {

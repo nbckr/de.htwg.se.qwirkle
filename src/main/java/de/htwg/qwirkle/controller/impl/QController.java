@@ -6,7 +6,7 @@ import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Supply;
 import de.htwg.qwirkle.model.Tile;
-import util.ConstantValues;
+import util.Constants;
 import util.observer.QEvent;
 import util.observer.Observable;
 
@@ -32,7 +32,7 @@ public class QController extends Observable implements IQController, IQControlle
         assert (!players.isEmpty()) && (players.size() < 5);
 
         //print welcome
-        this.statusMessage = ConstantValues.WELCOME;
+        this.statusMessage = Constants.WELCOME;
         notifyObservers(new QEvent(QEvent.Event.MESSAGE));
 
         this.players = (ArrayList) players;
@@ -156,6 +156,22 @@ public class QController extends Observable implements IQController, IQControlle
         return grid.getNumCols();
     }
 
+    @Override
+    public void select(Tile tile, boolean isSelected) {
+        tile.setSelected(isSelected);
+        notifyObservers();
+    }
+
+    @Override
+    public void selectToggle(Tile tile) {
+        tile.toggleSelected();
+        notifyObservers();
+    }
+
+    @Override
+    public void tradeSelectedTiles() {
+
+    }
 
     @Override
     public void exit() {

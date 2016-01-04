@@ -1,12 +1,10 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
-import util.ConstantValues;
+import util.Constants;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 
 /**
  * Created by niels on 18.12.2015.
@@ -22,7 +20,7 @@ public class GridPanel extends JPanel {
         int cols = controller.getNumCols();
 
         setLayout(new GridLayout(rows, cols, GAP_PX, GAP_PX));
-        setBorder(ConstantValues.INNER_BORDER);
+        setBorder(Constants.INNER_BORDER);
 
         // Add cells for all tiles
         for (int row = 0; row < rows; row++) {

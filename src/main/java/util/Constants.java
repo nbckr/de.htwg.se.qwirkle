@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * Created by niboecke on 30.10.2015.
  */
-public abstract class ConstantValues {
+public abstract class Constants {
 
     // color values used in TUI
     public static final String ANSI_RESET = "\u001B[0m";
@@ -30,7 +30,7 @@ public abstract class ConstantValues {
     public static final String ANSI_PURPLE_BG = "\u001B[45m";
     public static final String ANSI_CYAN_BG = "\u001B[46m";
 
-    // Messages used in TUI
+    // Text messages used in TUI
     public static final String INSTRUCTIONS = "List of commands:\n" +
                                               "\ta - add tile(s) to grid\n\t" +
                                               "t - trade in tile(s)\n" +
@@ -42,8 +42,17 @@ public abstract class ConstantValues {
 
     // Swing values used in GUI
     public static final Border INNER_BORDER = BorderFactory.createLineBorder(Color.BLACK, 5);
+    public static final int SIDE_PANEL_WIDTH = 200;
 
-    private ConstantValues() {
+    // Text messages used in GUI
+    public static final String INSTR_CHOOSE = "You can either add one or more tiles to " +
+            "the grid or you can trade one or more tiles.";
+    public static final String INSTR_ADD = "Select one tile on your hand and click " +
+            "on the desired position on the grid.";
+    public static final String INSTR_TRADE = "Select all tiles you want to trade and " +
+            "click on OK";
+
+    private Constants() {
         // prevent class from being instantiated
     }
 }

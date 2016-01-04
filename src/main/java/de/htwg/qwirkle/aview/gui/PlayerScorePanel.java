@@ -1,7 +1,7 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQController;
-import util.ConstantValues;
+import util.Constants;
 import util.observer.IObserver;
 import util.observer.QEvent;
 
@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class PlayerScorePanel extends JPanel implements IObserver {
 
-    private static final Dimension SIZE = new Dimension(QFrame.SIDE_PANEL_WIDTH, 100);
+    private static final Dimension SIZE = new Dimension(Constants.SIDE_PANEL_WIDTH, 100);
     private IQController controller;
     private JLabel textLabel;
 
@@ -22,7 +22,7 @@ public class PlayerScorePanel extends JPanel implements IObserver {
         this.controller = controller;
         controller.addObserver(this);
 
-        this.setBorder(ConstantValues.INNER_BORDER);
+        this.setBorder(Constants.INNER_BORDER);
         this.setPreferredSize(SIZE);
 
         textLabel = new JLabel("");
