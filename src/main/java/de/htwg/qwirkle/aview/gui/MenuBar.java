@@ -1,7 +1,5 @@
 package de.htwg.qwirkle.aview.gui;
 
-import com.sun.javafx.geom.Quat4f;
-import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
 
 import javax.swing.*;
@@ -59,7 +57,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
     }
 
     public void showNewGameDialog(IQControllerGui controller) {
-        NewGameDialog newGameDialog = new NewGameDialog(controller);
+        new NewGameDialog(controller);
     }
 
     @Override
@@ -74,7 +72,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
         }
 
         if (e.getSource() == instructionsMenuItem) {
-            // TODO
+            JOptionPane.showMessageDialog(null, "It's really easy :)",
+                    "Instructions", JOptionPane.INFORMATION_MESSAGE);
         }
 
         if (e.getSource() == aboutMenuItem) {

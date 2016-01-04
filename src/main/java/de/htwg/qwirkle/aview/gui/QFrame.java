@@ -66,7 +66,6 @@ public class QFrame extends JFrame implements IObserver {
 
         // JFrame Settings
         setContentPane(mainPanel);
-        //setTitle("HTWG QWiRKLE");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(DEFAULT_WINDOWSIZE);
         setResizable(true);
@@ -80,7 +79,6 @@ public class QFrame extends JFrame implements IObserver {
 
     @Override
     public void update(QEvent e) {
-        //statusPanel.setText(controller.getStatusMessage());
         //repaint(50);
     }
 }

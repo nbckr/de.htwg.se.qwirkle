@@ -155,7 +155,7 @@ public class TextUI implements IObserver {
             return;
         }
 
-        ArrayList<Tile> oldTiles = new ArrayList<>();
+        List<Tile> oldTiles = new ArrayList<>();
         for(int i : integerList) {
             oldTiles.add(controller.getCurrentPlayer().getTileFromHand(i));
         }

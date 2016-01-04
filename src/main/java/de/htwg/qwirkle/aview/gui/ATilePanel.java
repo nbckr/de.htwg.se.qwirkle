@@ -4,7 +4,6 @@ import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Tile;
 import util.StretchIcon;
 import util.observer.IObserver;
-import util.observer.QEvent;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -38,11 +37,14 @@ public abstract class ATilePanel extends JLabel implements ComponentListener,
     }
 
     @Override
-    public void componentMoved(ComponentEvent e) {}
+    public void componentMoved(ComponentEvent e) {
+    }
 
     @Override
-    public void componentShown(ComponentEvent e) {}
+    public void componentShown(ComponentEvent e) {
+    }
 
     @Override
-    public void componentHidden(ComponentEvent e) {}
+    public void componentHidden(ComponentEvent e) {
+    }
 }

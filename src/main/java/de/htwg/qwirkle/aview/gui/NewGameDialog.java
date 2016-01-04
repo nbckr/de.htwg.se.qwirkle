@@ -14,16 +14,20 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by niels on 02.01.2016.
  */
 public class NewGameDialog extends JDialog {
 
+    private static final String[] NUM_PLAYER_OPTIONS = { "2", "3", "4" };
+    private static final int FIELDSIZE = 15;
+
     IQControllerGui controller;
     NewGamePanel newGamePane;
     JOptionPane optionPane;
-    ArrayList<Player> players;
+    List<Player> players;
 
     public NewGameDialog(IQControllerGui controller) {
         super();
@@ -39,6 +43,7 @@ public class NewGameDialog extends JDialog {
 
         this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent we) {
                 exitOrShowError();
             }
@@ -46,6 +51,7 @@ public class NewGameDialog extends JDialog {
 
         optionPane.addPropertyChangeListener(
                 new PropertyChangeListener() {
+                    @Override
                     public void propertyChange(PropertyChangeEvent e) {
                         String prop = e.getPropertyName();
 
@@ -75,8 +81,6 @@ public class NewGameDialog extends JDialog {
         private JPanel namesPanel;
 
         private JComboBox numPlayerBox;
-        private final String[] NUM_PLAYER_OPTIONS = { "2", "3", "4" };
-        private final int FIELDSIZE = 15;
         private int numPlayerChoice;
 
         private JTextField player1;
@@ -89,17 +93,17 @@ public class NewGameDialog extends JDialog {
 
             choicePanel = new JPanel();
             choicePanel.setLayout(new FlowLayout());
-            choicePanel.setBorder((BorderFactory.createTitledBorder("Choose number of players")));
+            choicePanel.setBorder(BorderFactory.createTitledBorder("Choose number of players"));
 
             numPlayerBox = new JComboBox(NUM_PLAYER_OPTIONS);
             numPlayerBox.setSelectedIndex(0);
             numPlayerBox.addActionListener(this);
             choicePanel.add(numPlayerBox);
-            numPlayerChoice = Integer.parseInt(((String) numPlayerBox.getSelectedItem()));
+            numPlayerChoice = Integer.parseInt((String) numPlayerBox.getSelectedItem());
 
             namesPanel = new JPanel();
             namesPanel.setLayout(new BoxLayout(namesPanel, BoxLayout.PAGE_AXIS));
-            namesPanel.setBorder((BorderFactory.createTitledBorder("Enter players' names")));
+            namesPanel.setBorder(BorderFactory.createTitledBorder("Enter players' names"));
 
             player1 = new JTextField(FIELDSIZE);
             player1.setDocument(new JTextFieldLimit(FIELDSIZE));

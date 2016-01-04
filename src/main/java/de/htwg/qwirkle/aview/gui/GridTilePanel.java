@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class GridTilePanel extends ATilePanel {
 
-    private final Dimension SIZE_ON_GRID = new Dimension(30, 30);
+    private static final Dimension SIZE_ON_GRID = new Dimension(30, 30);
     private int row;
     private int col;
 

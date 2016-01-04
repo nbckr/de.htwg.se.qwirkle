@@ -11,7 +11,6 @@ public class Player {
     private String name;
     private int score;
     private List<Tile> hand;
-    // private static int playerCount = 0;
 
     /**
      * Standard constructor calls constructor with standard name: Player1, Player2, ...
@@ -92,7 +91,7 @@ public class Player {
     /**
      * @return a copy of the player's hand
      */
-    public ArrayList<Tile> getHand() {
+    public List<Tile> getHand() {
         return new ArrayList<Tile>(this.hand);
     }
 

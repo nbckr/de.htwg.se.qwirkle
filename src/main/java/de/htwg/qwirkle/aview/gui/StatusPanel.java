@@ -6,7 +6,6 @@ import util.observer.IObserver;
 import util.observer.QEvent;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 
 /**

@@ -13,8 +13,8 @@ import java.awt.*;
  */
 public class HandTilePanel extends ATilePanel {
 
-    private final Dimension SIZE_ON_HAND = new Dimension(75, 75);
-    private final int BORDER = 5;
+    private static final Dimension SIZE_ON_HAND = new Dimension(75, 75);
+    private static final int BORDER = 5;
     private int position;
 
     public HandTilePanel(Tile tile, IQControllerGui controller, int position) {

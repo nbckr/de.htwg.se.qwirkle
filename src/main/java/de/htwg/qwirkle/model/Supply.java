@@ -2,6 +2,7 @@ package de.htwg.qwirkle.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.Collections.*;
 
@@ -12,7 +13,7 @@ import de.htwg.qwirkle.model.Tile.*;
  */
 public class Supply {
 
-    private ArrayList<Tile> tiles;
+    private List<Tile> tiles;
     private static Random random;
     private static final int MAX_SIZE = 108;
 
@@ -21,7 +22,7 @@ public class Supply {
      */
     public Supply() {
         tiles = new ArrayList<Tile>(MAX_SIZE);
-        random = new Random(43);            // TODO: random always gives the same numbers...
+        random = new Random(System.currentTimeMillis());
 
         for (Shape s : Shape.values()) {
 

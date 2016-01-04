@@ -16,7 +16,6 @@ public class GridPanel extends JPanel {
 
         int rows = controller.getNumRows();
         int cols = controller.getNumCols();
-        int cells = rows * cols;
 
         setLayout(new GridLayout(rows, cols, GAP_PX, GAP_PX));
         setBorder(QFrame.INNER_BORDER);
@@ -30,9 +29,10 @@ public class GridPanel extends JPanel {
         }
 
         setPreferredSize(new Dimension(800, 800));
-        //
 
-        /*// make the Tiles always keep a 1:1 aspect ratio
+        /*
+
+        // make the Tiles always keep a 1:1 aspect ratio
         this.addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {

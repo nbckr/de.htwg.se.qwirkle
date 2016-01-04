@@ -7,7 +7,6 @@ import util.observer.QEvent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * Created by niels on 18.12.2015.
@@ -16,7 +15,6 @@ public class HandPanel extends JPanel implements IObserver {
 
     private static final Dimension SIZE = new Dimension(QFrame.SIDE_PANEL_WIDTH, 100);
     private IQControllerGui controller;
-    ArrayList<Tile> tiles;
 
     public HandPanel(IQControllerGui controller) {
 
