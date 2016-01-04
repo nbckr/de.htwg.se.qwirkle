@@ -1,7 +1,6 @@
 package de.htwg.qwirkle.controller;
 
 import de.htwg.qwirkle.controller.impl.QController;
-import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
 import junit.framework.TestCase;
@@ -38,7 +37,7 @@ public class QControllerTest extends TestCase {
     @Test
     public void testAddTileToGrid() throws Exception {
         controller.addTileToGrid(tile, 1, 1);
-        assertEquals(tile, controller.peekTileFromGrid(1, 1));
+        assertEquals(tile, controller.getTileFromGrid(1, 1));
     }
 
     @Test
@@ -78,6 +77,6 @@ public class QControllerTest extends TestCase {
     @Test
     public void testgetTileReference() throws Exception {
         controller.addTileToGrid(tile, 1, 1);
-        assertEquals(tile, controller.peekTileFromGrid(1, 1));
+        assertEquals(tile, controller.getTileFromGrid(1, 1));
     }
 }

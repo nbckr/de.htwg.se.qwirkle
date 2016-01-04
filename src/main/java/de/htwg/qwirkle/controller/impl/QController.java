@@ -63,16 +63,21 @@ public class QController extends Observable implements IQController, IQControlle
 
 
     @Override
-    public int addTileToGrid(Tile t, int i, int j) {
+    public int addTileToGrid(Tile t, int row, int col) {
         int points = 42;
         // TODO: validate if playing here is even possible, return -1 if no
 
-        grid.setTile(t, i, j);
+        grid.setTile(t, row, col);
         // TODO: how many points does the player get?
 
         this.statusMessage = "Still " + this.currentPlayer.getName() +"s turn";
         notifyObservers();
         return points;
+    }
+
+    @Override
+    public int addTileToGrid(int row, int col) {
+        return addTileToGrid(getSelectedTile(), row, col);
     }
 
 
@@ -104,7 +109,7 @@ public class QController extends Observable implements IQController, IQControlle
     public void nextPlayer(){
         int index = (this.players.indexOf(this.currentPlayer) + 1) % this.players.size();
         this.currentPlayer = this.players.get(index);
-        this.statusMessage = this.currentPlayer.getName() + " is next in line.";
+        this.statusMessage = this.currentPlayer.getName() + ", it's your turn!";
         notifyObservers(new QEvent(QEvent.Event.NEXTPLAYER));
     }
 
@@ -117,12 +122,12 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
-    public Tile peekTileFromGrid(int row, int col) {
+    public Tile getTileFromGrid(int row, int col) {
         return this.grid.getTile(row, col);
     }
 
     @Override
-    public Tile peekTileFromHand(int position) {
+    public Tile getTileFromHand(int position) {
         if (position >= getCurrentPlayer().getHand().size()) {
             return null;
         }
@@ -158,19 +163,70 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public void select(Tile tile, boolean isSelected) {
+        if (isSelected && getState() == State.ADDTILES) {
+            unselectAll();
+        }
         tile.setSelected(isSelected);
+
         notifyObservers();
     }
 
     @Override
     public void selectToggle(Tile tile) {
-        tile.toggleSelected();
+        select(tile, !tile.isSelected());
+    }
+
+    @Override
+    public void unselectAll() {
+        for (Tile tile : getCurrentHand()) {
+            tile.setSelected(false);
+        }
         notifyObservers();
     }
 
     @Override
-    public void tradeSelectedTiles() {
+    public Tile getSelectedTile() {
+        if (getNumberOfSelected() != 1) {
+            throw new IllegalArgumentException();
+        }
+        Tile selectedTile = null;
+        for (Tile tile : getCurrentHand()) {
+            if (tile.isSelected()) {
+                selectedTile = tile;
+                break;
+            }
+        }
+        return selectedTile;
+    }
 
+    @Override
+    public int getNumberOfSelected() {
+        int count = 0;
+        for (Tile tile : getCurrentHand()) {
+            if (tile.isSelected()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public void tradeSelectedTiles() {
+        List<Tile> oldTiles = new ArrayList<>();
+        for (Tile tile : getCurrentHand()) {
+            if (tile.isSelected()) {
+                oldTiles.add(tile);
+            }
+        }
+        unselectAll();
+        List<Tile> newTiles = tradeTiles(oldTiles);
+        getCurrentPlayer().addTilesToHand(newTiles);
+        notifyObservers();
+    }
+
+    @Override
+    public List<Tile> getCurrentHand() {
+        return getCurrentPlayer().getHand();
     }
 
     @Override
@@ -186,5 +242,10 @@ public class QController extends Observable implements IQController, IQControlle
     @Override
     public void setState(State state) {
         this.state = state;
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+        return players;
     }
 }

@@ -46,10 +46,6 @@ public class Tile {
         this.isSelected = isSelected;
     }
 
-    public void toggleSelected() {
-        isSelected = !isSelected;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Tile)) {

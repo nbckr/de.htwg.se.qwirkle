@@ -15,7 +15,7 @@ import java.awt.event.ComponentListener;
 /**
  * Created by niels on 18.12.2015.
  */
-public abstract class ATilePanel extends JLabel implements ComponentListener,
+public abstract class AbstractTileLabel extends JLabel implements ComponentListener,
         IObserver {
 
     protected static final Border BORDER_PLAIN = BorderFactory.createLineBorder(Color.BLUE, 1);
@@ -36,9 +36,9 @@ public abstract class ATilePanel extends JLabel implements ComponentListener,
 
     protected void refreshBorder() {
         if (tile.isSelected()) {
-            setBorder(ATilePanel.BORDER_SELECTED);
+            setBorder(AbstractTileLabel.BORDER_SELECTED);
         } else {
-            setBorder(ATilePanel.BORDER_PLAIN);
+            setBorder(AbstractTileLabel.BORDER_PLAIN);
         }
     }
 

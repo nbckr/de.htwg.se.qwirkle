@@ -17,17 +17,22 @@ public interface IQController extends IObservable {
 
     /**
      * @param t Tile to add
-     * @param i position to specify row
-     * @param j position to specify column
+     * @param row position to specify row
+     * @param col position to specify column
      * @return the points to add to player's score, or -1 if adding was impossible
      */
-    int addTileToGrid(Tile t, int i, int j);
+    int addTileToGrid(Tile t, int row, int col);
 
     /**
      * @param oldTiles old Tiles to trade in
      * @returns new Tiles to replace the old one
      */
     List<Tile> tradeTiles(List<Tile> oldTiles);
+
+    /**
+     * call addTileToGrid when exactly one Tile is selected at Hand and add this one.
+     */
+    int addTileToGrid(int row, int col);
 
     /**
      * @param oldTile old Tile to trade in
@@ -42,6 +47,12 @@ public interface IQController extends IObservable {
     Player getCurrentPlayer();
 
     /**
+     * Returns the hand of the current player.
+     * @return hand of the current player
+     */
+    List<Tile> getCurrentHand();
+
+    /**
      * Reset the current player with the player next in line.
      */
     void nextPlayer();
@@ -54,14 +65,13 @@ public interface IQController extends IObservable {
     /**
      * Returns the Tile on this position of the grid; the Tile remains on the grid though.
      */
-    Tile peekTileFromGrid(int row, int col);
-
+    Tile getTileFromGrid(int row, int col);
 
     /**
      * Returns the Tile on this position the current player's hand; the Tile remains
      * there though.
      */
-    Tile peekTileFromHand(int position);
+    Tile getTileFromHand(int position);
 
     /**
      * Returns the grid as text for tui
@@ -89,7 +99,17 @@ public interface IQController extends IObservable {
 
     void selectToggle(Tile tile);
 
+    void unselectAll();
+
+    Tile getSelectedTile();
+
+    int getNumberOfSelected();
+
     void tradeSelectedTiles();
+
+    List<Player> getPlayers();
+
+    void exit();
 
     public enum State {
         UNINIZIALIZED,          // no game started

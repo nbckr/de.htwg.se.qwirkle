@@ -1,10 +1,13 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQController;
+import de.htwg.qwirkle.model.Player;
 import util.Constants;
 import util.observer.IObserver;
 import util.observer.QEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,42 +16,59 @@ import java.awt.*;
  */
 public class PlayerScorePanel extends JPanel implements IObserver {
 
-    private static final Dimension SIZE = new Dimension(Constants.SIDE_PANEL_WIDTH, 100);
     private IQController controller;
-    private JLabel textLabel;
+    List<PlayerTextLabel> labels;
+    private boolean initialized;
 
     public PlayerScorePanel(IQController controller) {
-
         this.controller = controller;
         controller.addObserver(this);
 
-        this.setBorder(Constants.INNER_BORDER);
-        this.setPreferredSize(SIZE);
+        initialized = false;
+        labels = new ArrayList<>();
 
-        textLabel = new JLabel("");
-        textLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        textLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-        this.add(textLabel);
-        refreshText();
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        setBorder(Constants.INNER_BORDER);
     }
 
-    private void refreshText() {
-
-        if (controller.getState() != IQController.State.UNINIZIALIZED) {
-            StringBuilder sb = new StringBuilder("Current Player: ");
-            sb.append(controller.getCurrentPlayer().getName());
-            sb.append(", Score: ");
-            sb.append(controller.getCurrentPlayer().getScore());
-            textLabel.setText(sb.toString());
+    public void init() {
+        for (Player player : controller.getPlayers()) {
+            PlayerTextLabel label = new PlayerTextLabel(player);
+            labels.add(label);
+            this.add(label);
         }
-    }
-
-    public void clear() {
-        textLabel.setText("");
+        initialized = true;
     }
 
     @Override
     public void update(QEvent e) {
-        refreshText();
+        if (controller.getState() != IQController.State.UNINIZIALIZED) {
+            if (!initialized) {
+                init();
+            }
+            for (PlayerTextLabel label : labels) {
+                label.refreshText();
+            }
+        }
+    }
+
+    class PlayerTextLabel extends JLabel {
+        Player player;
+
+        public PlayerTextLabel(Player player) {
+            this.player = player;
+        }
+
+        public void refreshText() {
+            StringBuilder sb = new StringBuilder(player.getName());
+            sb.append(" (Score: " + controller.getCurrentPlayer().getScore() + ")");
+            setText(sb.toString());
+
+            if (player == controller.getCurrentPlayer()) {
+                setForeground(Color.RED);
+            } else {
+                setForeground(Color.BLACK);
+            }
+        }
     }
 }

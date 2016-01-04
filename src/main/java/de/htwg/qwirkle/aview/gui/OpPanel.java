@@ -1,5 +1,6 @@
 package de.htwg.qwirkle.aview.gui;
 
+import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
 import util.Constants;
 import util.observer.IObserver;
@@ -15,7 +16,6 @@ import java.awt.event.MouseEvent;
  */
 public class OpPanel extends JPanel implements IObserver {
 
-    private static final Dimension SIZE = new Dimension(Constants.SIDE_PANEL_WIDTH, 100);
     private IQControllerGui controller;
     private JPanel actionChoicePanel;
     private JPanel instructionPanel;
@@ -32,40 +32,74 @@ public class OpPanel extends JPanel implements IObserver {
 
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBorder(Constants.INNER_BORDER);
-        setPreferredSize(SIZE);
+        Listener listener = new Listener();
 
         actionChoicePanel = new JPanel();
         addButton = new JButton("Add Tile to Grid");
+        addButton.addMouseListener(listener);
         tradeButton = new JButton("Trade Tile(s)");
+        tradeButton.addMouseListener(listener);
         actionChoicePanel.add(addButton);
         actionChoicePanel.add(tradeButton);
         add(actionChoicePanel);
 
         instructionPanel = new JPanel();
         instructionLabel = new JLabel();
-        instructionLabel.setText(Constants.INSTR_CHOOSE);
         instructionPanel.add(instructionLabel);
         add(instructionPanel);
 
         confirmPanel = new JPanel();
         confirmButton = new JButton("OK");
+        confirmButton.addMouseListener(listener);
         confirmPanel.add(confirmButton);
         add(confirmButton);
 
-        addMouseListener(new Listener());
+        // refresh instr.?
+    }
+
+    private void refreshInstructions() {
+        switch (controller.getState()) {
+            case ADDTILES:
+                instructionLabel.setText(Constants.INSTR_ADD);
+                break;
+            case TRADETILES:
+                instructionLabel.setText(Constants.INSTR_TRADE);
+                break;
+            default:
+                instructionLabel.setText(Constants.INSTR_CHOOSE);
+        }
     }
 
     @Override
     public void update(QEvent e) {
-        // necessary?
+        refreshInstructions();
     }
 
     class Listener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent e) {
 
-            if (e.getSource() == confirmButton) {
+            if (e.getSource() == addButton) {
+                controller.setState(IQController.State.ADDTILES);
+                if (controller.getNumberOfSelected() > 1) {
+                    controller.unselectAll();
+                }
+            }
 
+            if (e.getSource() == tradeButton) {
+                controller.setState(IQController.State.TRADETILES);
+            }
+
+            if (e.getSource() == confirmButton
+                    && controller.getState() == IQController.State.TRADETILES) {
+                controller.tradeSelectedTiles();
+                controller.nextPlayer();
+            }
+
+            if (e.getSource() == confirmButton
+                    && controller.getState() == IQController.State.ADDTILES) {
+                // TODO
+                controller.nextPlayer();
             }
         }
     }

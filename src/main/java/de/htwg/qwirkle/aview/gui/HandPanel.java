@@ -15,7 +15,6 @@ import java.awt.*;
  */
 public class HandPanel extends JPanel implements IObserver {
 
-    private static final Dimension SIZE = new Dimension(Constants.SIDE_PANEL_WIDTH, 100);
     private static final int SPACING = 5;
     private IQControllerGui controller;
     protected List<JLabel> innerTilePanels;
@@ -27,7 +26,6 @@ public class HandPanel extends JPanel implements IObserver {
 
         setLayout(new FlowLayout());
         setBorder(Constants.INNER_BORDER);
-        setPreferredSize(SIZE);
 
         innerTilePanels = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
@@ -35,7 +33,7 @@ public class HandPanel extends JPanel implements IObserver {
             outerPanel.setBorder(BorderFactory.createEmptyBorder(SPACING, SPACING, SPACING, SPACING));
             outerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-            HandTilePanel handTilePanel = new HandTilePanel(null, controller, i);
+            HandTileLabel handTilePanel = new HandTileLabel(null, controller, i);
             innerTilePanels.add(handTilePanel);
 
             outerPanel.add(handTilePanel);

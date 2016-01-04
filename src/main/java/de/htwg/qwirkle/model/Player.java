@@ -50,6 +50,9 @@ public class Player {
         return true;
     }
 
+    /**
+     * Get a Tile from hand and remove it there.
+     */
     public Tile getTileFromHand() {
         return getTileFromHand(1);
     }

@@ -2,6 +2,9 @@ package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Tile;
+import javafx.scene.layout.Border;
+import util.Constants;
+import util.StretchIcon;
 import util.observer.IObserver;
 import util.observer.QEvent;
 
@@ -41,32 +44,52 @@ public class QFrame extends JFrame implements IObserver {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.LINE_AXIS));
 
         gridPanel = new GridPanel(controller);
+        gridPanel.setPreferredSize(Constants.GRID_PANEL_SIZE);
         mainPanel.add(gridPanel);
 
         sidePanel = new JPanel();
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.PAGE_AXIS));
-        mainPanel.add(Box.createRigidArea(RIGID_AREA));
-        mainPanel.add(sidePanel);
+
+        JPanel affe = new JPanel();
+        JLabel logoLabel = new JLabel();
+        String logopath = "src/main/resources/img/logo.png";
+        StretchIcon logo = new StretchIcon(logopath, true);
+        logoLabel.setIcon(logo);
+        logoLabel.setText(".............................");
+        logoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 6));
+        //affe.setMinimumSize(new Dimension(200, 200));
+        affe.add(logoLabel);
+        sidePanel.add(affe);
 
         playerScorePanel = new PlayerScorePanel(controller);
+        //playerScorePanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 100));
+        sidePanel.add(Box.createRigidArea(RIGID_AREA));
         sidePanel.add(playerScorePanel);
 
         handPanel = new HandPanel(controller);
+        //handPanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 100));
         sidePanel.add(Box.createRigidArea(RIGID_AREA));
         sidePanel.add(handPanel);
 
         opPanel = new OpPanel(controller);
+        ///opPanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 150));
         sidePanel.add(Box.createRigidArea(RIGID_AREA));
         sidePanel.add(opPanel);
 
         statusPanel = new StatusPanel(controller);
         sidePanel.add(Box.createRigidArea(RIGID_AREA));
+        //statusPanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 40));
         sidePanel.add(statusPanel);
+
+        sidePanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 0));
+        mainPanel.add(Box.createRigidArea(RIGID_AREA));
+        mainPanel.add(sidePanel);
 
         // JFrame Settings
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(DEFAULT_WINDOWSIZE);
+        //setSize(DEFAULT_WINDOWSIZE);
+        pack();
         setResizable(true);
         setVisible(true);
 

@@ -117,7 +117,7 @@ public class TextUI implements IObserver {
         }
 
         if ("h".equalsIgnoreCase(line)) {
-            LOG.info(Constants.INSTRUCTIONS);
+            LOG.info(Constants.INSTR_TUI);
         }
 
         if ("q".equalsIgnoreCase(line)) {
@@ -150,7 +150,7 @@ public class TextUI implements IObserver {
                 assert i <= this.controller.getCurrentPlayer().getHand().size();
                 integerList.add(i);
 
-                Tile t = controller.peekTileFromHand(i);
+                Tile t = controller.getTileFromHand(i);
                 controller.select(t, true);
             }
         } catch (PatternSyntaxException ex) {
@@ -158,13 +158,7 @@ public class TextUI implements IObserver {
             return;
         }
 
-        List<Tile> oldTiles = new ArrayList<>();
-        for(int i : integerList) {
-            oldTiles.add(controller.getCurrentPlayer().getTileFromHand(i));
-        }
-        List<Tile> newTiles = controller.tradeTiles(oldTiles);
-        controller.getCurrentPlayer().addTilesToHand(newTiles);
-
+        controller.tradeSelectedTiles();
         controller.nextPlayer();
         controller.setState(State.PLAYING);
         printTUI();

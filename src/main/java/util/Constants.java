@@ -31,26 +31,32 @@ public abstract class Constants {
     public static final String ANSI_CYAN_BG = "\u001B[46m";
 
     // Text messages used in TUI
-    public static final String INSTRUCTIONS = "List of commands:\n" +
-                                              "\ta - add tile(s) to grid\n\t" +
-                                              "t - trade in tile(s)\n" +
-                                              "\tn - new game\n" +
-                                              "\tq - quit";
+    public static final String INSTR_TUI = "List of commands:\n" +
+            "\ta - add tile(s) to grid\n\t" +
+            "t - trade in tile(s)\n" +
+            "\tn - new game\n" +
+            "\tq - quit";
     public static final String WELCOME = "Welcome to QWIRKLE!";
     public static final String SEEYOU = "\nSee you later!";
     public static final String INVALID = "invalid entry.";
 
     // Swing values used in GUI
+    public static final Dimension HAND_TILE_SIZE = new Dimension(75, 75);
+    public static final int SIDE_PANEL_WIDTH = 350;
+    public static final Dimension GRID_PANEL_SIZE = new Dimension(900, 900);
     public static final Border INNER_BORDER = BorderFactory.createLineBorder(Color.BLACK, 5);
-    public static final int SIDE_PANEL_WIDTH = 200;
 
     // Text messages used in GUI
-    public static final String INSTR_CHOOSE = "You can either add one or more tiles to " +
-            "the grid or you can trade one or more tiles.";
-    public static final String INSTR_ADD = "Select one tile on your hand and click " +
-            "on the desired position on the grid.";
-    public static final String INSTR_TRADE = "Select all tiles you want to trade and " +
-            "click on OK";
+    public static final String INSTR_CHOOSE =
+            "<html>You can either add one or more tiles to <br>" +
+            "the grid or you can trade one or more tiles.</html>";
+    public static final String INSTR_ADD =
+            "<html>Select one tile on your hand and click on the <br>" +
+            "desired position on the grid.</html>";
+    public static final String INSTR_TRADE =
+            "Select all tiles you want to trade and click on OK";
+    public static final String INSTR_GUI = "It's really easy :)";
+    public static final String ABOUT = "(c) by Niels Boecker & Lukas Luschin 2016";
 
     private Constants() {
         // prevent class from being instantiated

@@ -1,9 +1,9 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
+import util.Constants;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -68,13 +68,12 @@ public class MenuBar extends JMenuBar implements ActionListener {
         }
 
         if (e.getSource() == instructionsMenuItem) {
-            JOptionPane.showMessageDialog(null, "It's really easy :)",
+            JOptionPane.showMessageDialog(null, Constants.INSTR_GUI,
                     "Instructions", JOptionPane.INFORMATION_MESSAGE);
         }
 
         if (e.getSource() == aboutMenuItem) {
-            JOptionPane.showMessageDialog(null, "(c) by Niels Boecker \n" +
-                    "& Lukas Luschin 2016", "About", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, Constants.ABOUT, "About", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }
