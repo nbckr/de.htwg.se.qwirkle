@@ -5,7 +5,6 @@ import util.observer.IObserver;
 import util.observer.QEvent;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -16,7 +15,6 @@ public class QFrame extends JFrame implements IObserver {
     private static final Dimension DEFAULT_WINDOWSIZE = new Dimension(1500, 900);
     private static final Dimension RIGID_AREA = new Dimension(10, 10);
     protected static final int SIDE_PANEL_WIDTH = 200;
-    protected static final Border INNER_BORDER = BorderFactory.createLineBorder(Color.BLACK, 5);
 
     private JPanel mainPanel;
     private JPanel sidePanel;
@@ -63,7 +61,6 @@ public class QFrame extends JFrame implements IObserver {
         sidePanel.add(Box.createRigidArea(RIGID_AREA));
         sidePanel.add(statusPanel);
 
-
         // JFrame Settings
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,8 +71,6 @@ public class QFrame extends JFrame implements IObserver {
         // open the New Game dialog
         menuBar.showNewGameDialog(controller);
     }
-
-
 
     @Override
     public void update(QEvent e) {

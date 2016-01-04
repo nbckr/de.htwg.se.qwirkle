@@ -6,7 +6,7 @@ import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Supply;
 import de.htwg.qwirkle.model.Tile;
-import util.MessageUtil;
+import util.ConstantValues;
 import util.observer.QEvent;
 import util.observer.Observable;
 
@@ -32,7 +32,7 @@ public class QController extends Observable implements IQController, IQControlle
         assert (!players.isEmpty()) && (players.size() < 5);
 
         //print welcome
-        this.statusMessage = MessageUtil.WELCOME;
+        this.statusMessage = ConstantValues.WELCOME;
         notifyObservers(new QEvent(QEvent.Event.MESSAGE));
 
         this.players = (ArrayList) players;

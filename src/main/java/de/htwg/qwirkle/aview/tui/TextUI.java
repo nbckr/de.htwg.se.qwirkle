@@ -5,7 +5,7 @@ import de.htwg.qwirkle.controller.impl.QController;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
 
-import util.MessageUtil;
+import util.ConstantValues;
 import util.observer.QEvent;
 
 import java.util.ArrayList;
@@ -117,12 +117,12 @@ public class TextUI implements IObserver {
         }
 
         if ("h".equalsIgnoreCase(line)) {
-            LOG.info(MessageUtil.INSTRUCTIONS);
+            LOG.info(ConstantValues.INSTRUCTIONS);
         }
 
         if ("q".equalsIgnoreCase(line)) {
             // ToDo: evaluate player's score
-            LOG.info(MessageUtil.SEEYOU);
+            LOG.info(ConstantValues.SEEYOU);
             controller.exit();
         }
 
@@ -180,7 +180,7 @@ public class TextUI implements IObserver {
 
             Tile selectedTile = controller.getCurrentPlayer().getTileFromHand(iTile);
             if (selectedTile == null) {
-                LOG.info(MessageUtil.INVALID);
+                LOG.info(ConstantValues.INVALID);
                 continue;
             }
 

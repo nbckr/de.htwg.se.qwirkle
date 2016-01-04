@@ -1,15 +1,19 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
+import util.ConstantValues;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 /**
  * Created by niels on 18.12.2015.
  */
 public class GridPanel extends JPanel {
 
+    private static final Dimension SIZE = new Dimension(800, 800);
     private static final int GAP_PX = 2;
 
     public GridPanel(IQControllerGui controller) {
@@ -18,7 +22,7 @@ public class GridPanel extends JPanel {
         int cols = controller.getNumCols();
 
         setLayout(new GridLayout(rows, cols, GAP_PX, GAP_PX));
-        setBorder(QFrame.INNER_BORDER);
+        setBorder(ConstantValues.INNER_BORDER);
 
         // Add cells for all tiles
         for (int row = 0; row < rows; row++) {
@@ -28,27 +32,6 @@ public class GridPanel extends JPanel {
             }
         }
 
-        setPreferredSize(new Dimension(800, 800));
-
-        /*
-
-        // make the Tiles always keep a 1:1 aspect ratio
-        this.addComponentListener(new ComponentListener() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                Rectangle b = e.getComponent().getBounds();
-                int d = Math.min(b.height, b.width);
-                e.getComponent().setBounds(b.x, b.y, d, d);
-            }
-
-            @Override
-            public void componentMoved(ComponentEvent e) {}
-
-            @Override
-            public void componentShown(ComponentEvent e) {}
-
-            @Override
-            public void componentHidden(ComponentEvent e) {}
-        });*/
+        setPreferredSize(SIZE);
     }
 }

@@ -25,22 +25,21 @@ public class HandTilePanel extends ATilePanel {
         this.tile = tile;
         this.position = position;
 
-        update(new QEvent());
-
         setBorder(BorderFactory.createEmptyBorder(BORDER,BORDER,BORDER,BORDER));
         this.setPreferredSize(SIZE_ON_HAND);
 
         addComponentListener(this);
+
+        update(new QEvent());
     }
 
     @Override
-    public void update(QEvent e) {
+    public void refreshTile() {
         if (controller.getState() != IQController.State.UNINIZIALIZED) {
             tile = controller.peekTileFromHand(position);
         }
         if (tile == null) {
-            tile = new Tile();                    // null if empty osition// ; create undef Tile
+            tile = new Tile();
         }
-        refreshImage();
     }
 }

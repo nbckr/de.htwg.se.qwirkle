@@ -1,7 +1,7 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
-import de.htwg.qwirkle.model.Tile;
+import util.ConstantValues;
 import util.observer.IObserver;
 import util.observer.QEvent;
 
@@ -22,7 +22,7 @@ public class HandPanel extends JPanel implements IObserver {
         controller.addObserver(this);
 
         setLayout(new FlowLayout());
-        setBorder(QFrame.INNER_BORDER);
+        setBorder(ConstantValues.INNER_BORDER);
         setPreferredSize(SIZE);
 
         for (int i = 0; i < 6; i++) {

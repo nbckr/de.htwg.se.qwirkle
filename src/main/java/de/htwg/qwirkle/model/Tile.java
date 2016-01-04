@@ -4,7 +4,7 @@ package de.htwg.qwirkle.model;
  * Created by niels on 23.10.2015.
  */
 
-import util.TilePrintUtil;
+import util.ConstantValues;
 
 public class Tile {
 
@@ -59,30 +59,30 @@ public class Tile {
 
         switch(color) {
             case CYAN:
-                myColor = TilePrintUtil.ANSI_CYAN_BG;
+                myColor = ConstantValues.ANSI_CYAN_BG;
                 break;
             case YELLOW:
-                myColor = TilePrintUtil.ANSI_YELLOW_BG;
+                myColor = ConstantValues.ANSI_YELLOW_BG;
                 break;
             case RED:
-                myColor = TilePrintUtil.ANSI_RED_BG + TilePrintUtil.ANSI_WHITE;
+                myColor = ConstantValues.ANSI_RED_BG + ConstantValues.ANSI_WHITE;
                 break;
             case BLUE:
-                myColor = TilePrintUtil.ANSI_BLUE_BG + TilePrintUtil.ANSI_WHITE;
+                myColor = ConstantValues.ANSI_BLUE_BG + ConstantValues.ANSI_WHITE;
                 break;
             case GREEN:
-                myColor = TilePrintUtil.ANSI_GREEN_BG;
+                myColor = ConstantValues.ANSI_GREEN_BG;
                 break;
             case PURPLE:
-                myColor = TilePrintUtil.ANSI_PURPLE_BG + TilePrintUtil.ANSI_WHITE;
+                myColor = ConstantValues.ANSI_PURPLE_BG + ConstantValues.ANSI_WHITE;
                 break;
             default:
-                myColor = TilePrintUtil.ANSI_BLACK_BG;
+                myColor = ConstantValues.ANSI_BLACK_BG;
         }
 
         myShape = shape.toString().substring(0, 2);
 
-        return myColor + myShape + TilePrintUtil.ANSI_RESET;
+        return myColor + myShape + ConstantValues.ANSI_RESET;
     }
 
     /**

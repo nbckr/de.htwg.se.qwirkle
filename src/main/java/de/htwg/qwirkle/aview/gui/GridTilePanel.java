@@ -34,12 +34,11 @@ public class GridTilePanel extends ATilePanel {
     }
 
     @Override
-    public void update(QEvent e) {
+    public void refreshTile() {
         tile = controller.peekTileFromGrid(row, col);
         if (tile == null) {
-            tile = new Tile();                    // null if empty cell; create undef Tile
+            tile = new Tile();
         }
-        refreshImage();
     }
 
 

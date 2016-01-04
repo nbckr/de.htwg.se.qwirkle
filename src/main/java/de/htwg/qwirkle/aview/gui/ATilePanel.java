@@ -4,6 +4,7 @@ import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Tile;
 import util.StretchIcon;
 import util.observer.IObserver;
+import util.observer.QEvent;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -22,10 +23,19 @@ public abstract class ATilePanel extends JLabel implements ComponentListener,
     protected IQControllerGui controller;
     protected StretchIcon icon;
 
+    protected void refreshTile() {
+    }
+
     protected void refreshImage() {
         String filepath = tile.getImageFilepath();
         this.icon = new StretchIcon(filepath, false);
         this.setIcon(icon);
+    }
+
+    @Override
+    public void update(QEvent e) {
+        refreshTile();
+        refreshImage();
     }
 
     @Override
