@@ -34,7 +34,6 @@ public class Player {
         if (hand.size() > 6) {
             throw new IllegalArgumentException();
         }
-
         hand.add(t);
     }
 

@@ -13,8 +13,6 @@ public interface IQController extends IObservable {
      */
     void init(List<Player> players);
 
-    boolean gridFieldIsEmpty(int row, int col);
-
     void addTileToGrid(Tile t, GridPosition position);
 
     /**
@@ -142,7 +140,7 @@ public interface IQController extends IObservable {
     void exit();
 
     enum State {
-        UNINIZIALIZED,          // no game started
+        UNINITIALIZED,          // no game started
         INITIALIZED,    // players names were given
         CHOOSE_ACTION,
         ADDTILES,

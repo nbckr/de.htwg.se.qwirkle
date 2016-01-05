@@ -33,7 +33,7 @@ public class TextUI implements IObserver {
         controller.addObserver(this);
 
         // only read names in TUI if they haven't been read in GUI already
-        if (controller.getState() == State.UNINIZIALIZED) {
+        if (controller.getState() == State.UNINITIALIZED) {
             this.readPlayerNames();
         } else {
             printTUI();

@@ -43,7 +43,7 @@ public class Tile {
         return isSelectedAtHand;
     }
 
-    public void setSelectedAtHand(boolean isSelected) {
+    public void setSelected(boolean isSelected) {
         this.isSelectedAtHand = isSelected;
     }
 

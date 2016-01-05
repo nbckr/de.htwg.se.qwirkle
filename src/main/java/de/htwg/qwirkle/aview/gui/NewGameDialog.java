@@ -16,9 +16,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by niels on 02.01.2016.
- */
 public class NewGameDialog extends JDialog {
 
     private static final String[] NUM_PLAYER_OPTIONS = { "2", "3", "4" };
@@ -176,7 +173,7 @@ public class NewGameDialog extends JDialog {
     }
 
     private void exitOrShowError() {
-        if (controller.getState() == IQController.State.UNINIZIALIZED) {
+        if (controller.getState() == IQController.State.UNINITIALIZED) {
             int value = JOptionPane.showConfirmDialog(this, "You haven't started a game " +
                     "yet. Do you want to quit?", "Error!", JOptionPane.YES_NO_OPTION);
             if (value == JOptionPane.YES_OPTION) {
@@ -190,7 +187,7 @@ public class NewGameDialog extends JDialog {
 
     private void startGame() {
         String[] playerNames = newGamePane.getPlayerNames();
-        players = new ArrayList<Player>(playerNames.length);
+        players = new ArrayList<>(playerNames.length);
         for (String name : playerNames) {
             players.add(new Player(name));
         }

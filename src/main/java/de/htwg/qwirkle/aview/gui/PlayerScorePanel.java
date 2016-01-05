@@ -11,9 +11,6 @@ import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by niels on 03.01.2016.
- */
 public class PlayerScorePanel extends JPanel implements IObserver {
 
     private IQController controller;
@@ -32,6 +29,10 @@ public class PlayerScorePanel extends JPanel implements IObserver {
     }
 
     public void init() {
+        // stuff from old game when JFrame stays, but new game begins
+        //labels.clear();
+        this.removeAll();
+
         for (Player player : controller.getPlayers()) {
             PlayerTextLabel label = new PlayerTextLabel(player);
             labels.add(label);
@@ -42,13 +43,18 @@ public class PlayerScorePanel extends JPanel implements IObserver {
 
     @Override
     public void update(QEvent e) {
-        if (controller.getState() != IQController.State.UNINIZIALIZED) {
+        if (controller.getState()== IQController.State.UNINITIALIZED) {
+            initialized = false;
+        }
+
+        if (controller.getState()== IQController.State.INITIALIZED) {
             if (!initialized) {
                 init();
             }
-            for (PlayerTextLabel label : labels) {
-                label.refreshText();
-            }
+        }
+
+        for (PlayerTextLabel label : labels) {
+            label.refreshText();
         }
     }
 
@@ -62,13 +68,13 @@ public class PlayerScorePanel extends JPanel implements IObserver {
         public void refreshText() {
             StringBuilder sb = new StringBuilder(player.getName());
             sb.append(" (Score: " + player.getScore() + ")");
-            setText(sb.toString());
 
-            if (player == controller.getCurrentPlayer()) {
+            if (player.equals(controller.getCurrentPlayer())) {
                 setForeground(Color.RED);
             } else {
                 setForeground(Color.BLACK);
             }
+            setText(sb.toString());
         }
     }
 }
