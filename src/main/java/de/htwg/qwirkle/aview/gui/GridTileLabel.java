@@ -5,6 +5,8 @@ import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Tile;
 import util.observer.QEvent;
 
+import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,7 +17,8 @@ import java.awt.event.MouseEvent;
  */
 public class GridTileLabel extends AbstractTileLabel {
 
-    private static final Dimension SIZE_ON_GRID = new Dimension(30, 30);
+    protected static final Border BORDER_HOVER = BorderFactory.createLineBorder(Color.GREEN, 2);
+    //private static final Dimension SIZE_ON_GRID = new Dimension(30, 30);
     private int row;
     private int col;
 
@@ -58,6 +61,21 @@ public class GridTileLabel extends AbstractTileLabel {
                 if (controller.getCurrentHandSize() == 0) {
                     controller.refillCurrentAndGoToNextPlayer();
                 }
+            }
+        }
+
+        // hover when in ADDTILES state
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            if (controller.getState() == IQController.State.ADDTILES) {
+                setBorder(BORDER_HOVER);
+            }
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            if (controller.getState() == IQController.State.ADDTILES) {
+                refreshBorder();
             }
         }
     }
