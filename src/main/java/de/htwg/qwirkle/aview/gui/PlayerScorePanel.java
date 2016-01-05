@@ -27,7 +27,7 @@ public class PlayerScorePanel extends JPanel implements IObserver {
         initialized = false;
         labels = new ArrayList<>();
 
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        //setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBorder(Constants.INNER_BORDER);
     }
 

@@ -77,7 +77,6 @@ public class OpPanel extends JPanel implements IObserver {
 
             if (e.getSource() == addButton) {
                 controller.setState(IQController.State.ADDTILES);
-                confirmButton.setText(":-)");
                 if (controller.getNumberOfSelectedTiles() > 1) {
                     controller.unselectAllTilesAtHand();
                 }

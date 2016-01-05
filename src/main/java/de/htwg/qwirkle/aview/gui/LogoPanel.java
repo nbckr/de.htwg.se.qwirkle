@@ -5,8 +5,6 @@ import util.StretchIcon;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 
 public class LogoPanel extends JPanel {
 
@@ -18,12 +16,11 @@ public class LogoPanel extends JPanel {
         logoLabel = new JLabel();
         logoIcon = new StretchIcon(LOGO_PATH, true);
         logoLabel.setIcon(logoIcon);
-        logoLabel.setText(".,..........................................................");
 
         setBorder(Constants.INNER_BORDER);
 
         add(logoLabel);
 
-        logoLabel.setSize(200,200);
+        logoLabel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH-40, 120));
     }
 }

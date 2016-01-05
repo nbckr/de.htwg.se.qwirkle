@@ -15,8 +15,8 @@ import java.awt.event.MouseListener;
 
 public class QFrame extends JFrame implements IObserver {
 
-    private static final Dimension DEFAULT_WINDOWSIZE = new Dimension(1500, 900);
     private static final Dimension RIGID_AREA = new Dimension(10, 10);
+    private static final Dimension RIGID_BOTTOM = new Dimension(0, 250);
 
     private JPanel mainPanel;
     private JPanel sidePanel;
@@ -49,28 +49,29 @@ public class QFrame extends JFrame implements IObserver {
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.PAGE_AXIS));
 
         logoPanel = new LogoPanel();
-        sidePanel.add(Box.createRigidArea(RIGID_AREA));
+        logoPanel.setMaximumSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 220));
         sidePanel.add(logoPanel);
+
+        opPanel = new OpPanel(controller);
+        opPanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 130));
+        sidePanel.add(Box.createRigidArea(RIGID_AREA));
+        sidePanel.add(opPanel);
+
+        handPanel = new HandPanel(controller);
+        handPanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 200));
+        sidePanel.add(Box.createRigidArea(RIGID_AREA));
+        sidePanel.add(handPanel);
 
         playerScorePanel = new PlayerScorePanel(controller);
         //playerScorePanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 100));
         sidePanel.add(Box.createRigidArea(RIGID_AREA));
         sidePanel.add(playerScorePanel);
 
-        handPanel = new HandPanel(controller);
-        //handPanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 100));
-        sidePanel.add(Box.createRigidArea(RIGID_AREA));
-        sidePanel.add(handPanel);
-
-        opPanel = new OpPanel(controller);
-        ///opPanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 150));
-        sidePanel.add(Box.createRigidArea(RIGID_AREA));
-        sidePanel.add(opPanel);
-
         statusPanel = new StatusPanel(controller);
         sidePanel.add(Box.createRigidArea(RIGID_AREA));
-        //statusPanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 40));
+        //statusPanel.setMaximumSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 120));
         sidePanel.add(statusPanel);
+        sidePanel.add(Box.createRigidArea(RIGID_BOTTOM));
 
         sidePanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 0));
         mainPanel.add(Box.createRigidArea(RIGID_AREA));
@@ -84,8 +85,18 @@ public class QFrame extends JFrame implements IObserver {
         setResizable(true);
         setVisible(true);
 
+        // turn the ligths off
+        getRootPane().setGlassPane(new JComponent() {
+            public void paintComponent(Graphics g) {
+                g.setColor(new Color(0, 0, 0, 175));
+                g.fillRect(0, 0, getWidth(), getHeight());
+                super.paintComponent(g);
+            }
+        });
+
+
         // open the New Game dialog
-        new NewGameDialog(controller);
+        new NewGameDialog(controller, this);
     }
 
     @Override

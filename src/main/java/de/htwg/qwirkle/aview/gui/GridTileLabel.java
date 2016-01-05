@@ -53,7 +53,7 @@ public class GridTileLabel extends AbstractTileLabel {
 
                 controller.addSelectedTileToGrid(row, col);
                 controller.removeSelectedTilesFromCurrentPlayer();
-                controller.unselectAllTilesAtHand();
+                //controller.unselectAllTilesAtHand();
 
                 if (controller.getCurrentHandSize() == 0) {
                     controller.refillCurrentAndGoToNextPlayer();

@@ -164,6 +164,7 @@ public class QController extends Observable implements IQController, IQControlle
     @Override
     public void removeSelectedTilesFromCurrentPlayer() {
         List<Tile> selectedTiles = getSelectedTiles();
+        unselectAllTilesAtHand();
         removeTilesFromCurrentPlayer(selectedTiles);
     }
 
@@ -312,4 +313,6 @@ public class QController extends Observable implements IQController, IQControlle
     public List<Player> getPlayers() {
         return players;
     }
+
+
 }

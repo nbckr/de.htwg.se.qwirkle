@@ -30,7 +30,10 @@ public class NewGameDialog extends JDialog {
     List<Player> players;
 
     public NewGameDialog(IQControllerGui controller) {
+
         super();
+        frame2.getRootPane().getGlassPane().setVisible(true);
+
         this.setLocationByPlatform(true);
         this.controller = controller;
         this.setTitle("Start new game");
