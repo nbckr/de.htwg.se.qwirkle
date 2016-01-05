@@ -7,6 +7,7 @@ package util;
  */
 public class GridPosition {
 
+    // public so they can be accessed like in Dimension class
     public int row;
     public int col;
 
@@ -36,6 +37,7 @@ public class GridPosition {
         this.col = col;
     }
 
+    @Override
     public boolean equals(Object obj) {
         if (obj instanceof GridPosition) {
             GridPosition g = (GridPosition)obj;
@@ -44,11 +46,13 @@ public class GridPosition {
         return false;
     }
 
+    @Override
     public int hashCode() {
         int sum = row + col;
         return sum * (sum + 1)/2 + row;
     }
 
+    @Override
     public String toString() {
         return getClass().getName() + "[row=" + row + ",col=" + col + "]";
     }

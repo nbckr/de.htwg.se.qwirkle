@@ -1,17 +1,14 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
-import de.htwg.qwirkle.model.Tile;
-import javafx.scene.layout.Border;
 import util.Constants;
-import util.StretchIcon;
 import util.observer.IObserver;
 import util.observer.QEvent;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class QFrame extends JFrame implements IObserver {
+public class QFrame extends JFrame {
 
     private static final Dimension RIGID_AREA = new Dimension(10, 10);
     private static final Dimension RIGID_BOTTOM = new Dimension(0, 250);
@@ -24,12 +21,9 @@ public class QFrame extends JFrame implements IObserver {
     private PlayerScorePanel playerScorePanel;
     private OpPanel opPanel;
     private StatusPanel statusPanel;
-    private IQControllerGui controller;
 
     public QFrame (final IQControllerGui controller) {
         super("HTWG QWIRKLE 2016");
-        this.controller = controller;
-        controller.addObserver(this);
         controller.setGuiMainFrame(this);
 
         MenuBar menuBar = new MenuBar(controller);
@@ -62,13 +56,11 @@ public class QFrame extends JFrame implements IObserver {
         sidePanel.add(handPanel);
 
         playerScorePanel = new PlayerScorePanel(controller);
-        //playerScorePanel.setPreferredSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 100));
         sidePanel.add(Box.createRigidArea(RIGID_AREA));
         sidePanel.add(playerScorePanel);
 
         statusPanel = new StatusPanel(controller);
         sidePanel.add(Box.createRigidArea(RIGID_AREA));
-        //statusPanel.setMaximumSize(new Dimension(Constants.SIDE_PANEL_WIDTH, 120));
         sidePanel.add(statusPanel);
         sidePanel.add(Box.createRigidArea(RIGID_BOTTOM));
 
@@ -79,13 +71,13 @@ public class QFrame extends JFrame implements IObserver {
         // JFrame Settings
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setSize(DEFAULT_WINDOWSIZE);
         pack();
-        setResizable(true);
+        setResizable(false);
         setVisible(true);
 
         // prepare glass pane to turn the ligths off
         getRootPane().setGlassPane(new JComponent() {
+            @Override
             public void paintComponent(Graphics g) {
                 g.setColor(new Color(0, 0, 0, 175));
                 g.fillRect(0, 0, getWidth(), getHeight());
@@ -103,10 +95,5 @@ public class QFrame extends JFrame implements IObserver {
 
     public void turnLightsOn() {
         getRootPane().getGlassPane().setVisible(false);
-    }
-
-    @Override
-    public void update(QEvent e) {
-        //repaint(50);
     }
 }

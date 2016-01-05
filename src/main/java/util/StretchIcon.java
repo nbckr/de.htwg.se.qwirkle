@@ -285,11 +285,11 @@ public class StretchIcon extends ImageIcon {
             return;
         }
         Insets insets = ((Container) c).getInsets();
-        int x_new = insets.left;
-        int y_new = insets.top;
+        int xNew = insets.left;
+        int yNew = insets.top;
 
-        int w = c.getWidth() - x_new - insets.right;
-        int h = c.getHeight() - y_new - insets.bottom;
+        int w = c.getWidth() - xNew - insets.right;
+        int h = c.getHeight() - yNew - insets.bottom;
 
         if (proportionate) {
             int iw = image.getWidth(c);
@@ -297,17 +297,17 @@ public class StretchIcon extends ImageIcon {
 
             if (iw * h < ih * w) {
                 iw = (h * iw) / ih;
-                x_new += (w - iw) / 2;
+                xNew += (w - iw) / 2;
                 w = iw;
             } else {
                 ih = (w * ih) / iw;
-                y_new += (h - ih) / 2;
+                yNew += (h - ih) / 2;
                 h = ih;
             }
         }
 
         ImageObserver io = getImageObserver();
-        g.drawImage(image, x_new, y_new, w, h, io == null ? c : io);
+        g.drawImage(image, xNew, yNew, w, h, io == null ? c : io);
     }
 
     /**

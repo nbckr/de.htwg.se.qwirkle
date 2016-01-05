@@ -2,13 +2,9 @@ package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
-import de.htwg.qwirkle.model.Tile;
 import util.GridPosition;
 import util.observer.QEvent;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -40,9 +36,6 @@ public class GridTileLabel extends AbstractTileLabel {
     @Override
     public void refreshTile() {
         tile = controller.getTileFromGrid(position);
-        /*if (tile == null) {
-            tile = new Tile();
-        }*/
     }
 
     @Override

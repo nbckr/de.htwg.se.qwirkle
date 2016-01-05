@@ -128,7 +128,7 @@ public class TextUI implements IObserver {
     }
 
     private void tradeTileRoutine() {
-        assert(controller.getState() == State.TRADETILES);
+        assert controller.getState() == State.TRADETILES;
         int size = this.controller.getCurrentPlayer().getHand().size();
         LOG.info("Which tiles do you want to trade? (1-" + size + ", separated by " +
                 "space, 0 to quit:");
@@ -153,7 +153,7 @@ public class TextUI implements IObserver {
                 controller.selectTile(t, true);
             }
         } catch (PatternSyntaxException ex) {
-            LOG.info("Invalid input");
+            LOG.info("Invalid input: " + ex.getMessage());
             return;
         }
 
@@ -163,7 +163,7 @@ public class TextUI implements IObserver {
     }
 
     private void addTileRoutine() {
-        assert(controller.getState() == State.ADDTILES);
+        assert controller.getState() == State.ADDTILES;
         boolean tileSet = false;
 
         while(true) {

@@ -34,9 +34,6 @@ public class HandTileLabel extends AbstractTileLabel {
         if (controller.getState() != IQController.State.UNINITIALIZED) {
             tile = controller.getTileFromPlayer(index);
         }
-        /*if (tile == null) {
-            tile = new Tile();
-        }*/
     }
 
     @Override

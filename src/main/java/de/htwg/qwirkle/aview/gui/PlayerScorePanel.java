@@ -23,14 +23,13 @@ public class PlayerScorePanel extends JPanel implements IObserver {
 
         initialized = false;
         labels = new ArrayList<>();
-
         //setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBorder(Constants.INNER_BORDER);
     }
 
     public void init() {
         // stuff from old game when JFrame stays, but new game begins
-        //labels.clear();
+        labels.clear();
         this.removeAll();
 
         for (Player player : controller.getPlayers()) {
@@ -47,10 +46,8 @@ public class PlayerScorePanel extends JPanel implements IObserver {
             initialized = false;
         }
 
-        if (controller.getState()== IQController.State.INITIALIZED) {
-            if (!initialized) {
-                init();
-            }
+        if (controller.getState()== IQController.State.INITIALIZED && !initialized) {
+            init();
         }
 
         for (PlayerTextLabel label : labels) {

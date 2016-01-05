@@ -5,20 +5,14 @@ import util.Constants;
 import util.observer.IObserver;
 import util.observer.QEvent;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
-public class HandPanel extends JPanel implements IObserver {
+public class HandPanel extends JPanel {
 
     private static final int SPACING = 5;
-    private IQControllerGui controller;
 
     public HandPanel(IQControllerGui controller) {
-
-        this.controller = controller;
-        controller.addObserver(this);
 
         setLayout(new FlowLayout());
         setBorder(Constants.INNER_BORDER);
@@ -32,10 +26,5 @@ public class HandPanel extends JPanel implements IObserver {
             outerPanel.add(handTilePanel);
             this.add(outerPanel);
         }
-    }
-
-    @Override
-    public void update(QEvent e) {
-        // neccesary?
     }
 }

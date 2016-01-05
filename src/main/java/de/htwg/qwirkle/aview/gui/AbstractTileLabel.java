@@ -29,8 +29,11 @@ public abstract class AbstractTileLabel extends JLabel implements ComponentListe
 
     protected void refreshImage() {
         String filepath;
-        if (tile == null) filepath = new Tile().getImageFilepath();
-        else filepath = tile.getImageFilepath();
+        if (tile == null) {
+            filepath = new Tile().getImageFilepath();
+        }else {
+            filepath = tile.getImageFilepath();
+        }
 
         icon = new StretchIcon(filepath, false);
         setIcon(icon);

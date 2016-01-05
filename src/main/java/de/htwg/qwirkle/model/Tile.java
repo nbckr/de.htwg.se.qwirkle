@@ -1,7 +1,6 @@
 package de.htwg.qwirkle.model;
 
 import util.Constants;
-import util.GridPosition;
 
 public class Tile {
 
