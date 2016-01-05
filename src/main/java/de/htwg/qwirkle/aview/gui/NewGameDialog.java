@@ -30,9 +30,8 @@ public class NewGameDialog extends JDialog {
     List<Player> players;
 
     public NewGameDialog(IQControllerGui controller) {
-
         super();
-        frame2.getRootPane().getGlassPane().setVisible(true);
+        controller.getGuiMainFrame().turnLightsOff();
 
         this.setLocationByPlatform(true);
         this.controller = controller;
@@ -61,7 +60,7 @@ public class NewGameDialog extends JDialog {
                         if (NewGameDialog.this.isVisible()
                                 && (e.getSource() == optionPane)
                                 && (prop.equals(JOptionPane.VALUE_PROPERTY))) {
-                            // TODO check input validity
+                            // TODO check input validity (names match pattern)
 
                             JOptionPane e2 = (JOptionPane) e.getSource();
                             if ((Integer) e2.getValue() == JOptionPane.OK_OPTION) {
@@ -184,6 +183,7 @@ public class NewGameDialog extends JDialog {
                 controller.exit();
             }
         } else {
+            controller.getGuiMainFrame().turnLightsOn();
             this.setVisible(false);
         }
     }
@@ -196,6 +196,8 @@ public class NewGameDialog extends JDialog {
         }
         controller.init(players);
         controller.create();
+
+        controller.getGuiMainFrame().turnLightsOn();
         this.setVisible(false);
     }
 }

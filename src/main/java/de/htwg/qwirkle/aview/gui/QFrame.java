@@ -10,8 +10,6 @@ import util.observer.QEvent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class QFrame extends JFrame implements IObserver {
 
@@ -32,6 +30,7 @@ public class QFrame extends JFrame implements IObserver {
         super("HTWG QWIRKLE 2016");
         this.controller = controller;
         controller.addObserver(this);
+        controller.setGuiMainFrame(this);
 
         MenuBar menuBar = new MenuBar(controller);
         setJMenuBar(menuBar);
@@ -85,7 +84,7 @@ public class QFrame extends JFrame implements IObserver {
         setResizable(true);
         setVisible(true);
 
-        // turn the ligths off
+        // prepare glass pane to turn the ligths off
         getRootPane().setGlassPane(new JComponent() {
             public void paintComponent(Graphics g) {
                 g.setColor(new Color(0, 0, 0, 175));
@@ -94,9 +93,16 @@ public class QFrame extends JFrame implements IObserver {
             }
         });
 
-
         // open the New Game dialog
-        new NewGameDialog(controller, this);
+        new NewGameDialog(controller);
+    }
+
+    public void turnLightsOff() {
+        getRootPane().getGlassPane().setVisible(true);
+    }
+
+    public void turnLightsOn() {
+        getRootPane().getGlassPane().setVisible(false);
     }
 
     @Override

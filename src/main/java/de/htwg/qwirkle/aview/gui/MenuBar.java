@@ -60,8 +60,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == newMenuItem) {
-            new NewGameDialog(controller, null);
-            // TODO: SO NICHT!!!!!
+            new NewGameDialog(controller);
         }
 
         if (e.getSource() == quitMenuItem) {

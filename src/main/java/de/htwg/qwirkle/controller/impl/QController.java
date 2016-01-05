@@ -1,5 +1,6 @@
 package de.htwg.qwirkle.controller.impl;
 
+import de.htwg.qwirkle.aview.gui.QFrame;
 import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Grid;
@@ -21,6 +22,7 @@ public class QController extends Observable implements IQController, IQControlle
     private Supply supply;
     private Grid grid;
     private String statusMessage;
+    private QFrame guiMainFrame;
 
     public QController() {
         this.state = State.UNINIZIALIZED;
@@ -314,5 +316,13 @@ public class QController extends Observable implements IQController, IQControlle
         return players;
     }
 
+    @Override
+    public QFrame getGuiMainFrame() {
+        return guiMainFrame;
+    }
 
+    @Override
+    public void setGuiMainFrame(QFrame qFrame) {
+        this.guiMainFrame = qFrame;
+    }
 }
