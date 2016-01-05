@@ -69,10 +69,11 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
-    public void addTileToGrid(Tile t, GridPosition position) {
+    public void addTileToGrid(Tile tile, GridPosition position) {
         int points = 42;
 
-        grid.setTile(t, position);
+        tile.setPosition(position);
+        grid.setTile(tile, position);
         // compute score points...
         getCurrentPlayer().addScore(points);
 
@@ -83,11 +84,6 @@ public class QController extends Observable implements IQController, IQControlle
     @Override
     public void addTileToGrid(Tile tile, int row, int col) {
         addTileToGrid(tile, new GridPosition(row, col));
-    }
-
-    @Override
-    public void addSelectedTileToGrid(int row, int col) {
-        addTileToGrid(getSingleSelectedTile(), row, col);
     }
 
     @Override
@@ -241,7 +237,7 @@ public class QController extends Observable implements IQController, IQControlle
         if (isSelected && getState() == State.ADDTILES) {
             unselectAllTilesAtHand();
         }
-        tile.setSelected(isSelected);
+        tile.setSelectedAtHand(isSelected);
 
         notifyObservers();
     }
@@ -254,7 +250,7 @@ public class QController extends Observable implements IQController, IQControlle
     @Override
     public void unselectAllTilesAtHand() {
         for (Tile tile : getCurrentHand()) {
-            tile.setSelected(false);
+            tile.setSelectedAtHand(false);
         }
         notifyObservers();
     }
@@ -306,16 +302,24 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
-    public void setTargetPositionOnGrid(GridPosition target) {
-        // unselect old one necessary?
-        this.targetPositionOnGrid = target;
+    public void setTargetPositionOnGrid(GridPosition position) {
+        unselectTargetPositionOnGrid();
+
+        Tile newTarget = getTileFromGrid(position);
+        newTarget.setIsTargetedOnGrid(true);
+
+        this.targetPositionOnGrid = position;
         notifyObservers();
     }
 
     @Override
     public void unselectTargetPositionOnGrid() {
-        targetPositionOnGrid = null;
-        notifyObservers();
+        if (targetPositionOnGridIsSet()) {
+            Tile oldTarget = getTileFromGrid(getTargetPositionOnGrid());
+            oldTarget.setIsTargetedOnGrid(false);
+            targetPositionOnGrid = null;
+            notifyObservers();
+        }
     }
 
     @Override

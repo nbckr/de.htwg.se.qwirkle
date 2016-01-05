@@ -30,11 +30,6 @@ public interface IQController extends IObservable {
      */
     List<Tile> tradeTiles(List<Tile> oldTiles);
 
-    /**
-     * call addTileToGrid when exactly one Tile is selected at Hand and add this one.
-     */
-    void addSelectedTileToGrid(int row, int col);
-
     void addSelectedTileToTargetPosition();
 
     /**

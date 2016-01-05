@@ -16,29 +16,32 @@ public class Tile {
     private final Color color;
     private final Shape shape;
     private GridPosition position;
-    private boolean isOnGrid;
-    private boolean isSelected;
+    private boolean isTargetedOnGrid;
+    private boolean isSelectedAtHand;
 
     public Tile() {
-        this(Color.UNDEF, Shape.UNDEF);
+        this(null);
     }
 
     public Tile(GridPosition position) {
         this(Color.UNDEF, Shape.UNDEF, position);
     }
 
-    public Tile(Color c, Shape s) {
-        this.color = c;
-        this.shape = s;
-        this.isOnGrid = false;
-        this.isSelected = false;
+    public Tile(Color color, Shape shape) {
+        this(color, shape, null);
     }
 
-    public Tile(Color c, Shape s, GridPosition position) {
-        this.color = c;
-        this.shape = s;
-        this.isOnGrid = true;
-        this.isSelected = false;
+
+    /**
+     * @param color
+     * @param shape
+     * @param position position on Grid or null if not on the grid yet
+     */
+    public Tile(Color color, Shape shape, GridPosition position) {
+        this.color = color;
+        this.shape = shape;
+        this.isSelectedAtHand = false;
+        this.isTargetedOnGrid = false;
         this.position = position;
     }
 
@@ -55,19 +58,31 @@ public class Tile {
     }
 
     public boolean isSelectedAtHand() {
-        return isSelected;
+        return isSelectedAtHand;
     }
 
-    public void setSelected(boolean isSelected) {
-        this.isSelected = isSelected;
+    public void setSelectedAtHand(boolean isSelected) {
+        this.isSelectedAtHand = isSelected;
     }
 
     public GridPosition getPosition() {
         return position;
     }
 
+    public void setPosition(GridPosition position) {
+        this.position = position;
+    }
+
     public boolean isOnGrid() {
-        return isOnGrid;
+        return position == null ? false : true;
+    }
+
+    public boolean getIsTargetedOnGrid() {
+        return isTargetedOnGrid;
+    }
+
+    public void setIsTargetedOnGrid(boolean targeted) {
+        this.isTargetedOnGrid = targeted;
     }
 
     @Override
@@ -137,6 +152,4 @@ public class Tile {
     public String getImageFilepath() {
         return "src/main/resources/img/" + toString2() + ".jpg";
     }
-
-
 }

@@ -39,8 +39,7 @@ public abstract class AbstractTileLabel extends JLabel implements ComponentListe
     protected void refreshBorder() {
         if (tile.isSelectedAtHand()) {
             setBorder(BORDER_SELECTED);
-        } else if (tile.getPosition() == controller.getTargetPositionOnGrid()) {
-            // TODO: does == work or do i need equals()
+        } else if (tile.getIsTargetedOnGrid()) {
             System.out.println("SAME SAME!");
             setBorder(BORDER_TARGET);
         } else {

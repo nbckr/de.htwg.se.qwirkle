@@ -56,8 +56,6 @@ public class GridTileLabel extends AbstractTileLabel {
                     && tile.isUndefined()) {
 
                 controller.setTargetPositionOnGrid(tile.getPosition());
-
-
             }
         }
 

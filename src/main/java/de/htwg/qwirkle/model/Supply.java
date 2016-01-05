@@ -36,7 +36,7 @@ public class Supply {
                 if(c == Color.UNDEF)
                     continue;
                 for (int i = 0; i < 3; i++) {
-                    tiles.add(new Tile(c, s));
+                    tiles.add(new Tile(c, s, null));
                 }
             }
         }

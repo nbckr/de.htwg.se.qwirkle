@@ -6,6 +6,7 @@ import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
 
 import util.Constants;
+import util.GridPosition;
 import util.observer.QEvent;
 
 import java.util.ArrayList;
@@ -183,7 +184,9 @@ public class TextUI implements IObserver {
             int row = scanner.nextInt();
             int col = scanner.nextInt();
 
-            controller.addSelectedTileToGrid(row, col);
+            controller.setTargetPositionOnGrid(new GridPosition(row, col));
+            controller.addSelectedTileToTargetPosition();
+
             controller.removeSelectedTilesFromCurrentPlayer();
             tileSet = true;
         }
