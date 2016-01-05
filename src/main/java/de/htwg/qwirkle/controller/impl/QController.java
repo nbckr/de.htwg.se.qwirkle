@@ -8,6 +8,7 @@ import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Supply;
 import de.htwg.qwirkle.model.Tile;
 import util.Constants;
+import util.GridPosition;
 import util.observer.QEvent;
 import util.observer.Observable;
 
@@ -21,6 +22,7 @@ public class QController extends Observable implements IQController, IQControlle
     private Player currentPlayer;
     private Supply supply;
     private Grid grid;
+    private GridPosition targetPositionOnGrid;
     private String statusMessage;
     private QFrame guiMainFrame;
 
@@ -67,10 +69,10 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
-    public void addTileToGrid(Tile t, int row, int col) {
+    public void addTileToGrid(Tile t, GridPosition position) {
         int points = 42;
 
-        grid.setTile(t, row, col);
+        grid.setTile(t, position);
         // compute score points...
         getCurrentPlayer().addScore(points);
 
@@ -79,10 +81,19 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
+    public void addTileToGrid(Tile tile, int row, int col) {
+        addTileToGrid(tile, new GridPosition(row, col));
+    }
+
+    @Override
     public void addSelectedTileToGrid(int row, int col) {
         addTileToGrid(getSingleSelectedTile(), row, col);
     }
 
+    @Override
+    public void addSelectedTileToTargetPosition() {
+        addTileToGrid(getSingleSelectedTile(), getTargetPositionOnGrid());
+    }
 
     @Override
     public Tile tradeTile(Tile oldTile) {
@@ -136,8 +147,13 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
+    public Tile getTileFromGrid(GridPosition position) {
+        return this.grid.getTile(position);
+    }
+
+    @Override
     public Tile getTileFromGrid(int row, int col) {
-        return this.grid.getTile(row, col);
+        return getTileFromGrid(new GridPosition(row, col));
     }
 
     @Override
@@ -232,7 +248,7 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public void selectTileToggle(Tile tile) {
-        selectTile(tile, !tile.isSelected());
+        selectTile(tile, !tile.isSelectedAtHand());
     }
 
     @Override
@@ -250,7 +266,7 @@ public class QController extends Observable implements IQController, IQControlle
         }
         Tile selectedTile = null;
         for (Tile tile : getCurrentHand()) {
-            if (tile.isSelected()) {
+            if (tile.isSelectedAtHand()) {
                 selectedTile = tile;
                 break;
             }
@@ -262,7 +278,7 @@ public class QController extends Observable implements IQController, IQControlle
     public List<Tile> getSelectedTiles() {
         List<Tile> selectedTiles = new ArrayList<>();
         for (Tile tile : getCurrentHand()) {
-            if (tile.isSelected()) {
+            if (tile.isSelectedAtHand()) {
                 selectedTiles.add(tile);
             }
         }
@@ -284,6 +300,28 @@ public class QController extends Observable implements IQController, IQControlle
         notifyObservers();
     }
 
+    @Override
+    public GridPosition getTargetPositionOnGrid() {
+        return targetPositionOnGrid;
+    }
+
+    @Override
+    public void setTargetPositionOnGrid(GridPosition target) {
+        // unselect old one necessary?
+        this.targetPositionOnGrid = target;
+        notifyObservers();
+    }
+
+    @Override
+    public void unselectTargetPositionOnGrid() {
+        targetPositionOnGrid = null;
+        notifyObservers();
+    }
+
+    @Override
+    public boolean targetPositionOnGridIsSet() {
+        return targetPositionOnGrid != null;
+    }
 
     @Override
     public List<Tile> getCurrentHand() {

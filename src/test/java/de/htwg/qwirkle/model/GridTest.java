@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import de.htwg.qwirkle.model.Tile.*;
 import org.junit.Before;
 import org.junit.Test;
+import util.GridPosition;
 
 /**
  * Created by niboecke on 30.10.2015.
@@ -42,15 +43,15 @@ public class GridTest extends TestCase {
 
     @Test
     public void testSetTile() {
-        assertEquals(true, grid.setTile(tile1, 3,3));
-        assertEquals(false, grid.setTile(tile2, 3,3));
+        grid.setTile(tile1, 3, 3);
+        // expect no exceptions
     }
 
     @Test
     public void testGetTile() {
-        assertEquals(true, grid.setTile(tile1, 3,3));
-        assertEquals(tile1, grid.getTile(3,3));
-        assertEquals(null, grid.getTile(1,1));
+        grid.setTile(tile1, 3, 3);
+        assertEquals(tile1, grid.getTile(new GridPosition(3,3)));
+        assertEquals(null, grid.getTile(new GridPosition(1,1)));
     }
 
     @Test

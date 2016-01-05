@@ -20,6 +20,8 @@ public abstract class AbstractTileLabel extends JLabel implements ComponentListe
 
     protected static final Border BORDER_PLAIN = BorderFactory.createLineBorder(Color.BLUE, 1);
     protected static final Border BORDER_SELECTED = BorderFactory.createLineBorder(Color.RED, 4);
+    protected static final Border BORDER_HOVER = BorderFactory.createLineBorder(Color.GREEN, 2);
+    protected static final Border BORDER_TARGET = BorderFactory.createLineBorder(Color.RED, 2);
     protected Tile tile;
 
     protected IQControllerGui controller;
@@ -35,10 +37,14 @@ public abstract class AbstractTileLabel extends JLabel implements ComponentListe
     }
 
     protected void refreshBorder() {
-        if (tile.isSelected()) {
-            setBorder(AbstractTileLabel.BORDER_SELECTED);
+        if (tile.isSelectedAtHand()) {
+            setBorder(BORDER_SELECTED);
+        } else if (tile.getPosition() == controller.getTargetPositionOnGrid()) {
+            // TODO: does == work or do i need equals()
+            System.out.println("SAME SAME!");
+            setBorder(BORDER_TARGET);
         } else {
-            setBorder(AbstractTileLabel.BORDER_PLAIN);
+            setBorder(BORDER_PLAIN);
         }
     }
 

@@ -1,4 +1,4 @@
-package de.htwg.qwirkle.controller;
+package de.htwg.qwirkle.controller.impl;
 
 import de.htwg.qwirkle.controller.impl.QController;
 import de.htwg.qwirkle.model.Player;

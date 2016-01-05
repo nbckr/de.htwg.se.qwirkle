@@ -1,5 +1,7 @@
 package de.htwg.qwirkle.model;
 
+import util.GridPosition;
+
 import java.awt.*;
 
 /**
@@ -43,32 +45,34 @@ public class Grid {
 
     /**
      * setTile adds a tile to an empty cell of the tiles
-     * @param t Tile to put on the tiles
-     * @param row position to specify row
-     * @param col position to specify column
-     * @return true if successful, false otherwise
      */
-    public boolean setTile(Tile t, int row, int col) {
+    public void setTile(Tile tile, int row, int col) {
+        setTile(tile, new GridPosition(row, col));
+    }
 
-        if (tiles[row][col] != null)
-            return false;
-
-        tiles[row][col] = t;
-        return true;
+    public void setTile(Tile tile, GridPosition position) {
+        if (tiles[position.row][position.col] != null) {
+            throw new IllegalArgumentException();
+        }
+        tiles[position.row][position.col] = tile;
     }
 
     public boolean fieldIsEmpty(int row, int col) {
-        return tiles[row][col] == null;
+        return fieldIsEmpty(new GridPosition(row, col));
     }
+
+
+    public boolean fieldIsEmpty(GridPosition position) {
+        return tiles[position.row][position.col] == null;
+    }
+
 
     /**
      * getTile returns the tile of a cell on the tiles
-     * @param row position to specify row
-     * @param col position to specify column
      * @return Tile on the specified position or null if cell is empty
      */
-    public Tile getTile(int row, int col) {
-        return tiles[row][col];     // if empty, null is returned automatically
+    public Tile getTile(GridPosition position) {
+        return tiles[position.row][position.col];
     }
 
     @Override

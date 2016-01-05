@@ -1,6 +1,7 @@
 package de.htwg.qwirkle.model;
 
 import util.Constants;
+import util.GridPosition;
 
 public class Tile {
 
@@ -14,16 +15,31 @@ public class Tile {
 
     private final Color color;
     private final Shape shape;
+    private GridPosition position;
+    private boolean isOnGrid;
     private boolean isSelected;
 
     public Tile() {
         this(Color.UNDEF, Shape.UNDEF);
     }
 
+    public Tile(GridPosition position) {
+        this(Color.UNDEF, Shape.UNDEF, position);
+    }
+
     public Tile(Color c, Shape s) {
         this.color = c;
         this.shape = s;
+        this.isOnGrid = false;
         this.isSelected = false;
+    }
+
+    public Tile(Color c, Shape s, GridPosition position) {
+        this.color = c;
+        this.shape = s;
+        this.isOnGrid = true;
+        this.isSelected = false;
+        this.position = position;
     }
 
     public Color getColor() {
@@ -38,12 +54,20 @@ public class Tile {
         return shape == Shape.UNDEF;
     }
 
-    public boolean isSelected() {
+    public boolean isSelectedAtHand() {
         return isSelected;
     }
 
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
+    }
+
+    public GridPosition getPosition() {
+        return position;
+    }
+
+    public boolean isOnGrid() {
+        return isOnGrid;
     }
 
     @Override

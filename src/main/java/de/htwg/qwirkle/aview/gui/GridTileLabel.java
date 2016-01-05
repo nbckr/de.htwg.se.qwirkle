@@ -3,6 +3,7 @@ package de.htwg.qwirkle.aview.gui;
 import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Tile;
+import util.GridPosition;
 import util.observer.QEvent;
 
 import javax.swing.*;
@@ -17,20 +18,14 @@ import java.awt.event.MouseEvent;
  */
 public class GridTileLabel extends AbstractTileLabel {
 
-    protected static final Border BORDER_HOVER = BorderFactory.createLineBorder(Color.GREEN, 2);
-    //private static final Dimension SIZE_ON_GRID = new Dimension(30, 30);
-    private int row;
-    private int col;
+    private GridPosition position;
 
-    public GridTileLabel(int row, int col, IQControllerGui controller) {
+    public GridTileLabel(GridPosition position, IQControllerGui controller) {
 
         this.controller = controller;
         controller.addObserver(this);
 
-        this.row = row;
-        this.col = col;
-
-        //setPreferredSize(Constants.GRID_TILE_SIZE); no, let GridPanel determine size
+        this.position = position;
 
         addComponentListener(this);
         addMouseListener(new Listener());
@@ -38,15 +33,21 @@ public class GridTileLabel extends AbstractTileLabel {
         update(new QEvent());
     }
 
+    public GridTileLabel(int row, int col, IQControllerGui controller) {
+        this(new GridPosition(row, col), controller);
+    }
+
     @Override
     public void refreshTile() {
-        tile = controller.getTileFromGrid(row, col);
+        tile = controller.getTileFromGrid(position);
         if (tile == null) {
-            tile = new Tile();
+            tile = new Tile(position);
         }
     }
 
     class Listener extends MouseAdapter {
+
+        // remember this tile when clicked in ADDTILES state
         @Override
         public void mousePressed(MouseEvent e) {
 
@@ -54,27 +55,27 @@ public class GridTileLabel extends AbstractTileLabel {
                     && controller.getNumberOfSelectedTiles() == 1
                     && tile.isUndefined()) {
 
-                controller.addSelectedTileToGrid(row, col);
-                controller.removeSelectedTilesFromCurrentPlayer();
-                //controller.unselectAllTilesAtHand();
+                controller.setTargetPositionOnGrid(tile.getPosition());
 
-                if (controller.getCurrentHandSize() == 0) {
-                    controller.refillCurrentAndGoToNextPlayer();
-                }
+
             }
         }
 
-        // hover when in ADDTILES state
+        // hover empty fields when in ADDTILES state
         @Override
         public void mouseEntered(MouseEvent e) {
-            if (controller.getState() == IQController.State.ADDTILES) {
+            if (controller.getState() == IQController.State.ADDTILES
+                    && controller.getNumberOfSelectedTiles() == 1
+                    && tile.isUndefined()) {
                 setBorder(BORDER_HOVER);
             }
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            if (controller.getState() == IQController.State.ADDTILES) {
+            if (controller.getState() == IQController.State.ADDTILES
+                    && controller.getNumberOfSelectedTiles() == 1
+                    && tile.isUndefined()) {
                 refreshBorder();
             }
         }

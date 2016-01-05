@@ -2,6 +2,7 @@ package de.htwg.qwirkle.controller;
 
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
+import util.GridPosition;
 import util.observer.IObservable;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public interface IQController extends IObservable {
     void init(List<Player> players);
 
     boolean gridFieldIsEmpty(int row, int col);
+
+    void addTileToGrid(Tile t, GridPosition position);
 
     /**
      * @param t Tile to add
@@ -32,6 +35,8 @@ public interface IQController extends IObservable {
      */
     void addSelectedTileToGrid(int row, int col);
 
+    void addSelectedTileToTargetPosition();
+
     /**
      * @param oldTile old Tile to trade in
      * @return new Tile to replace the old one
@@ -43,6 +48,14 @@ public interface IQController extends IObservable {
      * @return the player next in line
      */
     Player getCurrentPlayer();
+
+    GridPosition getTargetPositionOnGrid();
+
+    void setTargetPositionOnGrid(GridPosition target);
+
+    void unselectTargetPositionOnGrid();
+
+    boolean targetPositionOnGridIsSet();
 
     /**
      * Returns the hand of the current player.
@@ -61,6 +74,8 @@ public interface IQController extends IObservable {
      * Refills the current players hand with tiles from supply
      */
     void refillCurrentPlayer();
+
+    Tile getTileFromGrid(GridPosition position);
 
     /**
      * Returns the Tile on this position of the grid; the Tile remains on the grid though.
