@@ -15,34 +15,16 @@ public class Tile {
 
     private final Color color;
     private final Shape shape;
-    private GridPosition position;
-    private boolean isTargetedOnGrid;
     private boolean isSelectedAtHand;
 
     public Tile() {
-        this(null);
-    }
-
-    public Tile(GridPosition position) {
-        this(Color.UNDEF, Shape.UNDEF, position);
+        this(Color.UNDEF, Shape.UNDEF);
     }
 
     public Tile(Color color, Shape shape) {
-        this(color, shape, null);
-    }
-
-
-    /**
-     * @param color
-     * @param shape
-     * @param position position on Grid or null if not on the grid yet
-     */
-    public Tile(Color color, Shape shape, GridPosition position) {
         this.color = color;
         this.shape = shape;
         this.isSelectedAtHand = false;
-        this.isTargetedOnGrid = false;
-        this.position = position;
     }
 
     public Color getColor() {
@@ -63,26 +45,6 @@ public class Tile {
 
     public void setSelectedAtHand(boolean isSelected) {
         this.isSelectedAtHand = isSelected;
-    }
-
-    public GridPosition getPosition() {
-        return position;
-    }
-
-    public void setPosition(GridPosition position) {
-        this.position = position;
-    }
-
-    public boolean isOnGrid() {
-        return position == null ? false : true;
-    }
-
-    public boolean getIsTargetedOnGrid() {
-        return isTargetedOnGrid;
-    }
-
-    public void setIsTargetedOnGrid(boolean targeted) {
-        this.isTargetedOnGrid = targeted;
     }
 
     @Override

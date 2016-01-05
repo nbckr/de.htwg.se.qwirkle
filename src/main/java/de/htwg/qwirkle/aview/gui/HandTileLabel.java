@@ -34,10 +34,20 @@ public class HandTileLabel extends AbstractTileLabel {
         if (controller.getState() != IQController.State.UNINIZIALIZED) {
             tile = controller.getTileFromPlayer(index);
         }
-        if (tile == null) {
+        /*if (tile == null) {
             tile = new Tile();
+        }*/
+    }
+
+    @Override
+    public void refreshBorder() {
+        if (tile != null && tile.isSelectedAtHand()) {
+            setBorder(BORDER_SELECTED);
+        } else {
+            setBorder(BORDER_PLAIN);
         }
     }
+
 
     class Listener extends MouseAdapter {
         @Override

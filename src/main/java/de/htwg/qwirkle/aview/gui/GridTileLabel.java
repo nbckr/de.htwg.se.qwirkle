@@ -20,10 +20,6 @@ public class GridTileLabel extends AbstractTileLabel {
 
     private GridPosition position;
 
-    public GridTileLabel(Tile tileOnGrid, IQControllerGui controller) {
-        this(tileOnGrid.getPosition(), controller);
-    }
-
     public GridTileLabel(GridPosition position, IQControllerGui controller) {
 
         this.controller = controller;
@@ -44,8 +40,19 @@ public class GridTileLabel extends AbstractTileLabel {
     @Override
     public void refreshTile() {
         tile = controller.getTileFromGrid(position);
-        if (tile == null) {
-            tile = new Tile(position);
+        /*if (tile == null) {
+            tile = new Tile();
+        }*/
+    }
+
+    @Override
+    public void refreshBorder() {
+        if (controller.targetPositionOnGridIsSet()
+                && position == controller.getTargetPositionOnGrid()) {
+            System.out.println("SAME SAME! XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            setBorder(BORDER_TARGET);
+        } else {
+            setBorder(BORDER_PLAIN);
         }
     }
 
@@ -57,9 +64,9 @@ public class GridTileLabel extends AbstractTileLabel {
 
             if (controller.getState() == IQController.State.ADDTILES
                     && controller.getNumberOfSelectedTiles() == 1
-                    && tile.isUndefined()) {
+                    && tile == null) {
 
-                controller.setTargetPositionOnGrid(tile.getPosition());
+                controller.setTargetPositionOnGrid(position);
             }
         }
 
@@ -68,7 +75,7 @@ public class GridTileLabel extends AbstractTileLabel {
         public void mouseEntered(MouseEvent e) {
             if (controller.getState() == IQController.State.ADDTILES
                     && controller.getNumberOfSelectedTiles() == 1
-                    && tile.isUndefined()) {
+                    && tile == null) {
                 setBorder(BORDER_HOVER);
             }
         }
@@ -77,7 +84,7 @@ public class GridTileLabel extends AbstractTileLabel {
         public void mouseExited(MouseEvent e) {
             if (controller.getState() == IQController.State.ADDTILES
                     && controller.getNumberOfSelectedTiles() == 1
-                    && tile.isUndefined()) {
+                    && tile == null) {
                 refreshBorder();
             }
         }

@@ -12,9 +12,6 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
-/**
- * Created by niels on 18.12.2015.
- */
 public abstract class AbstractTileLabel extends JLabel implements ComponentListener,
         IObserver {
 
@@ -31,20 +28,15 @@ public abstract class AbstractTileLabel extends JLabel implements ComponentListe
     }
 
     protected void refreshImage() {
-        String filepath = tile.getImageFilepath();
+        String filepath;
+        if (tile == null) filepath = new Tile().getImageFilepath();
+        else filepath = tile.getImageFilepath();
+
         icon = new StretchIcon(filepath, false);
         setIcon(icon);
     }
 
     protected void refreshBorder() {
-        if (tile.isSelectedAtHand()) {
-            setBorder(BORDER_SELECTED);
-        } else if (tile.getIsTargetedOnGrid()) {
-            System.out.println("SAME SAME!");
-            setBorder(BORDER_TARGET);
-        } else {
-            setBorder(BORDER_PLAIN);
-        }
     }
 
     public Tile getTile() {

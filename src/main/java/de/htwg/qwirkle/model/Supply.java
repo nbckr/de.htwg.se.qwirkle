@@ -8,9 +8,6 @@ import java.util.Collections.*;
 
 import de.htwg.qwirkle.model.Tile.*;
 
-/**
- * Created by niels on 23.10.2015.
- */
 public class Supply {
 
     private List<Tile> tiles;
@@ -21,22 +18,22 @@ public class Supply {
      * Creates 108 Tiles - three of each color/shape combination - and puts them in Supply in random order.
      */
     public Supply() {
-        tiles = new ArrayList<Tile>(MAX_SIZE);
+        tiles = new ArrayList<>(MAX_SIZE);
         random = new Random(System.currentTimeMillis());
 
-        for (Shape s : Shape.values()) {
+        for (Shape shape : Shape.values()) {
 
             //ignore undefined values
-            if(s == Shape.UNDEF)
+            if(shape == Shape.UNDEF)
                 continue;
 
-            for (Color c : Color.values()) {
+            for (Color color : Color.values()) {
 
                 //ignore undefined values
-                if(c == Color.UNDEF)
+                if(color == Color.UNDEF)
                     continue;
                 for (int i = 0; i < 3; i++) {
-                    tiles.add(new Tile(c, s, null));
+                    tiles.add(new Tile(color, shape));
                 }
             }
         }

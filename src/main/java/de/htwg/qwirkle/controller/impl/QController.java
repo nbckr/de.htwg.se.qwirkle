@@ -72,7 +72,6 @@ public class QController extends Observable implements IQController, IQControlle
     public void addTileToGrid(Tile tile, GridPosition position) {
         int points = 42;
 
-        tile.setPosition(position);
         grid.setTile(tile, position);
         // compute score points...
         getCurrentPlayer().addScore(points);
@@ -88,6 +87,7 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public void addSelectedTileToTargetPosition() {
+        assert getNumberOfSelectedTiles() == 1 && targetPositionOnGridIsSet();
         addTileToGrid(getSingleSelectedTile(), getTargetPositionOnGrid());
     }
 
@@ -303,23 +303,14 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public void setTargetPositionOnGrid(GridPosition position) {
-        unselectTargetPositionOnGrid();
-
-        Tile newTarget = getTileFromGrid(position);
-        newTarget.setIsTargetedOnGrid(true);
-
         this.targetPositionOnGrid = position;
         notifyObservers();
     }
 
     @Override
     public void unselectTargetPositionOnGrid() {
-        if (targetPositionOnGridIsSet()) {
-            Tile oldTarget = getTileFromGrid(getTargetPositionOnGrid());
-            oldTarget.setIsTargetedOnGrid(false);
-            targetPositionOnGrid = null;
-            notifyObservers();
-        }
+        targetPositionOnGrid = null;
+        notifyObservers();
     }
 
     @Override

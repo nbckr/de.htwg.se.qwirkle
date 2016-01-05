@@ -2,12 +2,6 @@ package de.htwg.qwirkle.model;
 
 import util.GridPosition;
 
-import java.awt.*;
-
-/**
- * Created by niboecke on 30.10.2015.
- */
-
 public class Grid {
 
     public static final int ROWS = 30;
@@ -33,21 +27,14 @@ public class Grid {
         create(row, col);
     }
 
-    private void create(int numRows, int numCols) {
-        if ((numRows < 10) || (numCols < 10) || (numRows > COLS) || (numCols > ROWS))
+    private void create(int row, int col) {
+        if ((row < 10) || (col < 10) || (row > COLS) || (col > ROWS))
             throw new IllegalArgumentException("Number of rows / columns must be " +
                     "between 10 and " + COLS);
 
-        this.tiles = new Tile[numRows][numCols];
-        this.numRows = numRows;
-        this.numCols = numCols;
-
-        // fill up with undef Tiles
-        for (int row = 0; row < this.numRows; row++) {
-            for (int col = 0; col < numCols; col++) {
-                tiles[row][col] = new Tile();
-            }
-        }
+        tiles = new Tile[row][col];
+        numRows = row;
+        numCols = col;
     }
 
     /**
@@ -79,7 +66,7 @@ public class Grid {
      * @return Tile on the specified position or null if cell is empty
      */
     public Tile getTile(GridPosition position) {
-        return tiles[position.row][position.col];
+        return tiles[position.row][position.col];            // if empty, null is returned
     }
 
     @Override

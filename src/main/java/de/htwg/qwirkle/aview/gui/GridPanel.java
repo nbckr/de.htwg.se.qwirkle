@@ -1,15 +1,11 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
-import de.htwg.qwirkle.model.Tile;
 import util.Constants;
 
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by niels on 18.12.2015.
- */
 public class GridPanel extends JPanel {
 
     private static final int GAP_PX = 2;
@@ -25,8 +21,7 @@ public class GridPanel extends JPanel {
         // Add cells for all tiles
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                Tile tile = controller.getTileFromGrid(row, col);
-                GridTileLabel gridTilePanel = new GridTileLabel(tile, controller);
+                GridTileLabel gridTilePanel = new GridTileLabel(row, col, controller);
                 this.add(gridTilePanel);
             }
         }
