@@ -41,7 +41,7 @@ public class HandTileLabel extends AbstractTileLabel {
 
     @Override
     public void refreshBorder() {
-        if (tile != null && tile.isSelectedAtHand()) {
+        if (tile != null && tile.isSelected()) {
             setBorder(BORDER_SELECTED);
         } else {
             setBorder(BORDER_PLAIN);
@@ -52,7 +52,9 @@ public class HandTileLabel extends AbstractTileLabel {
     class Listener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent e) {
-            controller.selectTileToggle(tile);
+            if (tile != null) {
+                controller.selectTileToggle(tile);
+            }
         }
     }
 }

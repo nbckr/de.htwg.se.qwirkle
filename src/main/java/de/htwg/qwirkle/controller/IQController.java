@@ -85,7 +85,7 @@ public interface IQController extends IObservable {
 
     void removeTileFromCurrentPlayer(int index);
 
-    void removeTilesFromCurrentPlayer(List<Tile> tiles);
+    void removeTilesFromCurrentPlayer(List<Integer> indexes);
 
     void removeSelectedTilesFromCurrentPlayer();
 
@@ -126,6 +126,8 @@ public interface IQController extends IObservable {
     void unselectAllTilesAtHand();
 
     Tile getSingleSelectedTile();
+
+    List<Integer> getSelectedTilesIndexes();
 
     List<Tile> getSelectedTiles();
 

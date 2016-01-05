@@ -49,7 +49,6 @@ public class QController extends Observable implements IQController, IQControlle
      * Initializes the players. Adds tile and chooses the first player.
      */
     private void initPlayers() {
-        // deal tiles
         for (Player player : this.players) {
             refillPlayer(player);
         }
@@ -170,16 +169,16 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
-    public void removeTilesFromCurrentPlayer(List<Tile> tiles) {
-        getCurrentPlayer().removeTiles(tiles);
+    public void removeTilesFromCurrentPlayer(List<Integer> indexes) {
+        getCurrentPlayer().removeTiles(indexes);
         notifyObservers();
     }
 
     @Override
     public void removeSelectedTilesFromCurrentPlayer() {
-        List<Tile> selectedTiles = getSelectedTiles();
+        List<Integer> selectedTilesIndexes = getSelectedTilesIndexes();
         unselectAllTilesAtHand();
-        removeTilesFromCurrentPlayer(selectedTiles);
+        removeTilesFromCurrentPlayer(selectedTilesIndexes);
     }
 
     @Override
@@ -244,7 +243,7 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public void selectTileToggle(Tile tile) {
-        selectTile(tile, !tile.isSelectedAtHand());
+        selectTile(tile, !tile.isSelected());
     }
 
     @Override
@@ -262,7 +261,7 @@ public class QController extends Observable implements IQController, IQControlle
         }
         Tile selectedTile = null;
         for (Tile tile : getCurrentHand()) {
-            if (tile.isSelectedAtHand()) {
+            if (tile.isSelected()) {
                 selectedTile = tile;
                 break;
             }
@@ -271,19 +270,29 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
-    public List<Tile> getSelectedTiles() {
-        List<Tile> selectedTiles = new ArrayList<>();
-        for (Tile tile : getCurrentHand()) {
-            if (tile.isSelectedAtHand()) {
-                selectedTiles.add(tile);
+    public List<Integer> getSelectedTilesIndexes() {
+        List<Integer> indexes = new ArrayList<>();
+        for (int i = 1; i <= getCurrentHandSize(); i++) {
+            if (getTileFromPlayer(i).isSelected()) {
+                indexes.add(i);
             }
+        }
+        return indexes;
+    }
+
+    @Override
+    public List<Tile> getSelectedTiles() {
+        List<Integer> indexes = getSelectedTilesIndexes();
+        List<Tile> selectedTiles = new ArrayList<>();
+        for (int i : indexes) {
+            selectedTiles.add(getTileFromPlayer(i));
         }
         return selectedTiles;
     }
 
     @Override
     public int getNumberOfSelectedTiles() {
-        return getSelectedTiles().size();
+        return getSelectedTilesIndexes().size();
     }
 
     @Override
@@ -338,6 +347,11 @@ public class QController extends Observable implements IQController, IQControlle
         return state;
     }
 
+    /**
+     * Set the global state. Note that this method notifies observers,
+     * so the caller of the method probably doesn't have to do that.
+     * @param state new state
+     */
     @Override
     public void setState(State state) {
         this.state = state;

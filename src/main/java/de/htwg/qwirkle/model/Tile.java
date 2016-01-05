@@ -39,7 +39,7 @@ public class Tile {
         return shape == Shape.UNDEF;
     }
 
-    public boolean isSelectedAtHand() {
+    public boolean isSelected() {
         return isSelectedAtHand;
     }
 

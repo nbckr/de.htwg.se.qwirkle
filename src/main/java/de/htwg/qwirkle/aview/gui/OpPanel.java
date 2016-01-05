@@ -15,11 +15,13 @@ public class OpPanel extends JPanel implements IObserver {
     private IQControllerGui controller;
     private JPanel actionChoicePanel;
     private JPanel instructionPanel;
-    private JPanel confirmPanel;
+    private JPanel confirmCancelPanel;
     private JLabel instructionLabel;
     private JButton addButton;
     private JButton tradeButton;
     private JButton confirmButton;
+    private JButton cancelButton;
+    private JButton finishAddingButton;
 
     public OpPanel(IQControllerGui controller) {
 
@@ -31,7 +33,7 @@ public class OpPanel extends JPanel implements IObserver {
         Listener listener = new Listener();
 
         actionChoicePanel = new JPanel();
-        addButton = new JButton("Add Tile to Grid");
+        addButton = new JButton("Add Tile(s) to Grid");
         addButton.addMouseListener(listener);
         tradeButton = new JButton("Trade Tile(s)");
         tradeButton.addMouseListener(listener);
@@ -40,17 +42,25 @@ public class OpPanel extends JPanel implements IObserver {
         add(actionChoicePanel);
 
         instructionPanel = new JPanel();
-        instructionLabel = new JLabel();
+        instructionLabel = new JLabel("");
         instructionPanel.add(instructionLabel);
         add(instructionPanel);
 
-        confirmPanel = new JPanel();
+        confirmCancelPanel = new JPanel();
         confirmButton = new JButton("OK");
         confirmButton.addMouseListener(listener);
-        confirmPanel.add(confirmButton);
-        add(confirmButton);
+        confirmCancelPanel.add(confirmButton);
 
-        // refresh instr.?
+        cancelButton = new JButton("Cancel");
+        cancelButton.addMouseListener(listener);
+        confirmCancelPanel.add(cancelButton);
+
+        finishAddingButton = new JButton("Finish round");
+        finishAddingButton.addMouseListener(listener);
+        finishAddingButton.setVisible(false);
+        confirmCancelPanel.add(finishAddingButton);
+
+        add(confirmCancelPanel);
     }
 
     private void refreshInstructions() {
@@ -75,6 +85,7 @@ public class OpPanel extends JPanel implements IObserver {
         @Override
         public void mousePressed(MouseEvent e) {
 
+            // change state to ADDTILES
             if (e.getSource() == addButton) {
                 controller.setState(IQController.State.ADDTILES);
                 if (controller.getNumberOfSelectedTiles() > 1) {
@@ -82,16 +93,24 @@ public class OpPanel extends JPanel implements IObserver {
                 }
             }
 
+            // change state to TRADETILES
             if (e.getSource() == tradeButton) {
                 controller.setState(IQController.State.TRADETILES);
             }
 
+            // go back to state CHOOSE_ACTION
+            if (e.getSource() == cancelButton) {
+                controller.setState(IQController.State.CHOOSE_ACTION);
+            }
+
+            // trade tiles
             if (e.getSource() == confirmButton
                     && controller.getState() == IQController.State.TRADETILES) {
                 controller.tradeSelectedTiles();
                 controller.refillCurrentAndGoToNextPlayer();
             }
 
+            // add tiles
             if (e.getSource() == confirmButton
                     && controller.getState() == IQController.State.ADDTILES
                     && controller.getNumberOfSelectedTiles() == 1
@@ -100,10 +119,29 @@ public class OpPanel extends JPanel implements IObserver {
                 controller.addSelectedTileToTargetPosition();
                 controller.removeSelectedTilesFromCurrentPlayer();
 
+                // now that adding started, can't be aborted; better do this via controller
+                cancelButton.setVisible(false);
+                finishAddingButton.setVisible(true);
+                tradeButton.setEnabled(false);
+                addButton.setEnabled(false);
+
                 if (controller.getCurrentHandSize() == 0) {
-                    controller.refillCurrentAndGoToNextPlayer();
+                    finishShouldBeDoneInController();
                 }
             }
+
+            // finish adding
+            if (e.getSource() == finishAddingButton) {
+                finishShouldBeDoneInController();
+            }
         }
+    }
+
+    public void finishShouldBeDoneInController() {
+        controller.refillCurrentAndGoToNextPlayer();
+        finishAddingButton.setVisible(false);
+        cancelButton.setVisible(true);
+        tradeButton.setEnabled(true);
+        addButton.setEnabled(true);
     }
 }

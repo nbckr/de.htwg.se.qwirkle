@@ -61,7 +61,7 @@ public class PlayerScorePanel extends JPanel implements IObserver {
 
         public void refreshText() {
             StringBuilder sb = new StringBuilder(player.getName());
-            sb.append(" (Score: " + controller.getCurrentPlayer().getScore() + ")");
+            sb.append(" (Score: " + player.getScore() + ")");
             setText(sb.toString());
 
             if (player == controller.getCurrentPlayer()) {

@@ -49,7 +49,6 @@ public class GridTileLabel extends AbstractTileLabel {
     public void refreshBorder() {
         if (controller.targetPositionOnGridIsSet()
                 && position == controller.getTargetPositionOnGrid()) {
-            System.out.println("SAME SAME! XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             setBorder(BORDER_TARGET);
         } else {
             setBorder(BORDER_PLAIN);

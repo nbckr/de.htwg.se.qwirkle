@@ -52,11 +52,10 @@ public class Player {
         hand.remove(index - 1);
     }
 
-    public void removeTiles(List<Tile> tiles) {
-        if (!hand.containsAll(tiles)) {
-            throw new IllegalArgumentException();
+    public void removeTiles(List<Integer> indexes) {
+        for (int i : indexes) {
+            removeTile(i);
         }
-        hand.removeAll(tiles);
     }
 
     public Tile getTile(int index) {

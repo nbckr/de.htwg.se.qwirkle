@@ -52,7 +52,8 @@ public abstract class Constants {
             "the grid or you can trade one or more tiles.</html>";
     public static final String INSTR_ADD =
             "<html>Select one tile on your hand and click on the <br>" +
-            "desired position on the grid.</html>";
+            "desired position on the grid. You can repeat this <br>" +
+            "until there are no more tiles on your hand.</html>";
     public static final String INSTR_TRADE =
             "Select all tiles you want to trade and click on OK";
     public static final String INSTR_GUI = "It's really easy :)";
