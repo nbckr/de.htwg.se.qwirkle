@@ -33,14 +33,21 @@ public class Grid {
         create(row, col);
     }
 
-    private void create(int row, int col) {
-        if ((row < 10) || (col < 10) || (row > COLS) || (col > ROWS))
+    private void create(int numRows, int numCols) {
+        if ((numRows < 10) || (numCols < 10) || (numRows > COLS) || (numCols > ROWS))
             throw new IllegalArgumentException("Number of rows / columns must be " +
                     "between 10 and " + COLS);
 
-        tiles = new Tile[row][col];
-        numRows = row;
-        numCols = col;
+        this.tiles = new Tile[numRows][numCols];
+        this.numRows = numRows;
+        this.numCols = numCols;
+
+        // fill up with undef Tiles
+        for (int row = 0; row < this.numRows; row++) {
+            for (int col = 0; col < numCols; col++) {
+                tiles[row][col] = new Tile();
+            }
+        }
     }
 
     /**

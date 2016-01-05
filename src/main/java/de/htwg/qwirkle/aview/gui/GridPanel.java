@@ -1,6 +1,7 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
+import de.htwg.qwirkle.model.Tile;
 import util.Constants;
 
 import javax.swing.*;
@@ -24,7 +25,8 @@ public class GridPanel extends JPanel {
         // Add cells for all tiles
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                GridTileLabel gridTilePanel = new GridTileLabel(row, col, controller);
+                Tile tile = controller.getTileFromGrid(row, col);
+                GridTileLabel gridTilePanel = new GridTileLabel(tile, controller);
                 this.add(gridTilePanel);
             }
         }

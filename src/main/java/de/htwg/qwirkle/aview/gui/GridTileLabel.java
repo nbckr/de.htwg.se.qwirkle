@@ -20,6 +20,10 @@ public class GridTileLabel extends AbstractTileLabel {
 
     private GridPosition position;
 
+    public GridTileLabel(Tile tileOnGrid, IQControllerGui controller) {
+        this(tileOnGrid.getPosition(), controller);
+    }
+
     public GridTileLabel(GridPosition position, IQControllerGui controller) {
 
         this.controller = controller;
