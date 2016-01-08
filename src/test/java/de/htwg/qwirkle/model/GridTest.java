@@ -1,15 +1,16 @@
 package de.htwg.qwirkle.model;
 
-import junit.framework.TestCase;
-import de.htwg.qwirkle.model.Tile.*;
 import org.junit.Before;
 import org.junit.Test;
+import de.htwg.qwirkle.model.Tile.*;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by niboecke on 30.10.2015.
  */
 
-public class GridTest extends TestCase {
+public class GridTest {
 
     Tile tile1, tile2;
     Supply supply;

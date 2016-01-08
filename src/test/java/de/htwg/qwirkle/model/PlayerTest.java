@@ -2,16 +2,18 @@ package de.htwg.qwirkle.model;
 
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
-import de.htwg.qwirkle.model.Tile.*;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.ArrayList;
+import de.htwg.qwirkle.model.Tile.*;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by luluschi on 23.10.2015.
  */
 
-public class PlayerTest extends TestCase {
+public class PlayerTest {
 
     Player player, player_full;
     ArrayList<Tile> tiles;

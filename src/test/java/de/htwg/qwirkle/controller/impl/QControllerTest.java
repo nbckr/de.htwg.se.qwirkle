@@ -1,15 +1,16 @@
 package de.htwg.qwirkle.controller.impl;
 
-import de.htwg.qwirkle.controller.impl.QController;
-import de.htwg.qwirkle.model.Player;
-import de.htwg.qwirkle.model.Tile;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+import de.htwg.qwirkle.model.Player;
+import de.htwg.qwirkle.model.Tile;
+
+import static org.junit.Assert.*;
+
 
 import java.util.ArrayList;
 
-public class QControllerTest extends TestCase {
+public class QControllerTest {
 
     Tile tile;
     QController controller;
@@ -256,6 +257,16 @@ public class QControllerTest extends TestCase {
 
     @Test
     public void testSetGuiMainFrame() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testGetRemainingTilesInSupply() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testSupplyIsEmpty() throws Exception {
         // TODO
     }
 }

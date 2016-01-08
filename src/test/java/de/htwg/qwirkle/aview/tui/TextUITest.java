@@ -1,29 +1,29 @@
 package de.htwg.qwirkle.aview.tui;
 
-import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
 
-/**
- * Created by niels on 03.12.2015.
- */
-public class TextUITest extends TestCase {
+import static org.junit.Assert.*;
+
+public class TextUITest {
 
     public void testPrintTUI() throws Exception {
-
+        // TODO
     }
 
     public void testInitializePlayer() throws Exception {
-
+        // TODO
     }
 
     public void testPrintMessage() throws Exception {
-
+        // TODO
     }
 
     public void testProcessInputLine() throws Exception {
-
+        // TODO
     }
 
     public void testUpdate() throws Exception {
-
+        // TODO
     }
 }

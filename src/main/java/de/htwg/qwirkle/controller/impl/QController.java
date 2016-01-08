@@ -325,6 +325,16 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
+    public int getRemainingTilesInSupply() {
+        return supply.getSize();
+    }
+
+    @Override
+    public boolean supplyIsEmpty() {
+        return supply.isEmpty();
+    }
+
+    @Override
     public List<Tile> getCurrentHand() {
         return getCurrentPlayer().getHand();
     }

@@ -50,6 +50,10 @@ public interface IQController extends IObservable {
 
     boolean targetPositionOnGridIsSet();
 
+    int getRemainingTilesInSupply();
+
+    boolean supplyIsEmpty();
+
     /**
      * Returns the hand of the current player.
      * @return hand of the current player

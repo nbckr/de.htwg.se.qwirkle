@@ -1,14 +1,15 @@
 package de.htwg.qwirkle.model;
 
-import de.htwg.qwirkle.model.Tile.*;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+import de.htwg.qwirkle.model.Tile.*;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by niboecke on 30.10.2015.
  */
-public class TileTest extends TestCase {
+public class TileTest {
 
     Tile tile[], tile_comp, tile_undef;
 

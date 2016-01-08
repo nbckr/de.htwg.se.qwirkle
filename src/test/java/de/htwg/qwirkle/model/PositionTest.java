@@ -1,6 +1,5 @@
 package de.htwg.qwirkle.model;
 
-import javafx.geometry.Pos;
 import org.junit.Before;
 import org.junit.Test;
 import de.htwg.qwirkle.model.Grid.*;

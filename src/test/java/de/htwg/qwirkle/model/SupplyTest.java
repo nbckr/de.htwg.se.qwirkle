@@ -1,13 +1,14 @@
 package de.htwg.qwirkle.model;
 
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by niels on 23.10.2015.
  */
-public class SupplyTest extends TestCase {
+public class SupplyTest {
 
     Supply supply;
     Tile tile;
