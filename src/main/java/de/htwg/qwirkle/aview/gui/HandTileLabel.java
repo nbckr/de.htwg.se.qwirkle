@@ -45,7 +45,6 @@ public class HandTileLabel extends AbstractTileLabel {
         }
     }
 
-
     class Listener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent e) {

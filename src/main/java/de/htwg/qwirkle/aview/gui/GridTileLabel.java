@@ -5,12 +5,14 @@ import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Grid;
 import util.observer.QEvent;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by niels on 18.12.2015.
- * This is implemented as Label to use Icons, however it rather functions as a Panel
+ * This is implemented as Label because Labels accept the
+ * use of Icons, however it rather functions as a Panel.
  */
 public class GridTileLabel extends AbstractTileLabel {
 
@@ -67,7 +69,8 @@ public class GridTileLabel extends AbstractTileLabel {
         public void mouseEntered(MouseEvent e) {
             if (controller.getState() == IQController.State.ADDTILES
                     && controller.getNumberOfSelectedTiles() == 1
-                    && tile == null) {
+                    && tile == null
+                    && position != controller.getTargetPositionOnGrid()) {
                 setBorder(BORDER_HOVER);
             }
         }

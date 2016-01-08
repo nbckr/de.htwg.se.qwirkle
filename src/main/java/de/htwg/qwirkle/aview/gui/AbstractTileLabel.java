@@ -18,13 +18,16 @@ public abstract class AbstractTileLabel extends JLabel implements ComponentListe
     protected static final Border BORDER_PLAIN = BorderFactory.createLineBorder(Color.BLUE, 1);
     protected static final Border BORDER_SELECTED = BorderFactory.createLineBorder(Color.RED, 4);
     protected static final Border BORDER_HOVER = BorderFactory.createLineBorder(Color.GREEN, 2);
-    protected static final Border BORDER_TARGET = BorderFactory.createLineBorder(Color.RED, 2);
+    protected static final Border BORDER_TARGET = BorderFactory.createLineBorder(Color.RED, 3);
     protected Tile tile;
 
     protected IQControllerGui controller;
     protected StretchIcon icon;
 
     protected void refreshTile() {
+    }
+
+    protected void refreshBorder() {
     }
 
     protected void refreshImage() {
@@ -39,17 +42,15 @@ public abstract class AbstractTileLabel extends JLabel implements ComponentListe
         setIcon(icon);
     }
 
-    protected void refreshBorder() {
-    }
-
     public Tile getTile() {
         return tile;
     }
+
     @Override
     public void update(QEvent e) {
         refreshTile();
-        refreshImage();
         refreshBorder();
+        refreshImage();
     }
 
     @Override
