@@ -153,7 +153,7 @@ public class QController extends Observable implements IQController, IQControlle
      */
     @Override
     public void removeTileFromCurrentPlayer(int index) {
-        if (index >= getCurrentPlayer().getHandSize()) {
+        if (getTileFromPlayer(index) == null    ) {
             throw new IllegalArgumentException();
         }
         getCurrentPlayer().removeTile(index);
@@ -264,13 +264,7 @@ public class QController extends Observable implements IQController, IQControlle
         if (getNumberOfSelectedTiles() != 1) {
             throw new IllegalArgumentException();
         }
-        for (Tile tile : getCurrentHand()) {
-            if (tile.isSelected()) {
-                return tile;
-            }
-        }
-        // if this code runs, something went wrong
-        throw new IllegalArgumentException();
+        return getSelectedTiles().get(0);
     }
 
     @Override
@@ -303,7 +297,6 @@ public class QController extends Observable implements IQController, IQControlle
     public void tradeSelectedTiles() {
         List<Tile> oldTiles = getSelectedTiles();
         removeSelectedTilesFromCurrentPlayer();
-        unselectAllTilesAtHand();
         List<Tile> newTiles = tradeTiles(oldTiles);
         addTilesToCurrentPlayer(newTiles);
         notifyObservers();

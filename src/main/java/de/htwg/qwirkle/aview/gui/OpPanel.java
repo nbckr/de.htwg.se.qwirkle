@@ -114,7 +114,8 @@ public class OpPanel extends JPanel implements IObserver {
             if (e.getSource() == confirmButton
                     && controller.getState() == IQController.State.ADDTILES
                     && controller.getNumberOfSelectedTiles() == 1
-                    && controller.targetPositionOnGridIsSet()) {
+                    && controller.targetPositionOnGridIsSet()
+                    && controller.getTileFromGrid(controller.getTargetPositionOnGrid()) == null) {
 
                 controller.addSelectedTileToTargetPosition();
                 controller.removeSelectedTilesFromCurrentPlayer();

@@ -19,9 +19,9 @@ public abstract class AbstractTileLabel extends JLabel implements ComponentListe
     protected static final Border BORDER_SELECTED = BorderFactory.createLineBorder(Color.RED, 4);
     protected static final Border BORDER_HOVER = BorderFactory.createLineBorder(Color.GREEN, 2);
     protected static final Border BORDER_TARGET = BorderFactory.createLineBorder(Color.RED, 3);
-    protected Tile tile;
 
     protected IQControllerGui controller;
+    protected Tile tile;
     protected StretchIcon icon;
 
     protected void refreshTile() {
@@ -56,9 +56,9 @@ public abstract class AbstractTileLabel extends JLabel implements ComponentListe
     @Override
     public void componentResized(ComponentEvent e) {
         // always keep a 1:1 aspect ratio
-        Rectangle b = e.getComponent().getBounds();
-        int d = Math.max(b.height, b.width);
-        e.getComponent().setBounds(b.x, b.y, d, d);
+        // Rectangle b = e.getComponent().getBounds();
+        // int d = Math.max(b.height, b.width);
+        // e.getComponent().setBounds(b.x, b.y, d, d);
     }
 
     @Override

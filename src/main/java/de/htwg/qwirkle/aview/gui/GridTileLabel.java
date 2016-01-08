@@ -42,7 +42,8 @@ public class GridTileLabel extends AbstractTileLabel {
 
     @Override
     public void refreshBorder() {
-        if (controller.targetPositionOnGridIsSet()
+        if (controller.getState() == IQController.State.ADDTILES
+                && controller.targetPositionOnGridIsSet()
                 && position == controller.getTargetPositionOnGrid()) {
             setBorder(BORDER_TARGET);
         } else {
@@ -57,7 +58,6 @@ public class GridTileLabel extends AbstractTileLabel {
         public void mousePressed(MouseEvent e) {
 
             if (controller.getState() == IQController.State.ADDTILES
-                    && controller.getNumberOfSelectedTiles() == 1
                     && tile == null) {
 
                 controller.setTargetPositionOnGrid(position);
@@ -68,7 +68,6 @@ public class GridTileLabel extends AbstractTileLabel {
         @Override
         public void mouseEntered(MouseEvent e) {
             if (controller.getState() == IQController.State.ADDTILES
-                    && controller.getNumberOfSelectedTiles() == 1
                     && tile == null
                     && position != controller.getTargetPositionOnGrid()) {
                 setBorder(BORDER_HOVER);
@@ -78,7 +77,6 @@ public class GridTileLabel extends AbstractTileLabel {
         @Override
         public void mouseExited(MouseEvent e) {
             if (controller.getState() == IQController.State.ADDTILES
-                    && controller.getNumberOfSelectedTiles() == 1
                     && tile == null) {
                 refreshBorder();
             }

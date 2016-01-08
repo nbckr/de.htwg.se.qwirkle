@@ -71,7 +71,7 @@ public class QFrame extends JFrame {
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
 
         // prepare glass pane to turn the ligths off
