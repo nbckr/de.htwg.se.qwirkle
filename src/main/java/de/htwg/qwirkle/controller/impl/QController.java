@@ -22,7 +22,6 @@ public class QController extends Observable implements IQController, IQControlle
     private Grid grid;
     private Grid.Position targetPositionOnGrid;
     private String statusMessage;
-    private QFrame guiMainFrame;
 
     public QController() {
         create();
@@ -366,15 +365,5 @@ public class QController extends Observable implements IQController, IQControlle
     @Override
     public List<Player> getPlayers() {
         return players;
-    }
-
-    @Override
-    public QFrame getGuiMainFrame() {
-        return guiMainFrame;
-    }
-
-    @Override
-    public void setGuiMainFrame(QFrame qFrame) {
-        this.guiMainFrame = qFrame;
     }
 }

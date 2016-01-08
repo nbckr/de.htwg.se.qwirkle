@@ -24,7 +24,6 @@ public class QFrame extends JFrame {
 
     public QFrame (final IQControllerGui controller) {
         super("HTWG QWIRKLE 2016");
-        controller.setGuiMainFrame(this);
 
         MenuBar menuBar = new MenuBar(controller, this);
         setJMenuBar(menuBar);
