@@ -57,4 +57,33 @@ public class TileTest extends TestCase {
         System.out.println(tile_undef.toString());
     }
 
+    @Test
+    public void testIsUndefined() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testIsSelected() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testSetSelected() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testHashCode() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testToString2() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testGetImageFilepath() throws Exception {
+        // TODO
+    }
 }

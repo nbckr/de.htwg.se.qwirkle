@@ -8,7 +8,6 @@ import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Supply;
 import de.htwg.qwirkle.model.Tile;
 import util.Constants;
-import util.GridPosition;
 import util.observer.Observable;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class QController extends Observable implements IQController, IQControlle
     private Player currentPlayer;
     private Supply supply;
     private Grid grid;
-    private GridPosition targetPositionOnGrid;
+    private Grid.Position targetPositionOnGrid;
     private String statusMessage;
     private QFrame guiMainFrame;
 
@@ -61,7 +60,7 @@ public class QController extends Observable implements IQController, IQControlle
      * the status message, this method also notifies observers.
      */
     @Override
-    public void addTileToGrid(Tile tile, GridPosition position) {
+    public void addTileToGrid(Tile tile, Grid.Position position) {
         int points = 42;
 
         grid.setTile(tile, position);
@@ -73,7 +72,7 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public void addTileToGrid(Tile tile, int row, int col) {
-        addTileToGrid(tile, new GridPosition(row, col));
+        addTileToGrid(tile, new Grid.Position(row, col));
     }
 
     @Override
@@ -128,13 +127,13 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
-    public Tile getTileFromGrid(GridPosition position) {
+    public Tile getTileFromGrid(Grid.Position position) {
         return this.grid.getTile(position);
     }
 
     @Override
     public Tile getTileFromGrid(int row, int col) {
-        return getTileFromGrid(new GridPosition(row, col));
+        return getTileFromGrid(new Grid.Position(row, col));
     }
 
     @Override
@@ -308,12 +307,12 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
-    public GridPosition getTargetPositionOnGrid() {
+    public Grid.Position getTargetPositionOnGrid() {
         return targetPositionOnGrid;
     }
 
     @Override
-    public void setTargetPositionOnGrid(GridPosition position) {
+    public void setTargetPositionOnGrid(Grid.Position position) {
         this.targetPositionOnGrid = position;
         notifyObservers();
     }

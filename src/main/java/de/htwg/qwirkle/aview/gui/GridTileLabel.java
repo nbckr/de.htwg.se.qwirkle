@@ -2,7 +2,7 @@ package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
-import util.GridPosition;
+import de.htwg.qwirkle.model.Grid;
 import util.observer.QEvent;
 
 import java.awt.event.MouseAdapter;
@@ -14,9 +14,9 @@ import java.awt.event.MouseEvent;
  */
 public class GridTileLabel extends AbstractTileLabel {
 
-    private GridPosition position;
+    private Grid.Position position;
 
-    public GridTileLabel(GridPosition position, IQControllerGui controller) {
+    public GridTileLabel(Grid.Position position, IQControllerGui controller) {
 
         this.controller = controller;
         controller.addObserver(this);
@@ -30,7 +30,7 @@ public class GridTileLabel extends AbstractTileLabel {
     }
 
     public GridTileLabel(int row, int col, IQControllerGui controller) {
-        this(new GridPosition(row, col), controller);
+        this(new Grid.Position(row, col), controller);
     }
 
     @Override

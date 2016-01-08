@@ -1,8 +1,8 @@
 package de.htwg.qwirkle.controller;
 
+import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
-import util.GridPosition;
 import util.observer.IObservable;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public interface IQController extends IObservable {
      */
     void init(List<Player> players);
 
-    void addTileToGrid(Tile t, GridPosition position);
+    void addTileToGrid(Tile t, Grid.Position position);
 
     /**
      * @param t Tile to add
@@ -42,9 +42,9 @@ public interface IQController extends IObservable {
      */
     Player getCurrentPlayer();
 
-    GridPosition getTargetPositionOnGrid();
+    Grid.Position getTargetPositionOnGrid();
 
-    void setTargetPositionOnGrid(GridPosition target);
+    void setTargetPositionOnGrid(Grid.Position target);
 
     void unselectTargetPositionOnGrid();
 
@@ -68,7 +68,7 @@ public interface IQController extends IObservable {
      */
     void refillCurrentPlayer();
 
-    Tile getTileFromGrid(GridPosition position);
+    Tile getTileFromGrid(Grid.Position position);
 
     /**
      * Returns the Tile on this position of the grid; the Tile remains on the grid though.

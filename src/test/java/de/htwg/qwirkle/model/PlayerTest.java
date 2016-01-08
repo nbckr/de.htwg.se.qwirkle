@@ -103,4 +103,29 @@ public class PlayerTest extends TestCase {
     public void testToString() {
         System.out.println(player);
     }
+
+    @Test
+    public void testAddTilesToHand() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testRemoveTile() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testRemoveTiles() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testGetTile() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testGetHandSize() throws Exception {
+        // TODO
+    }
 }

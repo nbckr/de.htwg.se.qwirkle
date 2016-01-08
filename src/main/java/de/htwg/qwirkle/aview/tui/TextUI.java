@@ -2,11 +2,11 @@ package de.htwg.qwirkle.aview.tui;
 
 import de.htwg.qwirkle.controller.IQController.*;
 import de.htwg.qwirkle.controller.impl.QController;
+import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
 
 import util.Constants;
-import util.GridPosition;
 import util.observer.QEvent;
 
 import java.util.ArrayList;
@@ -184,7 +184,7 @@ public class TextUI implements IObserver {
             int row = scanner.nextInt();
             int col = scanner.nextInt();
 
-            controller.setTargetPositionOnGrid(new GridPosition(row, col));
+            controller.setTargetPositionOnGrid(new Grid.Position(row, col));
             controller.addSelectedTileToTargetPosition();
 
             controller.removeSelectedTilesFromCurrentPlayer();
