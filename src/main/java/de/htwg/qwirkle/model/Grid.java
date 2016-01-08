@@ -129,7 +129,7 @@ public class Grid {
             return row;
         }
 
-        public double getCol() {
+        public int getCol() {
             return col;
         }
 

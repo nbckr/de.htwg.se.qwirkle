@@ -61,6 +61,8 @@ public interface IQController extends IObservable {
      */
     void refillCurrentAndGoToNextPlayer();
 
+    void goToNextPlayer();
+
     void refillPlayer(Player player);
 
     /**
@@ -109,9 +111,9 @@ public interface IQController extends IObservable {
 
     void create();
 
-    int getNumRows();
+    int getGridNumRows();
 
-    int getNumCols();
+    int getGridNumCols();
 
     State getState();
 

@@ -12,14 +12,16 @@ import de.htwg.qwirkle.controller.impl.QController;
 public final class Qwirkle {
 
     private static QController controller;
+    private static QFrame qFrame;
+    private static TextUI textUI;
 
     private Qwirkle() {
     }
 
     public static void main(String[] args) {
         controller =  new QController();
-        new QFrame(controller);
-        new TextUI(controller);
+        qFrame = new QFrame(controller);
+        textUI = new TextUI(controller);
     }
 
 }

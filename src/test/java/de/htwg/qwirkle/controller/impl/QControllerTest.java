@@ -85,11 +85,6 @@ public class QControllerTest extends TestCase {
     }
 
     @Test
-    public void testTradeTile1() throws Exception {
-        // TODO
-    }
-
-    @Test
     public void testTradeTiles() throws Exception {
         // TODO
     }

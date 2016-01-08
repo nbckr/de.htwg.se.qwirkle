@@ -12,8 +12,8 @@ public class GridPanel extends JPanel {
 
     public GridPanel(IQControllerGui controller) {
 
-        int rows = controller.getNumRows();
-        int cols = controller.getNumCols();
+        int rows = controller.getGridNumRows();
+        int cols = controller.getGridNumCols();
 
         setLayout(new GridLayout(rows, cols, GAP_PX, GAP_PX));
         setBorder(Constants.INNER_BORDER);

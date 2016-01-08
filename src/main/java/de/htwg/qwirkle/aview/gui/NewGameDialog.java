@@ -25,10 +25,12 @@ public class NewGameDialog extends JDialog {
     NewGamePanel newGamePane;
     JOptionPane optionPane;
     List<Player> players;
+    QFrame mainFrame;
 
-    public NewGameDialog(IQControllerGui controller) {
+    public NewGameDialog(IQControllerGui controller, QFrame mainFrame) {
         super();
-        controller.getGuiMainFrame().turnLightsOff();
+        this.mainFrame = mainFrame;
+        mainFrame.turnLightsOff();
 
         this.setLocationByPlatform(true);
         this.controller = controller;
@@ -180,7 +182,7 @@ public class NewGameDialog extends JDialog {
                 controller.exit();
             }
         } else {
-            controller.getGuiMainFrame().turnLightsOn();
+            mainFrame.turnLightsOn();
             this.setVisible(false);
         }
     }
@@ -194,7 +196,7 @@ public class NewGameDialog extends JDialog {
         controller.init(players);
         controller.create();
 
-        controller.getGuiMainFrame().turnLightsOn();
+        mainFrame.turnLightsOn();
         this.setVisible(false);
     }
 }

@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 public class MenuBar extends JMenuBar implements ActionListener {
 
     IQControllerGui controller;
+    QFrame mainFrame;
 
     JMenu fileMenu;
     JMenuItem newMenuItem, quitMenuItem;
@@ -21,9 +22,10 @@ public class MenuBar extends JMenuBar implements ActionListener {
     JMenu helpMenu;
     JMenuItem instructionsMenuItem, aboutMenuItem;
 
-    public MenuBar(IQControllerGui controller) {
+    public MenuBar(IQControllerGui controller, QFrame mainFrame) {
 
         this.controller = controller;
+        this.mainFrame = mainFrame;
 
         // File Menu
         fileMenu = new JMenu("File");
@@ -60,7 +62,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == newMenuItem) {
-            new NewGameDialog(controller);
+            new NewGameDialog(controller, mainFrame);
         }
 
         if (e.getSource() == quitMenuItem) {

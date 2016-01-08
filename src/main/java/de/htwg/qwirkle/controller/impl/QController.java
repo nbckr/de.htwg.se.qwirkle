@@ -106,7 +106,11 @@ public class QController extends Observable implements IQController, IQControlle
     @Override
     public void refillCurrentAndGoToNextPlayer(){
         refillCurrentPlayer();
+        goToNextPlayer();
+    }
 
+    @Override
+    public void goToNextPlayer() {
         int index = (players.indexOf(currentPlayer) + 1) % players.size();
         currentPlayer = players.get(index);
 
@@ -223,12 +227,12 @@ public class QController extends Observable implements IQController, IQControlle
     }
 
     @Override
-    public int getNumRows() {
+    public int getGridNumRows() {
         return grid.getNumRows();
     }
 
     @Override
-    public int getNumCols() {
+    public int getGridNumCols() {
         return grid.getNumCols();
     }
 

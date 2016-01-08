@@ -26,7 +26,7 @@ public class QFrame extends JFrame {
         super("HTWG QWIRKLE 2016");
         controller.setGuiMainFrame(this);
 
-        MenuBar menuBar = new MenuBar(controller);
+        MenuBar menuBar = new MenuBar(controller, this);
         setJMenuBar(menuBar);
 
         // Main Panel
@@ -86,7 +86,7 @@ public class QFrame extends JFrame {
         });
 
         // open the New Game dialog
-        new NewGameDialog(controller);
+        new NewGameDialog(controller, this);
     }
 
     public void turnLightsOff() {
