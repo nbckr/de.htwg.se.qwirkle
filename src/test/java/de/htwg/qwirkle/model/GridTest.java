@@ -66,4 +66,9 @@ public class GridTest {
 
         System.out.println(grid);
     }
+
+    @Test
+    public void testGetNumberOfTiles() throws Exception {
+        // TODO
+    }
 }

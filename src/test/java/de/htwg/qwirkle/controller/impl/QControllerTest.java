@@ -269,4 +269,14 @@ public class QControllerTest {
     public void testSupplyIsEmpty() throws Exception {
         // TODO
     }
+
+    @Test
+    public void testValidateAdding() throws Exception {
+        // TODO
+    }
+
+    @Test
+    public void testGetNumberOfTilesOnGrid() throws Exception {
+        // TODO
+    }
 }

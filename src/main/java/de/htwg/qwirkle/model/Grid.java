@@ -67,6 +67,18 @@ public class Grid {
         return tiles[position.row][position.col];            // if empty, null is returned
     }
 
+    public int getNumberOfTiles() {
+        int sum = 0;
+        for (int row = 0; row < numRows; row++) {
+            for (int col = 0; col < numCols; col++) {
+                if (tiles[row][col] != null) {
+                    sum++;
+                }
+            }
+        }
+        return sum;
+    }
+
     @Override
     public String toString() {
 
@@ -136,6 +148,22 @@ public class Grid {
         public void setPosition(int row, int col) {
             this.row = row;
             this.col = col;
+        }
+
+        public Position getNorth() {
+            return new Position(row-1, col);
+        }
+
+        public Position getEast() {
+            return new Position(row, col+1);
+        }
+
+        public Position getSouth() {
+            return new Position(row+1, col);
+        }
+
+        public Position getWest() {
+            return new Position(row, col-1);
         }
 
         @Override

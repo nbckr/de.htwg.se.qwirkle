@@ -145,6 +145,10 @@ public interface IQController extends IObservable {
 
     void exit();
 
+    boolean validateAdding(Tile tile, Grid.Position position);
+
+    int getNumberOfTilesOnGrid();
+
     enum State {
         UNINITIALIZED,          // no game started
         INITIALIZED,    // players names were given

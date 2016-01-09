@@ -1,6 +1,5 @@
 package de.htwg.qwirkle.controller.impl;
 
-import de.htwg.qwirkle.aview.gui.QFrame;
 import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.IQControllerGui;
 import de.htwg.qwirkle.model.Grid;
@@ -368,5 +367,38 @@ public class QController extends Observable implements IQController, IQControlle
     @Override
     public List<Player> getPlayers() {
         return players;
+    }
+
+    /**
+     * Determine if adding a tile to a certain position is allowed
+     * @param tile Tile
+     * @param position target position
+     * @return true if allowed, false otherwise
+     */
+    @Override
+    public boolean validateAdding(Tile tile, Grid.Position position) {
+        // first round anything goes
+        if (getNumberOfTilesOnGrid() == 0) return true;
+
+        // take a look at all four neighbors, if they exist
+        ArrayList<Tile> neighbors = new ArrayList<>();
+        neighbors.add(getTileFromGrid(position.getNorth()));
+        neighbors.add(getTileFromGrid(position.getEast()));
+        neighbors.add(getTileFromGrid(position.getSouth()));
+        neighbors.add(getTileFromGrid(position.getWest()));
+
+        for (Tile neighbor : neighbors) {
+            if (neighbor != null
+                    && (tile.getColor() == neighbor.getColor()
+                    || tile.getShape() == neighbor.getShape())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int getNumberOfTilesOnGrid() {
+        return grid.getNumberOfTiles();
     }
 }
