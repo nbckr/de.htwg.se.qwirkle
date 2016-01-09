@@ -64,7 +64,7 @@ public class Tile {
     @Override
     public String toString() {
         String myShape;
-        String myColor;
+        String myColor = Constants.ANSI_BLACK_BG;
 
         if(this.color == Color.UNDEF ||this.shape == Shape.UNDEF) {
             return "undefined";
@@ -89,8 +89,6 @@ public class Tile {
             case PURPLE:
                 myColor = Constants.ANSI_PURPLE_BG + Constants.ANSI_WHITE;
                 break;
-            default:
-                myColor = Constants.ANSI_BLACK_BG;
         }
 
         myShape = shape.toString().substring(0, 2);
@@ -113,4 +111,5 @@ public class Tile {
     public String getImageFilepath() {
         return "src/main/resources/img/" + toString2() + ".jpg";
     }
+
 }
