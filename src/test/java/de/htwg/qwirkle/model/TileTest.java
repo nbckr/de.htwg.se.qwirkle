@@ -15,7 +15,7 @@ public class TileTest {
 
     @Before
     public void setUp() {
-        tile = new Tile[6];
+        tile = new Tile[7];
 
         tile[0] = new Tile(Color.CYAN, Shape.CIRCLE);
         tile[1] = new Tile(Color.YELLOW, Shape.SQUARE);
@@ -23,6 +23,7 @@ public class TileTest {
         tile[3] = new Tile(Color.BLUE, Shape.DIAMOND);
         tile[4] = new Tile(Color.GREEN, Shape.STAR);
         tile[5] = new Tile(Color.PURPLE, Shape.CROSS);
+        tile[6] = new Tile();
 
         tile_comp = new Tile(Color.CYAN, Shape.CIRCLE);
         tile_undef = new Tile();
@@ -47,6 +48,8 @@ public class TileTest {
 
         retval = tile[0].equals(tile[1]);
         assertFalse(retval);
+
+        assertFalse(tile[0].equals(new Integer(1)));
     }
 
     @Test
@@ -60,31 +63,27 @@ public class TileTest {
 
     @Test
     public void testIsUndefined() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testIsSelected() throws Exception {
-        // TODO
+        assertTrue(tile_undef.isUndefined());
     }
 
     @Test
     public void testSetSelected() throws Exception {
-        // TODO
+        tile[0].setSelected(true);
+        assertTrue(tile[0].isSelected());
     }
 
     @Test
     public void testHashCode() throws Exception {
-        // TODO
+        assertEquals(42, tile[0].hashCode());
     }
 
     @Test
     public void testToString2() throws Exception {
-        // TODO
+        assertEquals("TILE_CYAN_CIRCLE", tile[0].toString2());
     }
 
     @Test
     public void testGetImageFilepath() throws Exception {
-        // TODO
+        assertEquals("src/main/resources/img/TILE_CYAN_CIRCLE.jpg", tile[0].getImageFilepath());
     }
 }
