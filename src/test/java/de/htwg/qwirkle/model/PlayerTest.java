@@ -48,7 +48,7 @@ public class PlayerTest {
         assertEquals(true, tiles.equals(player.getHand()));
     }
 
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void testAddTileToHand() {
         boolean retval;
 
@@ -57,6 +57,9 @@ public class PlayerTest {
             player.addTileToHand(new Tile(Color.BLUE, Shape.CLOVER));
             // assert no Exceptions
         }
+
+        player.addTileToHand(new Tile(Color.CYAN, Shape.DIAMOND));
+        player.addTileToHand(new Tile(Color.CYAN, Shape.DIAMOND));
     }
 
     @Test
@@ -121,13 +124,15 @@ public class PlayerTest {
         player.addTilesToHand(t);
     }
 
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void testRemoveTile() throws Exception {
         player.addTilesToHand(tiles);
         assertEquals(4, player.getHandSize());
 
         player.removeTile(1);
         assertEquals(3, player.getHandSize());
+
+        player.removeTile(5);
     }
 
     @Test
