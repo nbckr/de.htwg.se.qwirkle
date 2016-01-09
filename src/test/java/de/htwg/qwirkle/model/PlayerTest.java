@@ -106,28 +106,53 @@ public class PlayerTest {
         System.out.println(player);
     }
 
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void testAddTilesToHand() throws Exception {
-        // TODO
+        player.addTilesToHand(tiles);
+        assertEquals(4, player.getHandSize());
+
+        ArrayList<Tile> t = new ArrayList<Tile>();
+        t.add(new Tile(Color.PURPLE, Shape.CROSS));
+        t.add(new Tile(Color.GREEN, Shape.DIAMOND));
+
+        player.addTilesToHand(t);
+        assertEquals(6, player.getHandSize());
+
+        player.addTilesToHand(t);
     }
 
     @Test
     public void testRemoveTile() throws Exception {
-        // TODO
+        player.addTilesToHand(tiles);
+        assertEquals(4, player.getHandSize());
+
+        player.removeTile(1);
+        assertEquals(3, player.getHandSize());
     }
 
     @Test
     public void testRemoveTiles() throws Exception {
-        // TODO
+        player.addTilesToHand(tiles);
+        assertEquals(4, player.getHandSize());
+
+        ArrayList<Integer> l = new ArrayList<Integer>();
+        l.add(1);
+        l.add(2);
+        player.removeTiles(l);
+        assertEquals(2, player.getHandSize());
     }
 
     @Test
     public void testGetTile() throws Exception {
-        // TODO
+        Tile t = new Tile(Color.RED, Shape.CIRCLE);
+        player.addTileToHand(t);
+
+        assertEquals(t , player.getTile(1));
     }
 
     @Test
     public void testGetHandSize() throws Exception {
-        // TODO
+        player.addTilesToHand(tiles);
+        assertEquals(4, player.getHandSize());
     }
 }
