@@ -15,6 +15,7 @@ public class GridTest {
     Tile tile1, tile2;
     Supply supply;
     Grid grid, grid_full, grid_fail;
+    Grid.Position pos1, pos2, pos3;
 
     @Before
     public void setUp() {
@@ -28,22 +29,21 @@ public class GridTest {
         tile2 = new Tile(Color.RED, Shape.CROSS);
 
         supply = new Supply();
+
+        pos1 = new Grid.Position(3, 3);
+        pos2 = new Grid.Position(pos1);
+        pos3 = new Grid.Position();
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testGrid() {
-
-        //throws exception
-        try {
-            grid_fail = new Grid(9, 9);
-        } catch (IllegalArgumentException e) {
-            System.out.println("IllegalArgumentException expected: " + e.getMessage());
-        }
+        grid_fail = new Grid(9, 9);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSetTile() {
         grid.setTile(tile1, 3, 3);
+        grid.setTile(tile2, 3 ,3);
         // expect no exceptions
     }
 
@@ -52,6 +52,7 @@ public class GridTest {
         grid.setTile(tile1, 3, 3);
         assertEquals(tile1, grid.getTile(new Grid.Position(3,3)));
         assertEquals(null, grid.getTile(new Grid.Position(1,1)));
+        assertEquals(null, grid.getTile(new Grid.Position(-1,1)));
     }
 
     @Test
@@ -69,6 +70,29 @@ public class GridTest {
 
     @Test
     public void testGetNumberOfTiles() throws Exception {
-        // TODO
+        grid.setTile(tile1, 3, 3);
+        grid.setTile(tile1, 4, 4);
+
+        assertEquals(2, grid.getNumberOfTiles());
+    }
+
+    @Test
+    public void testFieldIsEmpty() {
+        grid.fieldIsEmpty(3, 3);
+    }
+
+    @Test
+    public void testGetNumRows() {
+        assertEquals(20, grid.getNumRows());
+    }
+
+    @Test
+    public void testGetNumCols() {
+        assertEquals(20, grid.getNumCols());
+    }
+
+    @Test
+    public void testEquals() {
+        assertEquals(false, grid.equals(new Integer(2)));
     }
 }
