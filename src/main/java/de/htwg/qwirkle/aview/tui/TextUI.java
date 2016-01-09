@@ -185,8 +185,12 @@ public class TextUI implements IObserver {
             int col = scanner.nextInt();
 
             controller.setTargetPositionOnGrid(new Grid.Position(row, col));
-            controller.addSelectedTileToTargetPosition();
+            if (!controller.validateAdding(controller.getSingleSelectedTile(), controller.getTargetPositionOnGrid())) {
+                LOG.info("You can't place this tile here!");
+                continue;
+            }
 
+            controller.addSelectedTileToTargetPosition();
             controller.removeSelectedTilesFromCurrentPlayer();
             tileSet = true;
         }
