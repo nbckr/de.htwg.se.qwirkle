@@ -21,7 +21,7 @@ public class QControllerTest {
     public void setUp() {
         controller =  new QController();
         tile = new Tile();
-        singlePlayerList = new ArrayList<>();
+        singlePlayerList = new ArrayList<Player>();
         horst = new Player("Horst");
         singlePlayerList.add(horst);
         controller.init(singlePlayerList);

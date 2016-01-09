@@ -22,7 +22,7 @@ public class PlayerScorePanel extends JPanel implements IObserver {
         controller.addObserver(this);
 
         initialized = false;
-        labels = new ArrayList<>();
+        labels = new ArrayList<PlayerTextLabel>();
         //setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBorder(Constants.INNER_BORDER);
     }

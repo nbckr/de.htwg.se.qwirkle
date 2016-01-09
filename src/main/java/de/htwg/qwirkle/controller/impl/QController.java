@@ -89,7 +89,7 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public List<Tile> tradeTiles(List<Tile> oldTiles) {
-        List<Tile> newTiles = new ArrayList<>();
+        List<Tile> newTiles = new ArrayList<Tile>();
         for (Tile oldTile : oldTiles) {
             newTiles.add(tradeTile(oldTile));
         }
@@ -268,7 +268,7 @@ public class QController extends Observable implements IQController, IQControlle
 
     @Override
     public List<Integer> getSelectedTilesIndexes() {
-        List<Integer> indexes = new ArrayList<>();
+        List<Integer> indexes = new ArrayList<Integer>();
         for (int i = 1; i <= getCurrentHandSize(); i++) {
             if (getTileFromPlayer(i).isSelected()) {
                 indexes.add(i);
@@ -280,7 +280,7 @@ public class QController extends Observable implements IQController, IQControlle
     @Override
     public List<Tile> getSelectedTiles() {
         List<Integer> indexes = getSelectedTilesIndexes();
-        List<Tile> selectedTiles = new ArrayList<>();
+        List<Tile> selectedTiles = new ArrayList<Tile>();
         for (int i : indexes) {
             selectedTiles.add(getTileFromPlayer(i));
         }
@@ -381,7 +381,7 @@ public class QController extends Observable implements IQController, IQControlle
         if (getNumberOfTilesOnGrid() == 0) return true;
 
         // take a look at all four neighbors, if they exist
-        ArrayList<Tile> neighbors = new ArrayList<>();
+        ArrayList<Tile> neighbors = new ArrayList<Tile>();
         neighbors.add(getTileFromGrid(position.getNorth()));
         neighbors.add(getTileFromGrid(position.getEast()));
         neighbors.add(getTileFromGrid(position.getSouth()));

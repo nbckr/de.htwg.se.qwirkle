@@ -189,7 +189,7 @@ public class NewGameDialog extends JDialog {
 
     private void startGame() {
         String[] playerNames = newGamePane.getPlayerNames();
-        players = new ArrayList<>(playerNames.length);
+        players = new ArrayList<Player>(playerNames.length);
         for (String name : playerNames) {
             players.add(new Player(name));
         }

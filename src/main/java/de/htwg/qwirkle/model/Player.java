@@ -23,7 +23,7 @@ public class Player {
     public Player(String name) {
         this.name = name;
         this.score = 0;
-        this.hand = new ArrayList<>(6);
+        this.hand = new ArrayList<Tile>(6);
     }
 
     /**
@@ -91,7 +91,7 @@ public class Player {
      * @return a copy of the player's hand
      */
     public List<Tile> getHand() {
-        return new ArrayList<>(this.hand);
+        return new ArrayList<Tile>(this.hand);
     }
 
     public int getHandSize() {

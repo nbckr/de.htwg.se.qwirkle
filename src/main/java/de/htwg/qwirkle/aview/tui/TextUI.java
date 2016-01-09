@@ -67,7 +67,7 @@ public class TextUI implements IObserver {
         String name, tmp;
         List<Player> players;
 
-        players = new ArrayList<>();
+        players = new ArrayList<Player>();
 
         while(noP <= 4) {
             if (noP >= 3) {
@@ -143,7 +143,7 @@ public class TextUI implements IObserver {
         List<Integer> integerList;
         try {
             String[] stringArray = trading.split("\\s+");
-            integerList = new ArrayList<>();
+            integerList = new ArrayList<Integer>();
             for(String string : stringArray) {
                 int i = Integer.parseInt(string);
                 assert i <= this.controller.getCurrentPlayer().getHand().size();
