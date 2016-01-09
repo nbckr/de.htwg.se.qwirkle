@@ -61,10 +61,12 @@ public class Grid {
 
     /**
      * getTile returns the tile of a cell on the tiles
-     * @return Tile on the specified position or null if cell is empty
+     * @return Tile on the specified position or null if cell is empty or out of bounds
      */
     public Tile getTile(Position position) {
-        return tiles[position.row][position.col];            // if empty, null is returned
+        if (position.row >= numRows || position.col >= numCols
+                || position.row < 0 || position.col < 0) return null;
+        return tiles[position.row][position.col];            // if empty, null is returned as well
     }
 
     public int getNumberOfTiles() {

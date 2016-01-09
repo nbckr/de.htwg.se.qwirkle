@@ -50,4 +50,28 @@ public class PositionTest {
         String testOutput = "de.htwg.qwirkle.model.Grid$Position[row=10,col=10]";
         assertEquals(testOutput, position.toString());
     }
+
+    @Test
+    public void testGetNorth() throws Exception {
+        Position northPosition = position.getNorth();
+        assertEquals(new Position(9, 10), northPosition);
+    }
+
+    @Test
+    public void testGetEast() throws Exception {
+        Position eastPosition = position.getEast();
+        assertEquals(new Position(10, 11), eastPosition);
+    }
+
+    @Test
+    public void testGetSouth() throws Exception {
+        Position southPosition = position.getSouth();
+        assertEquals(new Position(11, 10), southPosition);
+    }
+
+    @Test
+    public void testGetWest() throws Exception {
+        Position westPosition = position.getWest();
+        assertEquals(new Position(10, 9), westPosition);
+    }
 }

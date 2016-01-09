@@ -70,7 +70,13 @@ public class GridTileLabel extends AbstractTileLabel {
             if (controller.getState() == IQController.State.ADDTILES
                     && tile == null
                     && position != controller.getTargetPositionOnGrid()) {
-                setBorder(BORDER_HOVER);
+
+                if (controller.getNumberOfSelectedTiles() == 1
+                        &&controller.validateAdding(controller.getSingleSelectedTile(), position)) {
+                    setBorder(BORDER_CANDIDATE);
+                } else{
+                    setBorder(BORDER_HOVER);
+                }
             }
         }
 

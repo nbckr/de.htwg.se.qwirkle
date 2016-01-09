@@ -124,7 +124,7 @@ public class OpPanel extends JPanel implements IObserver {
 
                 // check if adding tile to target position is legit
                 if (!contr.validateAdding(contr.getSingleSelectedTile(), contr.getTargetPositionOnGrid())) {
-                    JOptionPane.showMessageDialog(null, "Error: You can't add this tile here!");
+                    JOptionPane.showMessageDialog(OpPanel.this, "Error: You can't add this tile here!");
                     return;
                 }
 
