@@ -15,7 +15,6 @@ public class GridTest {
     Tile tile1, tile2;
     Supply supply;
     Grid grid, grid_full, grid_fail;
-    Grid.Position pos1, pos2, pos3;
 
     @Before
     public void setUp() {
@@ -30,9 +29,7 @@ public class GridTest {
 
         supply = new Supply();
 
-        pos1 = new Grid.Position(3, 3);
-        pos2 = new Grid.Position(pos1);
-        pos3 = new Grid.Position();
+
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -89,10 +86,5 @@ public class GridTest {
     @Test
     public void testGetNumCols() {
         assertEquals(20, grid.getNumCols());
-    }
-
-    @Test
-    public void testEquals() {
-        assertEquals(false, grid.equals(new Integer(2)));
     }
 }
