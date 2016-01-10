@@ -1,5 +1,7 @@
 package de.htwg.qwirkle.controller.impl;
 
+import de.htwg.qwirkle.controller.IQController;
+import de.htwg.qwirkle.model.Grid;
 import org.junit.Before;
 import org.junit.Test;
 import de.htwg.qwirkle.model.Player;
@@ -8,6 +10,7 @@ import de.htwg.qwirkle.model.Tile;
 import static org.junit.Assert.*;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class QControllerTest {
@@ -15,7 +18,7 @@ public class QControllerTest {
     Tile tile;
     QController controller;
     ArrayList<Player> singlePlayerList;
-    Player horst;
+    Player horst, kalle;
 
     @Before
     public void setUp() {
@@ -23,7 +26,9 @@ public class QControllerTest {
         tile = new Tile();
         singlePlayerList = new ArrayList<Player>();
         horst = new Player("Horst");
+        kalle = new Player("Kalle");
         singlePlayerList.add(horst);
+        singlePlayerList.add(kalle);
         controller.init(singlePlayerList);
     }
 
@@ -82,17 +87,39 @@ public class QControllerTest {
 
     @Test
     public void testAddSelectedTileToTargetPosition() throws Exception {
-        // TODO
+        Grid.Position pos = new Grid.Position(2,2);
+        Tile t = horst.getTile(1);
+        controller.selectTile(t, true);
+        controller.setTargetPositionOnGrid(pos);
+
+        controller.addSelectedTileToTargetPosition();
+
+        assertEquals(t, controller.getTileFromGrid(pos));
     }
 
     @Test
     public void testTradeTiles() throws Exception {
-        // TODO
+        ArrayList<Tile> tiles = new ArrayList<Tile>();
+        tiles.add(horst.getTile(1));
+        tiles.add(horst.getTile(2));
+        tiles.add(horst.getTile(3));
+
+        ArrayList<Tile> newt = (ArrayList<Tile>) controller.tradeTiles(tiles);
+
+        assertEquals(3, newt.size());
     }
 
     @Test
     public void testRefillCurrentAndGoToNextPlayer() throws Exception {
-        // TODO
+        Player one = controller.getCurrentPlayer();
+
+        one.removeTile(1);
+        assertEquals(5, one.getHandSize());
+
+        controller.refillCurrentAndGoToNextPlayer();
+
+        assertEquals(6, one.getHandSize());
+        assertNotEquals(one, controller.getCurrentPlayer());
     }
 
     @Test
@@ -107,32 +134,59 @@ public class QControllerTest {
 
     @Test
     public void testGetTileFromPlayer() throws Exception {
-        // TODO
+        Tile t = controller.getTileFromPlayer(8);
+        assertEquals(null, t);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testRemoveTileFromCurrentPlayer() throws Exception {
-        // TODO
+        controller.removeTileFromCurrentPlayer(8);
     }
 
     @Test
     public void testRemoveTilesFromCurrentPlayer() throws Exception {
-        // TODO
+        ArrayList<Integer> ind = new ArrayList<Integer>();
+        ind.add(1);
+        ind.add(2);
+        ind.add(3);
+
+        controller.removeTilesFromCurrentPlayer(ind);
+
+        assertEquals(3, controller.getCurrentHandSize());
     }
 
     @Test
     public void testRemoveSelectedTilesFromCurrentPlayer() throws Exception {
-        // TODO
+        Player p = controller.getCurrentPlayer();
+
+        controller.selectTile(p.getTile(1), true);
+        controller.selectTile(p.getTile(2), true);
+
+        controller.removeSelectedTilesFromCurrentPlayer();
+
+        assertEquals(4, controller.getCurrentHandSize());
     }
 
     @Test
     public void testAddTileToCurrentPlayer() throws Exception {
-        // TODO
+
     }
 
     @Test
     public void testAddTilesToCurrentPlayer() throws Exception {
-        // TODO
+        Player p = controller.getCurrentPlayer();
+        ArrayList<Tile> tiles = new ArrayList<Tile>();
+
+        tiles.add(p.getTile(1));
+        tiles.add(p.getTile(2));
+
+        p.removeTile(1);
+        p.removeTile(2);
+
+        assertEquals(4, p.getHandSize());
+
+        controller.addTilesToCurrentPlayer(tiles);
+        assertEquals(6, p.getHandSize());
     }
 
     @Test
@@ -167,7 +221,11 @@ public class QControllerTest {
 
     @Test
     public void testSelectTileToggle() throws Exception {
-        // TODO
+        Tile t = horst.getTile(1);
+
+        controller.selectTileToggle(t);
+
+        assertEquals(1, controller.getNumberOfSelectedTiles());
     }
 
     @Test
@@ -175,9 +233,12 @@ public class QControllerTest {
         // TODO
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testGetSingleSelectedTile() throws Exception {
-        // TODO
+        controller.selectTile(horst.getTile(1), true);
+        controller.selectTile(horst.getTile(2), true);
+
+        controller.getSingleSelectedTile();
     }
 
     @Test
@@ -197,7 +258,13 @@ public class QControllerTest {
 
     @Test
     public void testTradeSelectedTiles() throws Exception {
-        // TODO
+        controller.selectTile(horst.getTile(1), true);
+        controller.selectTile(horst.getTile(2), true);
+        controller.selectTile(horst.getTile(3), true);
+
+        controller.tradeSelectedTiles();
+
+        assertEquals(6, horst.getHandSize());
     }
 
     @Test
