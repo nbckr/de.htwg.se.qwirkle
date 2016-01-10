@@ -123,16 +123,6 @@ public class QControllerTest {
     }
 
     @Test
-    public void testRefillCurrentPlayer() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testGetTileFromGrid() throws Exception {
-        // TODO
-    }
-
-    @Test
     public void testGetTileFromPlayer() throws Exception {
         Tile t = controller.getTileFromPlayer(8);
         assertEquals(null, t);
@@ -190,33 +180,10 @@ public class QControllerTest {
     }
 
     @Test
-    public void testAddTileToPlayer() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testSetStatusMessage() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testCreate() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testGetNumRows() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testGetNumCols() throws Exception {
-        // TODO
-    }
-
-    @Test
     public void testSelectTile() throws Exception {
-        // TODO
+        controller.setState(IQController.State.TRADETILES);
+        controller.selectTile(new Tile(), false);
+        assertEquals(0, controller.getNumberOfSelectedTiles());
     }
 
     @Test
@@ -228,32 +195,12 @@ public class QControllerTest {
         assertEquals(1, controller.getNumberOfSelectedTiles());
     }
 
-    @Test
-    public void testUnselectAllTilesAtHand() throws Exception {
-        // TODO
-    }
-
     @Test(expected = IllegalArgumentException.class)
     public void testGetSingleSelectedTile() throws Exception {
         controller.selectTile(horst.getTile(1), true);
         controller.selectTile(horst.getTile(2), true);
 
         controller.getSingleSelectedTile();
-    }
-
-    @Test
-    public void testGetSelectedTilesIndexes() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testGetSelectedTiles() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testGetNumberOfSelectedTiles() throws Exception {
-        // TODO
     }
 
     @Test
@@ -268,82 +215,65 @@ public class QControllerTest {
     }
 
     @Test
-    public void testGetTargetPositionOnGrid() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testSetTargetPositionOnGrid() throws Exception {
-        // TODO
-    }
-
-    @Test
     public void testUnselectTargetPositionOnGrid() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testTargetPositionOnGridIsSet() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testGetCurrentHand() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testGetCurrentHandSize() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testExit() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testGetState() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testSetState() throws Exception {
-        // TODO
+        controller.unselectTargetPositionOnGrid();
+        Grid.Position pos = controller.getTargetPositionOnGrid();
+        assertEquals(null, pos);
     }
 
     @Test
     public void testGetPlayers() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testGetGuiMainFrame() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void testSetGuiMainFrame() throws Exception {
-        // TODO
+        assertNotNull(controller.getPlayers());
     }
 
     @Test
     public void testGetRemainingTilesInSupply() throws Exception {
-        // TODO
+        assertEquals(96, controller.getRemainingTilesInSupply());
     }
 
     @Test
     public void testSupplyIsEmpty() throws Exception {
-        // TODO
+        assertEquals(false, controller.supplyIsEmpty());
     }
 
     @Test
     public void testValidateAdding() throws Exception {
-        // TODO
+        Tile t1 = new Tile(Tile.Color.RED, Tile.Shape.DIAMOND);
+        Tile t2 = new Tile(Tile.Color.BLUE, Tile.Shape.DIAMOND);
+        Tile t3 = new Tile(Tile.Color.GREEN, Tile.Shape.CLOVER);
+
+        Grid.Position p1 = new Grid.Position(2, 2);
+        Grid.Position p2 = new Grid.Position(2, 3);
+        Grid.Position p3 = new Grid.Position(2, 4);
+
+        assertTrue(controller.validateAdding(t1, p1));
+        controller.addTileToGrid(t1, p1);
+        assertTrue(controller.validateAdding(t2, p2));
+        controller.addTileToGrid(t2, p2);
+        assertFalse(controller.validateAdding(t3, p3));
     }
 
     @Test
     public void testGetNumberOfTilesOnGrid() throws Exception {
-        // TODO
+        Tile t = horst.getTile(1);
+
+        assertEquals(0, controller.getNumberOfTilesOnGrid());
+
+        controller.setTargetPositionOnGrid(new Grid.Position(2, 2));
+        controller.selectTile(t, true);
+        controller.addSelectedTileToTargetPosition();
+
+        assertEquals(1, controller.getNumberOfTilesOnGrid());
+
+    }
+
+    @Test
+    public void testGetGridNumRows() {
+        assertEquals(30, controller.getGridNumRows());
+    }
+
+    @Test
+    public void testGetGridNumCols() {
+        assertEquals(30, controller.getGridNumCols());
     }
 }
