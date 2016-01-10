@@ -4,11 +4,11 @@ import util.Constants;
 
 public class Tile {
 
-    protected enum Color {
+    public enum Color {
         CYAN, YELLOW, RED, BLUE, GREEN, PURPLE, UNDEF
     }
 
-    protected enum Shape {
+    public enum Shape {
         CIRCLE, SQUARE, CLOVER, DIAMOND, STAR, CROSS, UNDEF
     }
 
