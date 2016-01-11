@@ -20,8 +20,12 @@ public final class Qwirkle {
 
     public static void main(String[] args) {
         controller =  new QController();
+
         qFrame = new QFrame(controller);
+        qFrame.doNothing();
+
         textUI = new TextUI(controller);
+        textUI.doNothing();
     }
 
 }

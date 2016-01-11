@@ -89,6 +89,8 @@ public class Tile {
             case PURPLE:
                 myColor = Constants.ANSI_PURPLE_BG + Constants.ANSI_WHITE;
                 break;
+            default:
+                break;
         }
 
         myShape = shape.toString().substring(0, 2);

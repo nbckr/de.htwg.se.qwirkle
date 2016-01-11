@@ -9,8 +9,6 @@ import util.observer.QEvent;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 
 public abstract class AbstractTileLabel extends JLabel implements IObserver {
 

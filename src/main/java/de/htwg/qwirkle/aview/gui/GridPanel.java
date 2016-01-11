@@ -1,7 +1,6 @@
 package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
-import util.Constants;
 
 import javax.swing.*;
 import java.awt.*;
