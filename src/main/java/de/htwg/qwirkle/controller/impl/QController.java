@@ -378,10 +378,12 @@ public class QController extends Observable implements IQController, IQControlle
     @Override
     public boolean validateAdding(Tile tile, Grid.Position position) {
         // first round anything goes
-        if (getNumberOfTilesOnGrid() == 0) return true;
+        if (getNumberOfTilesOnGrid() == 0) {
+            return true;
+        }
 
         // take a look at all four neighbors, if they exist
-        ArrayList<Tile> neighbors = new ArrayList<Tile>();
+        List<Tile> neighbors = new ArrayList<Tile>();
         neighbors.add(getTileFromGrid(position.getNorth()));
         neighbors.add(getTileFromGrid(position.getEast()));
         neighbors.add(getTileFromGrid(position.getSouth()));

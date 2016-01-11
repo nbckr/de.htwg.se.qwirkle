@@ -23,7 +23,6 @@ public class HandTileLabel extends AbstractTileLabel {
 
         this.setPreferredSize(Constants.HAND_TILE_SIZE);
 
-        addComponentListener(this);
         addMouseListener(new Listener());
 
         update(new QEvent());

@@ -123,8 +123,8 @@ public class Grid {
     public static class Position {
 
         // public so they can be accessed like in Dimension class
-        public int row;
-        public int col;
+        private int row;
+        private int col;
 
         public Position() {
             this(0, 0);

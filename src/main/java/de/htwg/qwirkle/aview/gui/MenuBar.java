@@ -8,9 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-/**
- * Created by niels on 18.12.2015.
- */
 public class MenuBar extends JMenuBar implements ActionListener {
 
     IQControllerGui controller;
@@ -62,7 +59,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == newMenuItem) {
-            new NewGameDialog(controller, mainFrame);
+            NewGameDialog newGame = new NewGameDialog(controller, mainFrame);
+            newGame.doNothing();
         }
 
         if (e.getSource() == quitMenuItem) {

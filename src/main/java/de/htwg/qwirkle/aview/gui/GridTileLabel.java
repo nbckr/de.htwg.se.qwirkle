@@ -25,7 +25,6 @@ public class GridTileLabel extends AbstractTileLabel {
 
         this.position = position;
 
-        addComponentListener(this);
         addMouseListener(new Listener());
 
         update(new QEvent());

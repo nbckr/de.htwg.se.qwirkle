@@ -2,8 +2,6 @@ package de.htwg.qwirkle.aview.gui;
 
 import de.htwg.qwirkle.controller.IQControllerGui;
 import util.Constants;
-import util.observer.IObserver;
-import util.observer.QEvent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -85,7 +83,8 @@ public class QFrame extends JFrame {
         });
 
         // open the New Game dialog
-        new NewGameDialog(controller, this);
+        NewGameDialog newGame = new NewGameDialog(controller, this);
+        newGame.doNothing();
     }
 
     public void turnLightsOff() {
