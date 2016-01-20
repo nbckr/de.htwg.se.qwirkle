@@ -1,23 +1,17 @@
 package de.htwg.qwirkle.model;
 
 import util.Constants;
+import util.state.Color;
+import util.state.Shape;
 
 public class Tile {
-
-    public enum Color {
-        CYAN, YELLOW, RED, BLUE, GREEN, PURPLE, UNDEF
-    }
-
-    public enum Shape {
-        CIRCLE, SQUARE, CLOVER, DIAMOND, STAR, CROSS, UNDEF
-    }
 
     private final Color color;
     private final Shape shape;
     private boolean isSelectedAtHand;
 
     public Tile() {
-        this(Color.UNDEF, Shape.UNDEF);
+        this(null, null);
     }
 
     public Tile(Color color, Shape shape) {
@@ -35,7 +29,7 @@ public class Tile {
     }
 
     public boolean isUndefined() {
-        return shape == Shape.UNDEF;
+        return shape == null;
     }
 
     public boolean isSelected() {
@@ -66,36 +60,11 @@ public class Tile {
         String myShape;
         String myColor = Constants.ANSI_BLACK_BG;
 
-        if(this.color == Color.UNDEF ||this.shape == Shape.UNDEF) {
+        if(this.color == null ||this.shape == null) {
             return "undefined";
         }
 
-        switch(color) {
-            case CYAN:
-                myColor = Constants.ANSI_CYAN_BG;
-                break;
-            case YELLOW:
-                myColor = Constants.ANSI_YELLOW_BG;
-                break;
-            case RED:
-                myColor = Constants.ANSI_RED_BG + Constants.ANSI_WHITE;
-                break;
-            case BLUE:
-                myColor = Constants.ANSI_BLUE_BG + Constants.ANSI_WHITE;
-                break;
-            case GREEN:
-                myColor = Constants.ANSI_GREEN_BG;
-                break;
-            case PURPLE:
-                myColor = Constants.ANSI_PURPLE_BG + Constants.ANSI_WHITE;
-                break;
-            default:
-                break;
-        }
-
-        myShape = shape.toString().substring(0, 2);
-
-        return myColor + myShape + Constants.ANSI_RESET;
+        return this.color.toString() + this.shape.toString() + Constants.ANSI_RESET;
     }
 
     /**
