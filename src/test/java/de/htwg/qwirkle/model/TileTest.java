@@ -2,7 +2,7 @@ package de.htwg.qwirkle.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import de.htwg.qwirkle.model.Tile.*;
+import util.state.impl.*;
 
 import static org.junit.Assert.*;
 
@@ -17,26 +17,26 @@ public class TileTest {
     public void setUp() {
         tile = new Tile[7];
 
-        tile[0] = new Tile(Color.CYAN, Shape.CIRCLE);
-        tile[1] = new Tile(Color.YELLOW, Shape.SQUARE);
-        tile[2] = new Tile(Color.RED, Shape.CLOVER);
-        tile[3] = new Tile(Color.BLUE, Shape.DIAMOND);
-        tile[4] = new Tile(Color.GREEN, Shape.STAR);
-        tile[5] = new Tile(Color.PURPLE, Shape.CROSS);
+        tile[0] = new Tile(new Cyan(), new Circle());
+        tile[1] = new Tile(new Yellow(), new Square());
+        tile[2] = new Tile(new Red(), new Clover());
+        tile[3] = new Tile(new Blue(), new Diamond());
+        tile[4] = new Tile(new Green(), new Star());
+        tile[5] = new Tile(new Purple(), new Cross());
         tile[6] = new Tile();
 
-        tile_comp = new Tile(Color.CYAN, Shape.CIRCLE);
+        tile_comp = new Tile(new Cyan(), new Circle());
         tile_undef = new Tile();
     }
 
     @Test
     public void testGetColor() {
-        assertEquals(Color.CYAN, tile[0].getColor());
+        assertTrue(tile[0].getColor() instanceof Cyan);
     }
 
     @Test
     public void testGetShape() {
-        assertEquals(Shape.CIRCLE, tile[0].getShape());
+        assertTrue(tile[0].getShape() instanceof  Circle);
     }
 
     @Test
@@ -50,6 +50,7 @@ public class TileTest {
         assertFalse(retval);
 
         assertFalse(tile[0].equals(new Integer(1)));
+        assertFalse(tile[0].equals(tile[6]));
     }
 
     @Test

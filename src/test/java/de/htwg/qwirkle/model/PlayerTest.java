@@ -1,11 +1,10 @@
 package de.htwg.qwirkle.model;
 
-import junit.framework.TestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
-import de.htwg.qwirkle.model.Tile.*;
+
+import util.state.impl.*;
 
 import static org.junit.Assert.*;
 
@@ -26,10 +25,10 @@ public class PlayerTest {
         assertNotNull(player_full);
 
         tiles = new ArrayList<Tile>();
-        tiles.add(new Tile(Color.BLUE, Shape.CIRCLE));
-        tiles.add(new Tile(Color.GREEN, Shape.DIAMOND));
-        tiles.add(new Tile(Color.YELLOW, Shape.CLOVER));
-        tiles.add(new Tile(Color.PURPLE, Shape.STAR));
+        tiles.add(new Tile(new Blue(), new Circle()));
+        tiles.add(new Tile(new Green(), new Diamond()));
+        tiles.add(new Tile(new Yellow(), new Clover()));
+        tiles.add(new Tile(new Purple(), new Star()));
 
     }
 
@@ -54,12 +53,12 @@ public class PlayerTest {
 
         for (int i = 0; i <= 5; i++)
         {
-            player.addTileToHand(new Tile(Color.BLUE, Shape.CLOVER));
+            player.addTileToHand(new Tile(new Blue(), new Clover()));
             // assert no Exceptions
         }
 
-        player.addTileToHand(new Tile(Color.CYAN, Shape.DIAMOND));
-        player.addTileToHand(new Tile(Color.CYAN, Shape.DIAMOND));
+        player.addTileToHand(new Tile(new Cyan(), new Diamond()));
+        player.addTileToHand(new Tile(new Cyan(), new Diamond()));
     }
 
     @Test
@@ -115,8 +114,8 @@ public class PlayerTest {
         assertEquals(4, player.getHandSize());
 
         ArrayList<Tile> t = new ArrayList<Tile>();
-        t.add(new Tile(Color.PURPLE, Shape.CROSS));
-        t.add(new Tile(Color.GREEN, Shape.DIAMOND));
+        t.add(new Tile(new Purple(), new Cross()));
+        t.add(new Tile(new Green(), new Diamond()));
 
         player.addTilesToHand(t);
         assertEquals(6, player.getHandSize());
@@ -149,7 +148,7 @@ public class PlayerTest {
 
     @Test
     public void testGetTile() throws Exception {
-        Tile t = new Tile(Color.RED, Shape.CIRCLE);
+        Tile t = new Tile(new Red(), new Circle());
         player.addTileToHand(t);
 
         assertEquals(t , player.getTile(1));
