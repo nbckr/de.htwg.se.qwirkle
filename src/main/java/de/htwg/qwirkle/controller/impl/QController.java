@@ -391,8 +391,8 @@ public class QController extends Observable implements IQController, IQControlle
 
         for (Tile neighbor : neighbors) {
             if (neighbor != null
-                    && (tile.getColor() == neighbor.getColor()
-                    || tile.getShape() == neighbor.getShape())) {
+                    && (tile.getColor().getClass().equals(neighbor.getColor().getClass())
+                    || tile.getShape().getClass().equals(neighbor.getShape().getClass()))) {
                 return true;
             }
         }

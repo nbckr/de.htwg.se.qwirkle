@@ -1,21 +1,23 @@
-package util.state;
+package util.state.impl;
+
+import util.state.Color;
 
 /**
  * Created by opuee on 20.01.16.
  */
-public class Blue extends Color {
+public class Yellow extends Color {
     @Override
     public String getAnsiFG() {
-        return "\u001B[34m";
+        return "\u001B[33m";
     }
 
     @Override
     public String getAnsiBG() {
-        return "\u001B[44m";
+        return "\u001B[43m";
     }
 
     @Override
     public String toString() {
-        return "BLUE";
+        return "YELLOW";
     }
 }

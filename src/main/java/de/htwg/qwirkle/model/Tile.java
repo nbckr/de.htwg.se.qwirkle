@@ -45,7 +45,13 @@ public class Tile {
         if (!(o instanceof Tile)) {
             return false;
         }
+
         Tile t = (Tile) o;
+
+        if(t.color == null || t.shape == null) {
+            return false;
+        }
+
         return (this.color.getClass().equals(t.color.getClass())) &&
                 (this.shape.getClass().equals(t.shape.getClass()));
     }

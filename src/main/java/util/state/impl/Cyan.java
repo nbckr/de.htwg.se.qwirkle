@@ -1,4 +1,6 @@
-package util.state;
+package util.state.impl;
+
+import util.state.Color;
 
 /**
  * Created by opuee on 20.01.16.
