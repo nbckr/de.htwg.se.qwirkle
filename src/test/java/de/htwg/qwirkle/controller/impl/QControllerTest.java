@@ -6,11 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
-import util.state.impl.*;
 
 import static org.junit.Assert.*;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class QControllerTest {
@@ -23,7 +23,7 @@ public class QControllerTest {
     @Before
     public void setUp() {
         controller =  new QController();
-        tile = new Tile(new Blue(), new Cross());
+        tile = new Tile();
         singlePlayerList = new ArrayList<Player>();
         horst = new Player("Horst");
         kalle = new Player("Kalle");
@@ -40,7 +40,7 @@ public class QControllerTest {
     @Test
     public void testAddTileToGrid() throws Exception {
         controller.addTileToGrid(tile, 1, 1);
-        assertTrue(controller.getTileFromGrid(1, 1).equals(tile));
+        assertEquals(tile, controller.getTileFromGrid(1, 1));
     }
 
     @Test
@@ -238,9 +238,9 @@ public class QControllerTest {
 
     @Test
     public void testValidateAdding() throws Exception {
-        Tile t1 = new Tile(new Red(), new Diamond());
-        Tile t2 = new Tile(new Blue(), new Diamond());
-        Tile t3 = new Tile(new Green(), new Clover());
+        Tile t1 = new Tile(Tile.Color.RED, Tile.Shape.DIAMOND);
+        Tile t2 = new Tile(Tile.Color.BLUE, Tile.Shape.DIAMOND);
+        Tile t3 = new Tile(Tile.Color.GREEN, Tile.Shape.CLOVER);
 
         Grid.Position p1 = new Grid.Position(2, 2);
         Grid.Position p2 = new Grid.Position(2, 3);

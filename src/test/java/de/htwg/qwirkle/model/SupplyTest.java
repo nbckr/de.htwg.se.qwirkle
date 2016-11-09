@@ -2,8 +2,6 @@ package de.htwg.qwirkle.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import util.state.impl.Blue;
-import util.state.impl.Circle;
 
 import static org.junit.Assert.*;
 
@@ -18,7 +16,7 @@ public class SupplyTest {
     @Before
     public void setUp() {
         supply = new Supply();
-        tile = new Tile(new Blue(), new Circle());
+        tile = new Tile(Tile.Color.BLUE, Tile.Shape.CIRCLE);
     }
 
     @Test

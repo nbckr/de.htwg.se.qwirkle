@@ -2,10 +2,7 @@ package de.htwg.qwirkle.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import util.state.impl.Blue;
-import util.state.impl.Circle;
-import util.state.impl.Cross;
-import util.state.impl.Red;
+import de.htwg.qwirkle.model.Tile.*;
 
 import static org.junit.Assert.*;
 
@@ -27,8 +24,8 @@ public class GridTest {
         grid_full = new Grid();
         assertNotNull(grid_full);
 
-        tile1 = new Tile(new Blue(), new Circle());
-        tile2 = new Tile(new Red(), new Cross());
+        tile1 = new Tile(Color.BLUE, Shape.CIRCLE);
+        tile2 = new Tile(Color.RED, Shape.CROSS);
 
         supply = new Supply();
 
