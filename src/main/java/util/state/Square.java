@@ -1,18 +1,16 @@
-package util.state.impl;
-
-import util.state.Shape;
+package util.state;
 
 /**
  * Created by opuee on 20.01.16.
  */
-public class Star extends Shape {
+public class Square extends Shape {
     @Override
     public String getANSI() {
-        return "ST";
+        return "SQ";
     }
 
     @Override
     public String toString() {
-        return "STAR";
+        return "SQUARE";
     }
 }

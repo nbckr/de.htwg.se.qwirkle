@@ -1,6 +1,4 @@
-package util.state.impl;
-
-import util.state.Shape;
+package util.state;
 
 /**
  * Created by opuee on 20.01.16.

@@ -1,18 +1,16 @@
-package util.state.impl;
-
-import util.state.Shape;
+package util.state;
 
 /**
  * Created by opuee on 20.01.16.
  */
-public class Square extends Shape {
+public class Diamond extends Shape {
     @Override
     public String getANSI() {
-        return "SQ";
+        return "DI";
     }
 
     @Override
     public String toString() {
-        return "SQUARE";
+        return "DIAMOND";
     }
 }
