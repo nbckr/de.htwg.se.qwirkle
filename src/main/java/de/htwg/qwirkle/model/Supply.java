@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import util.state.*;
-
 import java.util.Collections.*;
 
 import de.htwg.qwirkle.model.Tile.*;
-import util.state.Shape;
 
 public class Supply {
 
@@ -25,29 +21,23 @@ public class Supply {
         tiles = new ArrayList<Tile>(MAX_SIZE);
         random = new Random(System.currentTimeMillis());
 
-        tiles.addAll(initTiles(new Blue()));
-        tiles.addAll(initTiles(new Cyan()));
-        tiles.addAll(initTiles(new Green()));
-        tiles.addAll(initTiles(new Purple()));
-        tiles.addAll(initTiles(new Red()));
-        tiles.addAll(initTiles(new Yellow()));
+        for (Shape shape : Shape.values()) {
 
-        Collections.shuffle(tiles);
-    }
+            //ignore undefined values
+            if(shape == Shape.UNDEF)
+                continue;
 
-    private List<Tile> initTiles(Color c) {
-        ArrayList<Tile> t = new ArrayList<Tile>();
+            for (Color color : Color.values()) {
 
-        for(int i = 0; i < 3; i++) {
-            t.add(new Tile(c, new Circle()));
-            t.add(new Tile(c, new Clover()));
-            t.add(new Tile(c, new Cross()));
-            t.add(new Tile(c, new Diamond()));
-            t.add(new Tile(c, new Square()));
-            t.add(new Tile(c, new Star()));
+                //ignore undefined values
+                if(color == Color.UNDEF)
+                    continue;
+                for (int i = 0; i < 3; i++) {
+                    tiles.add(new Tile(color, shape));
+                }
+            }
         }
-
-        return t;
+        Collections.shuffle(tiles);
     }
 
     /**
