@@ -22,6 +22,14 @@ public class QController extends Observable implements IQController, IQControlle
     private Grid.Position targetPositionOnGrid;
     private String statusMessage;
 
+    public Supply getSupply() {
+        return supply;
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
+
     public QController() {
         create();
     }
