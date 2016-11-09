@@ -46,8 +46,7 @@ public class Tile {
             return false;
         }
         Tile t = (Tile) o;
-        return (this.color.getClass().equals(t.color.getClass())) &&
-                (this.shape.getClass().equals(t.shape.getClass()));
+        return (this.color == t.color) && (this.shape == t.shape);
     }
 
     @Override
