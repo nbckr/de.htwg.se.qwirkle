@@ -5,11 +5,8 @@ Based on blueprint from https://moodle.htwg-konstanz.de/moodle/course/view.php?i
 
 package de.htwg.qwirkle;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import de.htwg.qwirkle.aview.tui.TextUI;
 import de.htwg.qwirkle.aview.gui.QFrame;
-import de.htwg.qwirkle.controller.IQController;
 import de.htwg.qwirkle.controller.impl.QController;
 
 public final class Qwirkle {
@@ -22,9 +19,7 @@ public final class Qwirkle {
     }
 
     public static void main(String[] args) {
-        Injector injector = Guice.createInjector(new QwirkleModule());
-
-        controller = (QController) injector.getInstance(IQController.class);
+        controller =  new QController();
 
         qFrame = new QFrame(controller);
         qFrame.doNothing();
