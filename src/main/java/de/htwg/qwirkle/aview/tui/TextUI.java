@@ -1,22 +1,20 @@
 package de.htwg.qwirkle.aview.tui;
 
-import de.htwg.qwirkle.controller.IQController.*;
+import de.htwg.qwirkle.controller.IQController.State;
 import de.htwg.qwirkle.controller.impl.QController;
 import de.htwg.qwirkle.model.Grid;
 import de.htwg.qwirkle.model.Player;
 import de.htwg.qwirkle.model.Tile;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import util.Constants;
+import util.observer.IObserver;
 import util.observer.QEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.PatternSyntaxException;
-
-import util.observer.IObserver;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 public class TextUI implements IObserver {
 
@@ -57,6 +55,16 @@ public class TextUI implements IObserver {
         LOG.info("Hand: " + controller.getCurrentPlayer().printHand());
         LOG.info("Score: " + controller.getCurrentPlayer().getScore());
         LOG.info("Please enter a command (press h for help)");
+    }
+
+    public String getAsString() {
+        return new StringBuilder()
+                .append(controller.getGridString())
+                .append(controller.getStatusMessage())
+                .append("Hand: " + controller.getCurrentPlayer().printHand())
+                .append("Score: " + controller.getCurrentPlayer().getScore())
+                .append("Please enter a command (press h for help)")
+                .toString();
     }
 
     /**
